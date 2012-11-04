@@ -1,4 +1,4 @@
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
 set -o vi
 [[ -r ~/.rvm/scripts/rvm ]] && . ~/.rvm/scripts/rvm
 [[ -r /usr/local/etc/bash_completion.d/git-prompt.sh ]] && . /usr/local/etc/bash_completion.d/git-prompt.sh
