@@ -1,0 +1,2 @@
+set nu
+syntax on
