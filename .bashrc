@@ -1,6 +1,7 @@
 PATH=$PATH:$HOME/bin # Add RVM to PATH for scripting
 set -o vi
 export PATH="/usr/local/heroku/bin:$PATH"
+alias rb=rbenv
 [[ -r /usr/local/etc/bash_completion.d/git-prompt.sh ]] && . /usr/local/etc/bash_completion.d/git-prompt.sh
 function prompt
 {
