@@ -1,8 +1,10 @@
-PATH=$PATH:$HOME/bin # Add RVM to PATH for scripting
 set -o vi
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
 alias rb=rbenv
-[[ -r /usr/local/etc/bash_completion.d/git-prompt.sh ]] && . /usr/local/etc/bash_completion.d/git-prompt.sh
+if [![ -f ~/.bash-git-prompt/gitprompt.sh ]]; then 
+  git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
+; fi
+. ~/.bash-git-prompt/gitprompt.sh
 function prompt
 {
 	local WHITE="\[\033[1;37m\]"
