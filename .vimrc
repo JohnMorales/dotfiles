@@ -73,6 +73,18 @@ map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
 
 nmap ,, <C-^>
 
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+nmap <C-h> <C-w><Left>
+nmap <C-l> <C-w><Right>
+nmap <C-t> :CtrlPMixed<CR>
+
 " contents of last global command in new window
 nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 
@@ -81,9 +93,9 @@ nmap <F12> :set number!<CR>
 
 nmap :Q :q
 
-highlight Pmenu ctermbg=238 gui=bold                
+highlight Pmenu ctermbg=238 gui=bold
 highlight PMenu gui=bold guibg=#CECECE guifg=#444444
-highlight SpecialKey ctermfg=14 ctermbg=23 guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
 
 
 
