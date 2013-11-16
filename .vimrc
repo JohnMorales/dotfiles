@@ -27,6 +27,7 @@ set cursorline
 filetype plugin on
 
 set t_Co=256
+" Jellybeans colors
 set background=dark
 colorscheme jellybeans
 "let g:solarized_termtrans=1

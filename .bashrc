@@ -1,9 +1,9 @@
 set -o vi
 export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
 alias rb=rbenv
-if [![ -f ~/.bash-git-prompt/gitprompt.sh ]]; then 
+if [ ! -f ~/.bash-git-prompt/gitprompt.sh ]; then 
   git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
-; fi
+fi
 . ~/.bash-git-prompt/gitprompt.sh
 alias rd="rm -f"
 function prompt
@@ -18,3 +18,4 @@ ${GREEN}\u${CYAN}@${BLUE}\h ${CYAN}\w"' $(__git_ps1 "(%s)") '"${GRAY}"
 }
 prompt
 eval "$(rbenv init -)"
+export CLICOLOR=1
