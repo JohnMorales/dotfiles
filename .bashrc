@@ -1,10 +1,15 @@
 set -o vi
 export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
 alias rb=rbenv
+<<<<<<< HEAD
 if [![ -f ~/.bash-git-prompt/gitprompt.sh ]]; then 
   git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
 ; fi
 . ~/.bash-git-prompt/gitprompt.sh
+=======
+alias rd="rm -f"
+[[ -r /usr/local/etc/bash_completion.d/git-prompt.sh ]] && . /usr/local/etc/bash_completion.d/git-prompt.sh
+>>>>>>> Updating aliases, and creating shell script to install customizations
 function prompt
 {
 	local WHITE="\[\033[1;37m\]"
@@ -16,3 +21,4 @@ function prompt
 ${GREEN}\u${CYAN}@${BLUE}\h ${CYAN}\w"' $(__git_ps1 "(%s)") '"${GRAY}"
 }
 prompt
+eval "$(rbenv init -)"
