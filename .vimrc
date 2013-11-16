@@ -12,7 +12,7 @@ set background=dark
 set cmdheight=2
 set laststatus=2
 set scrolloff=3
-set virtualedit=all
+set virtualedit=onemore
 " Allow backspacing set backspace=indent,eol,start
 
 " Status line
