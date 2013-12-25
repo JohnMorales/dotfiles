@@ -1,7 +1,7 @@
 #!/bin/bash
 VIMPLUGINDIR=~/.vim/bundle
 mkdir -p ~/.vim/autoload $VIMPLUGINDIR;\
-curl -Sso ~/.vim/autoload/pathogen.vik \
+curl -Sso ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 mkdir -p $VIMPLUGINDIR
 test -d $VIMPLUGINDIR/ctrlp.vim || git clone https://github.com/kien/ctrlp.vim.git $VIMPLUGINDIR/ctrlp.vim
