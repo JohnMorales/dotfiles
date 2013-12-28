@@ -12,8 +12,9 @@ set background=dark
 set cmdheight=2
 set laststatus=2
 set scrolloff=3
-set virtualedit=onemore
-" Allow backspacing set backspace=indent,eol,start
+set virtualedit=all
+" Allow backspacing 
+set backspace=indent,eol,start
 
 " Status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%b][0x%B]
