@@ -2,8 +2,9 @@
 set -o vi
 eval "$(rbenv init -)"
 alias t2='tree -L 2 |less'
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-alias vim='mvim -v'
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+alias ls='ls --color'
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
