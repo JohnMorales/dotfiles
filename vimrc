@@ -1,6 +1,7 @@
 filetype off
 execute pathogen#infect()
 
+set nowrap
 set number
 set ai
 set tabstop=2
@@ -31,10 +32,10 @@ filetype plugin on
 " Jellybeans colors
 " let g:solarized_termcolors=16
 if $ITERM_PROFILE == "SolarizedLight"
-  echo "Setting light background"
+  " echo "Setting light background"
   set background=light
 else
-  echo "Setting dark background"
+  " echo "Setting dark background"
   set background=dark
 endif
 "colorscheme jellybeans
