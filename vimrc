@@ -8,7 +8,6 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set ruler
-set background=dark
 set cmdheight=2
 set laststatus=2
 set scrolloff=3
@@ -27,11 +26,21 @@ set ignorecase
 set cursorline
 filetype plugin on
 
-set t_Co=256
+" let g:solarized_termcolors=256
+"set t_Co=256
 " Jellybeans colors
-set background=dark
-colorscheme jellybeans
-"let g:solarized_termtrans=1
+" let g:solarized_termcolors=16
+if $ITERM_PROFILE == "SolarizedLight"
+  echo "Setting light background"
+  set background=light
+else
+  echo "Setting dark background"
+  set background=dark
+endif
+"colorscheme jellybeans
+colorscheme solarized
+"Only useful if using transparent backgrounds.
+let g:solarized_termtrans=1
 
 " Add dictionary completion
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -97,17 +106,29 @@ nmap <F12> :set number!<CR>
 
 nmap :Q :q
 
-highlight Pmenu ctermbg=238 gui=bold
-highlight PMenu gui=bold guibg=#CECECE guifg=#444444
-highlight SpecialKey guifg=#4a4a59
+" TODO: figure out what PMenu and SpecialKey do.
+" highlight Pmenu ctermbg=238 gui=bold
+" highlight PMenu gui=bold guibg=#CECECE guifg=#444444
+" highlight SpecialKey guifg=#4a4a59
 
 map <leader>j !python -m json.tool<CR>
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+
+" Determine good colors for IdentGuides.
+" let g:cterm_colors = (&g:background == 'dark') ? ['darkgrey', 'black'] : ['lightgrey', 'white']
+" let g:gui_colors   = (&g:background == 'dark') ? ['grey15', 'grey30']  : ['grey70', 'grey85']
+if &g:background == 'dark'
+  hi IndentGuidesEven ctermbg='Black'
+  hi IndentGuidesOdd  ctermbg='Black'
+else
+  hi IndentGuidesEven ctermbg='lightgrey'
+  hi IndentGuidesOdd  ctermbg='lightgrey'
+endif
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
 let g:ctrlp_working_path_mode = 'b:ra'
 nmap ,n :NERDTreeFind<CR>
@@ -115,8 +136,13 @@ nmap ,m :NERDTreeToggle<CR>
 
 function! AppendModeline()
   let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+   \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+set foldmethod=marker
