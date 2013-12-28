@@ -1,21 +1,23 @@
-set -o vi
-export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
-alias rb=rbenv
-if [ ! -f ~/.bash-git-prompt/gitprompt.sh ]; then 
-  git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
-fi
 . ~/.bash-git-prompt/gitprompt.sh
-alias rd="rm -f"
-function prompt
-{
-	local WHITE="\[\033[1;37m\]"
-	local GREEN="\[\033[0;32m\]"
-	local CYAN="\[\033[0;36m\]"
-	local GRAY="\[\033[0;37m\]"
-	local BLUE="\[\033[0;34m\]"
-	export PS1="
-${GREEN}\u${CYAN}@${BLUE}\h ${CYAN}\w"' $(__git_ps1 "(%s)") '"${GRAY}"
-}
-prompt
+set -o vi
 eval "$(rbenv init -)"
+alias t2='tree -L 2 |less'
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+alias vim='mvim -v'
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+export EDITOR=vim
+alias vms='VBoxManage list runningvms'
+power_down_vms() {
+  VMS=$(VBoxManage list runningvms | awk '{ x=$1;gsub("\"", "", x);print x }')
+  for i in $VMS 
+  do 
+    echo "Shutting down $i"
+    VBoxManage controlvm $i poweroff 2> /dev/null
+  done
+}
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
 export CLICOLOR=1

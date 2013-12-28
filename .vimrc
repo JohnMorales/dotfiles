@@ -84,6 +84,8 @@ nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 nmap <C-h> <C-w><Left>
 nmap <C-l> <C-w><Right>
+nmap <C-k> <C-w><Up>
+nmap <C-j> <C-w><Down>
 nmap <C-t> :CtrlPMixed<CR>
 
 " contents of last global command in new window
@@ -98,9 +100,22 @@ highlight Pmenu ctermbg=238 gui=bold
 highlight PMenu gui=bold guibg=#CECECE guifg=#444444
 highlight SpecialKey guifg=#4a4a59
 
+map <leader>j !python -m json.tool<CR>
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
+let g:ctrlp_working_path_mode = 'b:ra'
+nmap ,n :NERDTreeFind<CR>
+nmap ,m :NERDTreeToggle<CR>
 
-set list
-set encoding=utf-8
-" use the same symbols as textmate for tabstops and eols
-set listchars=trail:~,nbsp:*,tab:▸\ ,eol:¬
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
