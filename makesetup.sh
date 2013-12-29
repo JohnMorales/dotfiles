@@ -10,7 +10,7 @@ mkdir -p $VIMPLUGINDIR
 test -d $VIMPLUGINDIR/ctrlp.vim || git clone https://github.com/kien/ctrlp.vim.git $VIMPLUGINDIR/ctrlp.vim
 test -d $VIMPLUGINDIR/jellybeans.vim || git clone https://github.com/nanotech/jellybeans.vim.git $VIMPLUGINDIR/jellybeans.vim
 test -d $VIMPLUGINDIR/nerdtree.vim || git clone https://github.com/scrooloose/nerdtree.git $VIMPLUGINDIR/nerdtree.vim
-test -d $VIMPLUGINDIR/nerdtree-ag.vim || git clone https://github.com/taiansu/nerdtree-ag.git $VIMPLUGINDIR/nerdtree-ag.vim
+test -d $VIMPLUGINDIR/nnerdtree-ag.vim || git clone https://github.com/taiansu/nerdtree-ag.git $VIMPLUGINDIR/nnerdtree-ag.vim
 
 link_config_file() {
 file=$1
@@ -38,5 +38,16 @@ test -f ~/.dir_colors_dark || ln -s ~/Development/dircolors-solarized/dircolors.
 test -f ~/.dir_colors_light || ln -s ~/Development/dircolors-solarized/dircolors.ansi-light ~/.dir_colors_light
 
 #brew utils
-test -d /usr/local/Cellar/tree || brew install tree
-test -d /usr/local/Cellar/the_silver_searcher || brew install the_silver_searcher
+install_brew_package() {
+package=$1
+echo "checking for package $i"
+test -d /usr/local/Cellar/$package || brew install $package
+}
+PACKAGES=(
+  tree
+  the_silver_searcher 
+  tig
+)
+for i in ${PACKAGES[*]}; do
+  install_brew_package $i
+done;
