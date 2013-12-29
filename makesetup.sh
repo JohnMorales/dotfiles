@@ -3,6 +3,7 @@ set -e
 [[ "$OSTYPE" == "darwin"* ]] && IS_MAC=true
 SCRIPT_DIR=`pwd -P`
 VIMPLUGINDIR=~/.vim/bundle
+DEVELOPMENT=~/Development
 mkdir -p ~/.vim/autoload $VIMPLUGINDIR;\
 curl -Sso ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
@@ -35,9 +36,9 @@ if [ ! -d /usr/local/opt/coreutils/ ] && $IS_MAC; then
 fi
 
 # install dircolors themes
-test -d ~/Development/dircolors-solarized || git clone https://github.com/seebi/dircolors-solarized.git ~/Development/dircolors-solarized
-test -f ~/.dir_colors_dark || ln -s ~/Development/dircolors-solarized/dircolors.ansi-dark ~/.dir_colors_dark
-test -f ~/.dir_colors_light || ln -s ~/Development/dircolors-solarized/dircolors.ansi-light ~/.dir_colors_light
+test -d $DEVELOPMENT/dircolors-solarized || git clone https://github.com/seebi/dircolors-solarized.git $DEVELOPMENT/dircolors-solarized
+test -f ~/.dir_colors_dark || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-dark ~/.dir_colors_dark
+test -f ~/.dir_colors_light || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-light ~/.dir_colors_light
 
 #brew utils
 install_brew_package() {
@@ -54,3 +55,12 @@ PACKAGES=(
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
 done;
+
+
+# install tmux-pastboard hack fix.
+if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
+  git clone https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard.git $DEVELOPMENT/tmux-MacOSX-pasteboard
+  cd $DEVELOPMENT/tmux-MacOSX-pasteboard
+  make
+  ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace 
+fi
