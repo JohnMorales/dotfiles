@@ -1,0 +1,101 @@
+# vim:set sw=4 ts=4 et:
+# Name:     Jeremy Attali's .tigrc
+# Author:   Jeremy Attali
+# URL:
+# License:  MIT license (see .vimrc end of file)
+# Created:  In Paris
+
+# Variables {{{
+
+set horizontal-scroll = 33%
+set line-graphics = yes
+set show-id = yes
+set show-author = yes
+set show-date = default
+set show-refs = yes
+set show-rev-graph = no
+
+# }}}
+# Colors {{{
+color cursor white black
+color status white default
+color title-focus white black
+color date yellow default
+color author green default
+color main-head magenta default
+color main-tag magenta default
+color stat-staged green default
+color stat-unstaged red bold
+color stat-untracked yellow default
+color tree-head white default
+color tree-dir cyan default
+# }}}
+# Bindings {{{
+
+# Generic {{{
+
+bind generic b view-branch
+bind generic s view-status
+bind generic F !git fetch
+bind generic y !@sh -c "echo -n %(commit) | xsel -ib"
+bind generic Y !@sh -c "echo -n %(commit) | xsel -ib"
+
+# }}}
+# Main {{{
+
+bind main F6 !@git fetch
+bind main F7 !@git rebase
+bind main F8 !@git pull
+bind main F9 !@git push
+
+bind main ! !git revert %(commit)
+bind main C !?git checkout %(commit)
+bind main H !?git reset --hard %(commit)
+bind main R !git rebase -i %(commit)^
+bind main P !git cherry-pick %(commit)
+bind main X !?git push
+bind main F !@sh -c "git show %(commit) --pretty=format: --name-only | xargs | xsel -ib"
+bind main E !<sh -c "vim -c 'Gedit %(commit)' $(ls | head -1)"
+bind main V !<sh -c "vim $(git show %(commit) --pretty=format: --name-only | xargs)"
+
+# }}}
+# Diff {{{
+
+bind diff Up move-up
+bind diff Down move-down
+
+# Edit all files of commit
+bind diff A !git add %(file)              # Add current file
+bind diff C !git commit -av               # Add and commit
+bind diff P !git add -p %(file)           # Partially add current file
+bind diff F !@sh -c "git show %(commit) --pretty=format: --name-only | xargs | xsel -ib"
+bind diff E !<sh -c "vim -c 'Gedit %(commit)' $(ls | head -1)"
+bind diff V !<sh -c "vim $(git show %(commit) --pretty=format: --name-only | xargs)"
+
+# }}}
+# Tree {{{
+
+bind tree V !vim %(file)
+
+# }}}
+# Branch {{{
+
+bind branch N !@git branch %(prompt) # Create a new branch
+
+# }}}
+# Status {{{
+
+bind status A !@git add %(file)        # Add
+bind status R !@git reset HEAD %(file) # Reset
+bind status M !@git commit --amend    # Amend
+bind status N !@git add -N %(file)     # Intent to add
+
+# }}}
+# Stage {{{
+
+bind stage 1 stage-update-line # Stage a single line
+bind stage C !@git commit # Commit staging changes
+
+# }}}
+
+# }}}

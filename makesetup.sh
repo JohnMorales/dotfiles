@@ -15,13 +15,15 @@ test -d $VIMPLUGINDIR/nnerdtree-ag.vim || git clone https://github.com/taiansu/n
 link_config_file() {
 file=$1
 if [ ! -L ~/.$file ]; then
-  echo "creating backup of exiting file to .$file.bak"
-  [ -f ~/.$file ] && mv ~/.$file ~/.$file.bak
+  if [ -f ~/.$file ]; then 
+    echo "creating backup of existing file to .$file.bak"
+    mv ~/.$file ~/.$file.bak
+  fi
   ln -s $SCRIPT_DIR/$file ~/.$file
 fi
 }
 
-FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile)
+FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc)
 for i in ${FILES[@]} 
   do 
     link_config_file $i; 
