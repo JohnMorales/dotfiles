@@ -49,6 +49,7 @@ PACKAGES=(
   tree
   the_silver_searcher 
   tig
+  tmux
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
