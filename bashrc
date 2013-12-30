@@ -25,7 +25,7 @@ fi
 #DIR Colors 
 export CLICOLOR=1
 alias ls='ls -lph --color'
-if [ $ITERM_PROFILE == "SolarizedLight" ]; then
+if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
   eval $(dircolors ~/.dir_colors_light)
 else
   eval $(dircolors ~/.dir_colors_dark)
