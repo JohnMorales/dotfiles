@@ -7,6 +7,7 @@ set ai
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set shiftround
 set expandtab
 set ruler
 set cmdheight=2
@@ -147,3 +148,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 set foldmethod=marker
+
+" make last typed word uppercase.
+:imap <c-u> <esc>viwUA
+:nmap <c-u> gUiw

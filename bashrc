@@ -1,3 +1,11 @@
+#Customizing git prompt
+ResetColor="\[\033[0m\]"            # Text reset
+IntenseBlack="\[\033[0;90m\]" # Grey
+Yellow="\[\033[0;33m\]"
+IntenseBlack="\[\033[0;90m\]"
+BoldGreen="\[\033[1;32m\]"
+GIT_PROMPT_START="${BoldGreen}\h ${Yellow}\w${ResetColor}"
+
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 set -o vi
 eval "$(rbenv init -)"

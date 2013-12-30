@@ -50,6 +50,7 @@ PACKAGES=(
   tree
   the_silver_searcher 
   tig
+  pstree
   tmux
 )
 for i in ${PACKAGES[*]}; do
