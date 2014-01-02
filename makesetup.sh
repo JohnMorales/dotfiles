@@ -17,12 +17,13 @@ test -d $VIMPLUGINDIR/vim-fugitive.vim || git clone https://github.com/tpope/vim
 
 link_config_file() {
 file=$1
-if [ ! -L ~/.$file ]; then
-  if [ -f ~/.$file ]; then 
-    echo "creating backup of existing file to .$file.bak"
-    mv ~/.$file ~/.$file.bak
+destination=${2-$file}
+if [ ! -L ~/.$destination ]; then
+  if [ -f ~/.$destination ]; then 
+    echo "creating backup of existing file to .$destination.bak"
+    mv ~/.$destination ~/.$destination.bak
   fi
-  ln -s $SCRIPT_DIR/$file ~/.$file
+  ln -s $SCRIPT_DIR/$file ~/.$destination
 fi
 }
 
@@ -31,6 +32,14 @@ for i in ${FILES[@]}
   do 
     link_config_file $i; 
   done
+
+# installing irssi customizations
+link_config_file "irssi" "irssi/config"
+test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized 
+mkdir -p ~/.irssi/scripts
+if [ ! -L ~/.irssi/scripts ]; then 
+  ln -s `pwd`/irssi/ ~/.irssi/scripts/autorun
+fi
 
 #installing coreutils to get the latest gnu tools, lscolors, etc.
 if [ ! -d /usr/local/opt/coreutils/ ] && $IS_MAC; then
@@ -54,6 +63,7 @@ PACKAGES=(
   tig
   pstree
   tmux
+  wget
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
