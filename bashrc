@@ -39,3 +39,26 @@ else
   eval $(dircolors ~/.dir_colors_dark)
 fi
 alias t2='tree -Fth -L 2 --du |less'
+
+#Git helper
+git_dirty() {
+  show_diff=$1
+  directories=$(find . -type d -depth 1 | grep -v '^\./\.')
+  for i in $directories; 
+  do 
+    #echo "checking $i"
+    if [ ! -d "$i/.git" ]; then  
+      continue 
+    fi 
+    cd $i
+    STATUS=$(git status)
+    if [[ ! "$STATUS" =~ "working directory clean" ]]; then 
+      echo "$i dirty"  
+      if [[ "$show_diff" != "" ]]
+      then
+        git status && git diff
+      fi
+    fi 
+    cd ..
+  done
+}
