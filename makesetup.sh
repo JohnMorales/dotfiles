@@ -12,6 +12,8 @@ test -d $VIMPLUGINDIR/ctrlp.vim || git clone https://github.com/kien/ctrlp.vim.g
 test -d $VIMPLUGINDIR/jellybeans.vim || git clone https://github.com/nanotech/jellybeans.vim.git $VIMPLUGINDIR/jellybeans.vim
 test -d $VIMPLUGINDIR/nerdtree.vim || git clone https://github.com/scrooloose/nerdtree.git $VIMPLUGINDIR/nerdtree.vim
 test -d $VIMPLUGINDIR/nnerdtree-ag.vim || git clone https://github.com/taiansu/nerdtree-ag.git $VIMPLUGINDIR/nnerdtree-ag.vim
+test -d $VIMPLUGINDIR/vim-colors-solarized.vim || git clone git://github.com/altercation/vim-colors-solarized.git $VIMPLUGINDIR/vim-colors-solarized.vim
+test -d $VIMPLUGINDIR/vim-fugitive.vim || git clone https://github.com/tpope/vim-fugitive.git $VIMPLUGINDIR/vim-fugitive.vim
 
 link_config_file() {
 file=$1
