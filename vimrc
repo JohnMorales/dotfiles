@@ -54,7 +54,7 @@ syntax on
 noremap <F4> :set hlsearch! <cr>
 noremap <F8> :TagbarToggle <CR>
 
-inoremap jj <esc>
+"inoremap jj <esc>
 
 " Find todos
 nmap ,p :w \|!grep -r '\# TODO:' ./ \| grep ^./<cr>
@@ -98,7 +98,7 @@ nmap <C-h> <C-w><Left>
 nmap <C-l> <C-w><Right>
 nmap <C-k> <C-w><Up>
 nmap <C-j> <C-w><Down>
-nmap <C-t> :CtrlPMixed<CR>
+nmap <C-t> :CtrlPBuffer<CR>
 
 " contents of last global command in new window
 nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>

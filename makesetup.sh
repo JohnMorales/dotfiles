@@ -14,6 +14,10 @@ test -d $VIMPLUGINDIR/nerdtree.vim || git clone https://github.com/scrooloose/ne
 test -d $VIMPLUGINDIR/nnerdtree-ag.vim || git clone https://github.com/taiansu/nerdtree-ag.git $VIMPLUGINDIR/nnerdtree-ag.vim
 test -d $VIMPLUGINDIR/vim-colors-solarized.vim || git clone git://github.com/altercation/vim-colors-solarized.git $VIMPLUGINDIR/vim-colors-solarized.vim
 test -d $VIMPLUGINDIR/vim-fugitive.vim || git clone https://github.com/tpope/vim-fugitive.git $VIMPLUGINDIR/vim-fugitive.vim
+test -d $VIMPLUGINDIR/tlib_vim.vim || git clone https://github.com/tomtom/tlib_vim.git $VIMPLUGINDIR/tlib_vim.vim
+test -d $VIMPLUGINDIR/vim-addon-mw-utils.vim || git clone https://github.com/MarcWeber/vim-addon-mw-utils.git $VIMPLUGINDIR/vim-addon-mw-utils.vim
+test -d $VIMPLUGINDIR/vim-snipmate.vim || git clone https://github.com/garbas/vim-snipmate.git $VIMPLUGINDIR/vim-snipmate.vim
+test -d $VIMPLUGINDIR/vim-snippets.vim || git clone https://github.com/honza/vim-snippets.git $VIMPLUGINDIR/vim-snippets.vim
 
 link_config_file() {
 file=$1
@@ -34,6 +38,7 @@ for i in ${FILES[@]}
   done
 
 # installing irssi customizations
+mkdir ~/.irssi
 link_config_file "irssi" "irssi/config"
 test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized 
 mkdir -p ~/.irssi/scripts
