@@ -38,7 +38,7 @@ for i in ${FILES[@]}
   done
 
 # installing irssi customizations
-mkdir ~/.irssi
+test -d ~/.irssi || mkdir ~/.irssi
 link_config_file "irssi" "irssi/config"
 test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized 
 mkdir -p ~/.irssi/scripts
