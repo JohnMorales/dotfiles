@@ -18,6 +18,7 @@ test -d $VIMPLUGINDIR/tlib_vim.vim || git clone https://github.com/tomtom/tlib_v
 test -d $VIMPLUGINDIR/vim-addon-mw-utils.vim || git clone https://github.com/MarcWeber/vim-addon-mw-utils.git $VIMPLUGINDIR/vim-addon-mw-utils.vim
 test -d $VIMPLUGINDIR/vim-snipmate.vim || git clone https://github.com/garbas/vim-snipmate.git $VIMPLUGINDIR/vim-snipmate.vim
 test -d $VIMPLUGINDIR/vim-snippets.vim || git clone https://github.com/honza/vim-snippets.git $VIMPLUGINDIR/vim-snippets.vim
+test -d $VIMPLUGINDIR/vim-bracketed-paste.vim || git clone https://github.com/ConradIrwin/vim-bracketed-paste.git $VIMPLUGINDIR/vim-bracketed-paste.vim
 
 link_config_file() {
 file=$1
