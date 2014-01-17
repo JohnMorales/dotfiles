@@ -23,7 +23,7 @@ test -d $VIMPLUGINDIR/vim-bracketed-paste.vim || git clone https://github.com/Co
 link_config_file() {
 file=$1
 destination=${2-$file}
-if [ ! -L ~/.$destination ]; then
+if [ ! -L ~/.$destination -a ! -f ~/.$destination.keep ]; then
   if [ -f ~/.$destination ]; then 
     echo "creating backup of existing file to .$destination.bak"
     mv ~/.$destination ~/.$destination.bak
