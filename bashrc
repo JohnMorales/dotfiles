@@ -39,7 +39,6 @@ else
   eval $(dircolors ~/.dir_colors_dark)
 fi
 alias t2='tree -Fth -L 2 --du |less'
-
 #Git helper
 git_dirty() {
   show_diff=$1
@@ -61,4 +60,7 @@ git_dirty() {
     fi 
     cd ..
   done
+}
+create_local_gemset() {
+  echo './.gems' > .rbenv-gemsets
 }
