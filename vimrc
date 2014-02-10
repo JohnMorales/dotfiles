@@ -2,7 +2,6 @@ filetype off
 execute pathogen#infect()
 
 set nowrap
-set number
 set ai
 set tabstop=2
 set softtabstop=2
@@ -104,7 +103,7 @@ nmap <C-t> :CtrlPBuffer<CR>
 nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 
 " toggle line numbers
-nmap <F12> :set number!<CR>
+" nmap <F12> :set number!<CR>
 
 nmap :Q :q
 
@@ -153,3 +152,18 @@ set foldmethod=marker
 " make last typed word uppercase.
 :imap <c-u> <esc>viwUA
 :nmap <c-u> gUiw
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+"set relativenumber
+set number
