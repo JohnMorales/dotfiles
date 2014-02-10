@@ -70,7 +70,7 @@ light() {
 }
 dark() {
   export ITERM_PROFILE=SolarizedDark
-  tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-dark.conf
+  tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-dark2.conf
 }
 alias grep="grep -r --exclude-dir=.git  --exclude=*.swp"
 export DOCKER_HOST=localhost
