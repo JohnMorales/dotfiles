@@ -64,3 +64,13 @@ git_dirty() {
 create_local_gemset() {
   echo './.gems' > .rbenv-gemsets
 }
+light() {
+  export ITERM_PROFILE=SolarizedLight
+  tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-light.conf
+}
+dark() {
+  export ITERM_PROFILE=SolarizedDark
+  tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-dark.conf
+}
+alias grep="grep -r --exclude-dir=.git  --exclude=*.swp"
+export DOCKER_HOST=localhost

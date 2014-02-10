@@ -52,6 +52,9 @@ if [ ! -d /usr/local/opt/coreutils/ ] && $IS_MAC; then
   brew install coreutils
 fi
 
+#install tmux themes
+test -d $DEVELOPMENT/tmux-colors-solarized || git clone https://github.com/seebi/tmux-colors-solarized.git $DEVELOPMENT/tmux-colors-solarized
+
 # install dircolors themes
 test -d $DEVELOPMENT/dircolors-solarized || git clone https://github.com/seebi/dircolors-solarized.git $DEVELOPMENT/dircolors-solarized
 test -f ~/.dir_colors_dark || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-dark ~/.dir_colors_dark
