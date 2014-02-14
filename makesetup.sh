@@ -60,6 +60,9 @@ test -d $DEVELOPMENT/dircolors-solarized || git clone https://github.com/seebi/d
 test -f ~/.dir_colors_dark || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-dark ~/.dir_colors_dark
 test -f ~/.dir_colors_light || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-light ~/.dir_colors_light
 
+#Install dupes
+test -d /usr/local/Library/Taps/homebrew-dupes || brew tap homebrew/dupes
+
 #brew utils
 install_brew_package() {
 package=$1
@@ -73,6 +76,8 @@ PACKAGES=(
   pstree
   tmux
   wget
+  grep
+  pv
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
@@ -86,3 +91,5 @@ if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
   make
   ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace 
 fi
+
+

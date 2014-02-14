@@ -19,12 +19,17 @@ export EDITOR=vim
 # Vagrant aliases.
 alias vms='VBoxManage list runningvms'
 power_down_vms() {
-  VMS=$(VBoxManage list runningvms | awk '{ x=$1;gsub("\"", "", x);print x }')
+  VMS=$(VBoxManage list runningvms |grep -v boot2docker | awk '{ x=$1;gsub("\"", "", x);print x }')
   for i in $VMS 
   do 
     echo "Shutting down $i"
     VBoxManage controlvm $i poweroff 2> /dev/null
   done
+}
+power_down_vm() {
+  VM=$1
+  echo "Shutting down $VM"
+  VBoxManage controlvm $VM poweroff 2> /dev/null
 }
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
@@ -72,5 +77,15 @@ dark() {
   export ITERM_PROFILE=SolarizedDark
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-dark2.conf
 }
-alias grep="grep -r --exclude-dir=.git  --exclude=*.swp"
+alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp"
 export DOCKER_HOST=localhost
+if [ -t 1 ]; then
+  if [ "$COLORFGBG" == "11;15" ]; then
+    echo "setting background to light";
+    light
+  fi;
+  if [ "$COLORFGBG" == "12;8" ]; then 
+    echo "setting background to dark";
+    dark
+  fi;
+fi;
