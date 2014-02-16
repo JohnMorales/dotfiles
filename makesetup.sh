@@ -28,6 +28,7 @@ if [ ! -L ~/.$destination -a ! -f ~/.$destination.keep ]; then
     echo "creating backup of existing file to .$destination.bak"
     mv ~/.$destination ~/.$destination.bak
   fi
+  echo "ln -s $SCRIPT_DIR/$file ~/.$destination"
   ln -s $SCRIPT_DIR/$file ~/.$destination
 fi
 }
@@ -40,11 +41,11 @@ for i in ${FILES[@]}
 
 # installing irssi customizations
 test -d ~/.irssi || mkdir ~/.irssi
-link_config_file "irssi" "irssi/config"
+link_config_file "irssirc" "irssi/config"
 test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized 
 mkdir -p ~/.irssi/scripts
-if [ ! -L ~/.irssi/scripts ]; then 
-  ln -s `pwd`/irssi/ ~/.irssi/scripts/autorun
+if [ ! -L ~/.irssi/scripts/autorun ]; then 
+  ln -s `pwd`/irssi ~/.irssi/scripts/autorun
 fi
 
 #installing coreutils to get the latest gnu tools, lscolors, etc.
