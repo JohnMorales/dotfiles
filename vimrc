@@ -34,12 +34,17 @@ filetype plugin on
 if $ITERM_PROFILE == "SolarizedLight"
   " echo "Setting light background"
   set background=light
-else
+  colorscheme solarized
+elseif $ITERM_PROFILE == "Misterioso"
   " echo "Setting dark background"
   set background=dark
+  colorscheme tomorrow-night
+elseif $ITERM_PROFILE == "SolarizedDark"
+  " echo "Setting dark background"
+  set background=dark
+  colorscheme solarized
 endif
 "colorscheme jellybeans
-colorscheme solarized
 "Only useful if using transparent backgrounds.
 let g:solarized_termtrans=1
 
