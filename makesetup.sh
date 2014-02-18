@@ -20,6 +20,7 @@ test -d $VIMPLUGINDIR/vim-snipmate.vim || git clone https://github.com/garbas/vi
 test -d $VIMPLUGINDIR/vim-snippets.vim || git clone https://github.com/honza/vim-snippets.git $VIMPLUGINDIR/vim-snippets.vim
 test -d $VIMPLUGINDIR/vim-bracketed-paste.vim || git clone https://github.com/ConradIrwin/vim-bracketed-paste.git $VIMPLUGINDIR/vim-bracketed-paste.vim
 test -d $VIMPLUGINDIR/vim-surround.vim || git clone https://github.com/tpope/vim-surround.git $VIMPLUGINDIR/vim-surround.vim
+test -d $VIMPLUGINDIR/molokai.vim || git clone https://github.com/tomasr/molokai.git $VIMPLUGINDIR/molokai.vim
 
 link_config_file() {
 file=$1

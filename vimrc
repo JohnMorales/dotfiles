@@ -24,7 +24,6 @@ set t_ti= t_te=
 set incsearch
 set hlsearch
 set ignorecase
-set cursorline
 filetype plugin on
 
 " let g:solarized_termcolors=256
@@ -35,6 +34,7 @@ if $ITERM_PROFILE == "SolarizedLight"
   " echo "Setting light background"
   set background=light
   colorscheme solarized
+  set cursorline
 elseif $ITERM_PROFILE == "Misterioso"
   " echo "Setting dark background"
   set background=dark
@@ -43,6 +43,9 @@ elseif $ITERM_PROFILE == "SolarizedDark"
   " echo "Setting dark background"
   set background=dark
   colorscheme solarized
+  set cursorline
+else
+  colorscheme default
 endif
 "colorscheme jellybeans
 "Only useful if using transparent backgrounds.
