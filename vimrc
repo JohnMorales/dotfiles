@@ -15,6 +15,8 @@ set scrolloff=3
 set virtualedit=all
 " Allow backspacing 
 set backspace=indent,eol,start
+set modeline
+set modelines=5
 
 " Status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%b][0x%B]
