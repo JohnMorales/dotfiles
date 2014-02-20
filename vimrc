@@ -169,9 +169,18 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-:au FocusLost * :set number
-:au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
 "set relativenumber
 set number
+
+
+
+" Custom extenstions
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
+  au BufReadPost *.hbs set syntax=html
+  au FocusLost * :set number
+  au FocusGained * :set relativenumber
+  au InsertEnter * :set number
+  au InsertLeave * :set relativenumber
+endif
+"set verbose=9
