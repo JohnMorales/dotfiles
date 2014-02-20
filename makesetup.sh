@@ -22,12 +22,13 @@ test -d $VIMPLUGINDIR/vim-bracketed-paste.vim || git clone https://github.com/Co
 test -d $VIMPLUGINDIR/vim-surround.vim || git clone https://github.com/tpope/vim-surround.git $VIMPLUGINDIR/vim-surround.vim
 test -d $VIMPLUGINDIR/molokai.vim || git clone https://github.com/tomasr/molokai.git $VIMPLUGINDIR/molokai.vim
 test -d $VIMPLUGINDIR/html5.vim || git clone https://github.com/othree/html5.vim.git $VIMPLUGINDIR/html5.vim
+test -d $VIMPLUGINDIR/vim-airline.vim || git clone https://github.com/bling/vim-airline.git $VIMPLUGINDIR/vim-airline.vim
 
 link_config_file() {
 file=$1
 destination=${2-$file}
 if [ ! -L ~/.$destination -a ! -f ~/.$destination.keep ]; then
-  if [ -f ~/.$destination ]; then 
+  if [ -f ~/.$destination ]; then
     echo "creating backup of existing file to .$destination.bak"
     mv ~/.$destination ~/.$destination.bak
   fi
@@ -37,17 +38,17 @@ fi
 }
 
 FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc)
-for i in ${FILES[@]} 
-  do 
-    link_config_file $i; 
+for i in ${FILES[@]}
+  do
+    link_config_file $i;
   done
 
 # installing irssi customizations
 test -d ~/.irssi || mkdir ~/.irssi
 link_config_file "irssirc" "irssi/config"
-test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized 
+test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized
 mkdir -p ~/.irssi/scripts
-if [ ! -L ~/.irssi/scripts/autorun ]; then 
+if [ ! -L ~/.irssi/scripts/autorun ]; then
   ln -s `pwd`/irssi ~/.irssi/scripts/autorun
 fi
 
@@ -75,7 +76,7 @@ test -d /usr/local/Cellar/$package || brew install $package
 }
 PACKAGES=(
   tree
-  the_silver_searcher 
+  the_silver_searcher
   tig
   pstree
   tmux
@@ -93,7 +94,7 @@ if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
   git clone https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard.git $DEVELOPMENT/tmux-MacOSX-pasteboard
   cd $DEVELOPMENT/tmux-MacOSX-pasteboard
   make
-  ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace 
+  ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace
 fi
 
 

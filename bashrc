@@ -1,9 +1,8 @@
 #Customizing git prompt
-ResetColor="\[\033[0m\]"            # Text reset
-IntenseBlack="\[\033[0;90m\]" # Grey
-Yellow="\[\033[0;33m\]"
-IntenseBlack="\[\033[0;90m\]"
-BoldGreen="\[\033[1;32m\]"
+ResetColor="[0m\]"
+Yellow="[0;33m\]"
+BoldGreen="[1;32m\]"
+Green="[0;32m\]"
 GIT_PROMPT_START="${BoldGreen}\h ${Yellow}\w${ResetColor}"
 
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
@@ -20,8 +19,8 @@ export EDITOR=vim
 alias vms='VBoxManage list runningvms'
 power_down_vms() {
   VMS=$(VBoxManage list runningvms |grep -v boot2docker | awk '{ x=$1;gsub("\"", "", x);print x }')
-  for i in $VMS 
-  do 
+  for i in $VMS
+  do
     echo "Shutting down $i"
     VBoxManage controlvm $i poweroff 2> /dev/null
   done
@@ -35,7 +34,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-#DIR Colors 
+#DIR Colors
 export CLICOLOR=1
 alias ls='ls -lph --color'
 if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
@@ -48,21 +47,21 @@ alias t2='tree -Fth -L 2 --du |less'
 git_dirty() {
   show_diff=$1
   directories=$(find . -type d -depth 1 | grep -v '^\./\.')
-  for i in $directories; 
-  do 
+  for i in $directories;
+  do
     #echo "checking $i"
-    if [ ! -d "$i/.git" ]; then  
-      continue 
-    fi 
+    if [ ! -d "$i/.git" ]; then
+      continue
+    fi
     cd $i
     STATUS=$(git status)
-    if [[ ! "$STATUS" =~ "working directory clean" ]]; then 
-      echo "$i dirty"  
+    if [[ ! "$STATUS" =~ "working directory clean" ]]; then
+      echo "$i dirty"
       if [[ "$show_diff" != "" ]]
       then
         git status && git diff
       fi
-    fi 
+    fi
     cd ..
   done
 }
@@ -84,7 +83,7 @@ if [ -t 1 ]; then
     echo "setting background to light";
     light
   fi;
-  if [ "$COLORFGBG" == "12;8" ]; then 
+  if [ "$COLORFGBG" == "12;8" ]; then
     echo "setting background to dark";
     dark
   fi;

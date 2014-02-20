@@ -48,6 +48,7 @@ elseif $ITERM_PROFILE == "SolarizedDark"
   colorscheme solarized
   set cursorline
 else
+  set background=dark
   colorscheme default
 endif
 "colorscheme jellybeans
@@ -133,11 +134,11 @@ let g:indent_guides_start_level = 2
 " let g:cterm_colors = (&g:background == 'dark') ? ['darkgrey', 'black'] : ['lightgrey', 'white']
 " let g:gui_colors   = (&g:background == 'dark') ? ['grey15', 'grey30']  : ['grey70', 'grey85']
 if &g:background == 'dark'
-  hi IndentGuidesEven ctermbg='Black'
-  hi IndentGuidesOdd  ctermbg='Black'
+  " hi IndentGuidesEven ctermbg='Black'
+  " hi IndentGuidesOdd  ctermbg='Black'
 else
-  hi IndentGuidesEven ctermbg='lightgrey'
-  hi IndentGuidesOdd  ctermbg='lightgrey'
+  " hi IndentGuidesEven ctermbg='lightgrey'
+  " hi IndentGuidesOdd  ctermbg='lightgrey'
 endif
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
@@ -174,9 +175,6 @@ endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
 "set relativenumber
 set number
-
-
-
 " Custom extenstions
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
@@ -187,3 +185,5 @@ if !exists("autocommands_loaded")
   au InsertLeave * :set relativenumber
 endif
 "set verbose=9
+set list
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
