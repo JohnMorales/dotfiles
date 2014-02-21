@@ -144,6 +144,13 @@ endif
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
 let g:ctrlp_working_path_mode = 'b:ra'
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
 nmap ,n :NERDTreeFind<CR>
 nmap ,m :NERDTreeToggle<CR>
 
@@ -157,6 +164,7 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <C-d> YP
 nmap cp cw<C-r>0<esc>b
 
 set foldmethod=marker
