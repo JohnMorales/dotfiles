@@ -30,6 +30,7 @@ filetype plugin on
 "set t_Co=256
 " Jellybeans colors
 " let g:solarized_termcolors=16
+let g:solarized_bold = 0
 if $ITERM_PROFILE == "SolarizedLight"
   " echo "Setting light background"
   set background=light
@@ -49,7 +50,7 @@ else
 endif
 "colorscheme jellybeans
 "Only useful if using transparent backgrounds.
-let g:solarized_termtrans=1
+" let g:solarized_termtrans=1
 
 " Add dictionary completion
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
