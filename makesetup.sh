@@ -8,6 +8,8 @@ mkdir -p ~/.vim/autoload $VIMPLUGINDIR;\
 curl -Sso ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 mkdir -p $VIMPLUGINDIR
+mkdir -p ~/.vim/indent
+test -f ~/.vim/indent/html.vim ||  curl http://www.vim.org/scripts/download_script.php?src_id=21389 -o ~/.vim/indent/html.vim
 test -d $VIMPLUGINDIR/ctrlp.vim || git clone https://github.com/kien/ctrlp.vim.git $VIMPLUGINDIR/ctrlp.vim
 test -d $VIMPLUGINDIR/jellybeans.vim || git clone https://github.com/nanotech/jellybeans.vim.git $VIMPLUGINDIR/jellybeans.vim
 test -d $VIMPLUGINDIR/nerdtree.vim || git clone https://github.com/scrooloose/nerdtree.git $VIMPLUGINDIR/nerdtree.vim

@@ -88,3 +88,7 @@ if [ -t 1 ]; then
     dark
   fi;
 fi;
+
+if [ -f ~/.quick_dirs ]; then
+  . ~/.quick_dirs
+fi;

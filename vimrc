@@ -26,7 +26,7 @@ set t_ti= t_te=
 set incsearch
 set hlsearch
 set ignorecase
-filetype plugin on
+filetype plugin indent on
 
 " let g:solarized_termcolors=256
 "set t_Co=256
@@ -187,3 +187,5 @@ endif
 "set verbose=9
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+"let g:html_indent_tags = 'html\|div\|table\|p'
+"let g:html_indent_tags .= '\|p\|nav\|head'
