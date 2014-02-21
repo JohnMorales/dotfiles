@@ -164,7 +164,7 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <C-d> YP
+map <C-d> YP
 nmap cp cw<C-r>0<esc>b
 
 set foldmethod=marker
