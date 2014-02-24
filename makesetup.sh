@@ -8,6 +8,7 @@ mkdir -p ~/.vim/autoload $VIMPLUGINDIR;\
 curl -Sso ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 mkdir -p $VIMPLUGINDIR
+test -d ~/.backup || mkdir ~/.backup
 mkdir -p ~/.vim/indent
 test -f ~/.vim/indent/html.vim ||  curl http://www.vim.org/scripts/download_script.php?src_id=21389 -o ~/.vim/indent/html.vim
 test -d $VIMPLUGINDIR/ctrlp.vim || git clone https://github.com/kien/ctrlp.vim.git $VIMPLUGINDIR/ctrlp.vim
