@@ -134,11 +134,11 @@ let g:indent_guides_start_level = 2
 " let g:cterm_colors = (&g:background == 'dark') ? ['darkgrey', 'black'] : ['lightgrey', 'white']
 " let g:gui_colors   = (&g:background == 'dark') ? ['grey15', 'grey30']  : ['grey70', 'grey85']
 if &g:background == 'dark'
-  " hi IndentGuidesEven ctermbg='Black'
-  " hi IndentGuidesOdd  ctermbg='Black'
+   hi IndentGuidesEven ctermbg='Black'
+   hi IndentGuidesOdd  ctermbg='Black'
 else
-  " hi IndentGuidesEven ctermbg='lightgrey'
-  " hi IndentGuidesOdd  ctermbg='lightgrey'
+   hi IndentGuidesEven ctermbg='lightgrey'
+   hi IndentGuidesOdd  ctermbg='lightgrey'
 endif
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
