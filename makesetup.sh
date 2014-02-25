@@ -26,7 +26,7 @@ test -d $VIMPLUGINDIR/vim-surround.vim || git clone https://github.com/tpope/vim
 test -d $VIMPLUGINDIR/molokai.vim || git clone https://github.com/tomasr/molokai.git $VIMPLUGINDIR/molokai.vim
 test -d $VIMPLUGINDIR/html5.vim || git clone https://github.com/othree/html5.vim.git $VIMPLUGINDIR/html5.vim
 test -d $VIMPLUGINDIR/vim-airline.vim || git clone https://github.com/bling/vim-airline.git $VIMPLUGINDIR/vim-airline.vim
-test -d $VIMPLUGINDIR/bootstrap-snippets.vim || git clone https://github.com/bonsaiben/bootstrap-snippets.git $VIMPLUGINDIR/bootstrap-snippets.vim
+test -d $VIMPLUGINDIR/bootstrap-snippets.vim || git clone https://github.com/JohnMorales/bootstrap-snippets.git $VIMPLUGINDIR/bootstrap-snippets.vim
 
 
 link_config_file() {
