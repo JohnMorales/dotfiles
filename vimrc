@@ -168,6 +168,15 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 map <C-d> YP
 nmap cp cw<C-r>0<esc>b
 
+" unmapping Ex mode
+:map Q <Nop>
+
+" quote single
+"nnoremap <leader>qs ysiw'
+"nnoremap <leader>qd ysiw"
+nnoremap <leader>cs cs"'
+nnoremap <leader>cd cs'"
+
 set foldmethod=marker
 
 " make last typed word uppercase.
@@ -182,12 +191,13 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-"set relativenumber
-set number
+set relativenumber
+"set number
 " Custom extenstions
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
   au BufReadPost *.hbs set syntax=html
+  au BufReadPost *.bats set syntax=sh
   au FocusLost * :set number
   au FocusGained * :set relativenumber
   au InsertEnter * :set number

@@ -29,6 +29,7 @@ test -d $VIMPLUGINDIR/vim-airline.vim || git clone https://github.com/bling/vim-
 test -d $VIMPLUGINDIR/bootstrap-snippets.vim || git clone https://github.com/JohnMorales/bootstrap-snippets.git $VIMPLUGINDIR/bootstrap-snippets.vim
 test -d $VIMPLUGINDIR/vim-commentary.vim || git clone https://github.com/tpope/vim-commentary.git $VIMPLUGINDIR/vim-commentary.vim
 test -d $VIMPLUGINDIR/syntastic.vim || git clone https://github.com/scrooloose/syntastic.git $VIMPLUGINDIR/syntastic.vim
+test -d $VIMPLUGINDIR/vim-repeat.vim || git clone https://github.com/tpope/vim-repeat.git $VIMPLUGINDIR/vim-repeat.vim
 
 
 link_config_file() {
