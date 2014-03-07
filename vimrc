@@ -191,17 +191,14 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
+set number
 set relativenumber
 "set number
 " Custom extenstions
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
-  au BufReadPost *.hbs set syntax=html
-  au BufReadPost *.bats set syntax=sh
-  au FocusLost * :set number
-  au FocusGained * :set relativenumber
-  au InsertEnter * :set number
-  au InsertLeave * :set relativenumber
+  au BufReadPost *.hbs set ft=html
+  au BufReadPost *.bats set ft=sh
 endif
 "set verbose=9
 set list
