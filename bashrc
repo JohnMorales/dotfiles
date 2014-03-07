@@ -7,7 +7,9 @@ GIT_PROMPT_START="${BoldGreen}\h ${Yellow}\w${ResetColor}"
 
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 set -o vi
-eval "$(rbenv init -)"
+if [ "$(type -t rbenv)" == "function" ]; then
+  eval "$(rbenv init -)"
+fi
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 if [ -f ~/.git-completion.bash ]; then
