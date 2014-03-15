@@ -30,6 +30,9 @@ test -d $VIMPLUGINDIR/bootstrap-snippets.vim || git clone https://github.com/Joh
 test -d $VIMPLUGINDIR/vim-commentary.vim || git clone https://github.com/tpope/vim-commentary.git $VIMPLUGINDIR/vim-commentary.vim
 test -d $VIMPLUGINDIR/syntastic.vim || git clone https://github.com/scrooloose/syntastic.git $VIMPLUGINDIR/syntastic.vim
 test -d $VIMPLUGINDIR/vim-repeat.vim || git clone https://github.com/tpope/vim-repeat.git $VIMPLUGINDIR/vim-repeat.vim
+test -d $VIMPLUGINDIR/vim-multiple-cursors.vim || git clone https://github.com/terryma/vim-multiple-cursors.git $VIMPLUGINDIR/vim-multiple-cursors.vim
+test -d $VIMPLUGINDIR/vim-textobj-rubyblock.vim || git clone https://github.com/nelstrom/vim-textobj-rubyblock.git $VIMPLUGINDIR/vim-textobj-rubyblock.vim
+test -d $VIMPLUGINDIR/_vim-textobj-user.vim || git clone https://github.com/kana/vim-textobj-user.git $VIMPLUGINDIR/_vim-textobj-user.vim
 
 
 link_config_file() {
