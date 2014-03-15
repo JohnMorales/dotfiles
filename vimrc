@@ -13,7 +13,7 @@ set cmdheight=2
 set laststatus=2
 set scrolloff=3
 set virtualedit=all
-" Allow backspacing 
+" Allow backspacing
 set backspace=indent,eol,start
 set modeline
 set modelines=5
@@ -111,7 +111,7 @@ nmap <C-l> <C-w><Right>
 nmap <C-k> <C-w><Up>
 nmap <C-j> <C-w><Down>
 nmap <C-t> :CtrlPBuffer<CR>
-
+nmap <leader>r :CtrlPMRU<CR>
 " contents of last global command in new window
 nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 
@@ -119,6 +119,7 @@ nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 " nmap <F12> :set number!<CR>
 
 nmap :Q :q
+nmap <leader>tr :%s/\s\+$//g<CR>:w<CR>:e<CR>
 
 " TODO: figure out what PMenu and SpecialKey do.
 " highlight Pmenu ctermbg=238 gui=bold
@@ -172,8 +173,8 @@ nmap cp cw<C-r>0<esc>b
 :map Q <Nop>
 
 " quote single
-"nnoremap <leader>qs ysiw'
-"nnoremap <leader>qd ysiw"
+map <leader>' ysiw'
+map <leader>" ysiw"
 nnoremap <leader>cs cs"'
 nnoremap <leader>cd cs'"
 
@@ -190,7 +191,6 @@ function! NumberToggle()
   endif
 endfunc
 
-nnoremap <C-n> :call NumberToggle()<cr>
 set number
 set relativenumber
 "set number
@@ -205,3 +205,5 @@ set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags = 'html\|div\|table\|p'
 "let g:html_indent_tags .= '\|p\|nav\|head'
+"Still figuring this one out.
+map <leader>d c<div><C-R>"</div><ESC>
