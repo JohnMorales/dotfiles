@@ -73,10 +73,12 @@ create_local_gemset() {
 light() {
   export ITERM_PROFILE=SolarizedLight
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-light.conf
+  tmux set-environment -g ITERM_PROFILE SolarizedLight
 }
 dark() {
   export ITERM_PROFILE=SolarizedDark
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-dark.conf
+  tmux set-environment -g ITERM_PROFILE SolarizedDark
 }
 alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp"
 if [ -f ~/.dockerrc ]; then
@@ -106,3 +108,4 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+alias clear_dns="sudo killall -HUP mDNSResponder"
