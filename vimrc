@@ -17,8 +17,12 @@ set virtualedit=all
 set backspace=indent,eol,start
 set modeline
 set modelines=5
-
+runtime macros/matchit.vim
 set backupdir=~/.backup,/tmp
+set nocompatible
+if has("autocmd")
+  filetype indent plugin on
+endif
 " Status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%b][0x%B]
 
@@ -181,8 +185,8 @@ nnoremap <leader>cd cs'"
 set foldmethod=marker
 
 " make last typed word uppercase.
-:imap <c-u> <esc>viwUA
-:nmap <c-u> gUiw
+":imap <c-u> <esc>viwUA
+":nmap <c-u> gUiw
 function! NumberToggle()
   if(&relativenumber == 1)
     set number
