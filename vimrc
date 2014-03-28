@@ -73,16 +73,16 @@ noremap <F8> :TagbarToggle <CR>
 "inoremap jj <esc>
 
 " Find todos
-nmap ,p :w \|!grep -r '\# TODO:' ./ \| grep ^./<cr>
-
-" Make sure ruby syntax is OK
-nmap ,c :w \|!ruby -c % <cr>
-
-" Test files using rspec
-nmap ,tr :w \|!rspec -I ./ % --format=doc --color <cr>
-
+"nmap ,p :w \|!grep -r '\# TODO:' ./ \| grep ^./<cr>
+"
+"" Make sure ruby syntax is OK
+"nmap ,c :w \|!ruby -c % <cr>
+"
+"" Test files using rspec
+"nmap ,tr :w \|!rspec -I ./ % --format=doc --color <cr>
+"
 " Build tags for current directory using exuberant c-tags
-nmap ,ta :w \|!ctags -R . <cr>
+nmap ,ta :!ctags -R . <cr>
 
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -211,3 +211,8 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
 map <leader>d c<div><C-R>"</div><ESC>
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+inoremap jk <Esc>
+nmap ,t :TagbarToggle<CR>

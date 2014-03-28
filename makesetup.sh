@@ -19,20 +19,25 @@ test -d $VIMPLUGINDIR/vim-colors-solarized.vim || git clone git://github.com/alt
 test -d $VIMPLUGINDIR/vim-fugitive.vim || git clone https://github.com/tpope/vim-fugitive.git $VIMPLUGINDIR/vim-fugitive.vim
 test -d $VIMPLUGINDIR/tlib_vim.vim || git clone https://github.com/tomtom/tlib_vim.git $VIMPLUGINDIR/tlib_vim.vim
 test -d $VIMPLUGINDIR/vim-addon-mw-utils.vim || git clone https://github.com/MarcWeber/vim-addon-mw-utils.git $VIMPLUGINDIR/vim-addon-mw-utils.vim
-test -d $VIMPLUGINDIR/vim-snipmate.vim || git clone https://github.com/garbas/vim-snipmate.git $VIMPLUGINDIR/vim-snipmate.vim
-test -d $VIMPLUGINDIR/vim-snippets.vim || git clone https://github.com/honza/vim-snippets.git $VIMPLUGINDIR/vim-snippets.vim
+#test -d $VIMPLUGINDIR/vim-snipmate.vim || git clone https://github.com/garbas/vim-snipmate.git $VIMPLUGINDIR/vim-snipmate.vim
 test -d $VIMPLUGINDIR/vim-bracketed-paste.vim || git clone https://github.com/ConradIrwin/vim-bracketed-paste.git $VIMPLUGINDIR/vim-bracketed-paste.vim
 test -d $VIMPLUGINDIR/vim-surround.vim || git clone https://github.com/tpope/vim-surround.git $VIMPLUGINDIR/vim-surround.vim
 test -d $VIMPLUGINDIR/molokai.vim || git clone https://github.com/tomasr/molokai.git $VIMPLUGINDIR/molokai.vim
 test -d $VIMPLUGINDIR/html5.vim || git clone https://github.com/othree/html5.vim.git $VIMPLUGINDIR/html5.vim
 test -d $VIMPLUGINDIR/vim-airline.vim || git clone https://github.com/bling/vim-airline.git $VIMPLUGINDIR/vim-airline.vim
-test -d $VIMPLUGINDIR/bootstrap-snippets.vim || git clone https://github.com/JohnMorales/bootstrap-snippets.git $VIMPLUGINDIR/bootstrap-snippets.vim
 test -d $VIMPLUGINDIR/vim-commentary.vim || git clone https://github.com/tpope/vim-commentary.git $VIMPLUGINDIR/vim-commentary.vim
 test -d $VIMPLUGINDIR/syntastic.vim || git clone https://github.com/scrooloose/syntastic.git $VIMPLUGINDIR/syntastic.vim
 test -d $VIMPLUGINDIR/vim-repeat.vim || git clone https://github.com/tpope/vim-repeat.git $VIMPLUGINDIR/vim-repeat.vim
 test -d $VIMPLUGINDIR/vim-multiple-cursors.vim || git clone https://github.com/terryma/vim-multiple-cursors.git $VIMPLUGINDIR/vim-multiple-cursors.vim
 test -d $VIMPLUGINDIR/vim-textobj-rubyblock.vim || git clone https://github.com/nelstrom/vim-textobj-rubyblock.git $VIMPLUGINDIR/vim-textobj-rubyblock.vim
 test -d $VIMPLUGINDIR/_vim-textobj-user.vim || git clone https://github.com/kana/vim-textobj-user.git $VIMPLUGINDIR/_vim-textobj-user.vim
+test -d $VIMPLUGINDIR/delimitMate.vim || git clone https://github.com/Raimondi/delimitMate.git      $VIMPLUGINDIR/delimitMate.vim
+test -d $VIMPLUGINDIR/YouCompleteMe.vim || (git clone https://github.com/Valloric/YouCompleteMe.git $VIMPLUGINDIR/YouCompleteMe.vim;cd $VIMPLUGINDIR/YouCompleteMe.vim; git submodule update --init --recursive)
+test -d $VIMPLUGINDIR/ultisnips.vim || git clone https://github.com/SirVer/ultisnips.git $VIMPLUGINDIR/ultisnips.vim
+test -d $VIMPLUGINDIR/_snip_vim-snippets.vim || git clone https://github.com/honza/vim-snippets.git $VIMPLUGINDIR/_snip_vim-snippets.vim
+test -d $VIMPLUGINDIR/_snip_bootstrap-snippets.vim || git clone https://github.com/JohnMorales/bootstrap-snippets.git $VIMPLUGINDIR/_snip_bootstrap-snippets.vim
+test -d $VIMPLUGINDIR/tagbar.vim || git clone https://github.com/majutsushi/tagbar.git $VIMPLUGINDIR/tagbar.vim
+
 
 
 link_config_file() {
