@@ -84,12 +84,15 @@ alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp"
 if [ -f ~/.dockerrc ]; then
   . ~/.dockerrc
 fi
+if [ "$TMUX" ] && [ "$(tmux showenv -g ITERM_PROFILE)" ]; then
+  eval $(tmux showenv -g ITERM_PROFILE)
+fi
 if [ -t 1 ]; then
-  if [ "$COLORFGBG" == "11;15" ]; then
+  if [ "$ITERM_PROFILE" == "SolarizedLight" ]; then
     echo "setting background to light";
     light
   fi;
-  if [ "$COLORFGBG" == "12;8" ]; then
+  if [ "$ITERM_PROFILE" == "SolarizedDark" ]; then
     echo "setting background to dark";
     dark
   fi;
