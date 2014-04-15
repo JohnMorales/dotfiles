@@ -53,7 +53,7 @@ if [ ! -L ~/.$destination -a ! -f ~/.$destination.keep ]; then
 fi
 }
 
-FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc my.cnf)
+FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc my.cnf editrc)
 for i in ${FILES[@]}
   do
     link_config_file $i;
