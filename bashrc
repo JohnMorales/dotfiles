@@ -112,3 +112,4 @@ man() {
     man "$@"
 }
 alias clear_dns="sudo killall -HUP mDNSResponder"
+export CDPATH=.:~/Development/:~/Development/chef:~/Development/chef/chef_files

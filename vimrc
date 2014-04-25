@@ -203,6 +203,7 @@ if !exists("autocommands_loaded")
   let autocommands_loaded = 1
   au BufReadPost *.hbs set ft=html
   au BufReadPost *.bats set ft=sh
+  au BufReadPost *.md set ft=markdown
 endif
 "set verbose=9
 set list
@@ -216,3 +217,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 inoremap jk <Esc>
 nmap ,t :TagbarToggle<CR>
+
+
+let g:ycm_key_list_previous_completion = ['<UP>']
+let delimitMate_expand_cr = 1
