@@ -19,6 +19,7 @@ set modeline
 set modelines=5
 runtime macros/matchit.vim
 set backupdir=~/.backup,/tmp
+set dir=/tmp
 set nocompatible
 if has("autocmd")
   filetype indent plugin on
