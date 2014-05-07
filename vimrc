@@ -24,11 +24,15 @@ Plugin 'git://github.com/Valloric/YouCompleteMe.git'
 Plugin 'git://github.com/SirVer/ultisnips.git'
 Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/bootstrap-snippets.git'
+Plugin 'git://github.com/JazzCore/ctrlp-cmatcher.git'
 
 
 call vundle#end()            " required
 filetype plugin indent on
 " End vundle
+
+" cmatcher
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 set nowrap
 set ai
@@ -175,13 +179,13 @@ endif
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
-let g:ctrlp_working_path_mode = 'b:ra'
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
   \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ },
-  \ 'fallback': 'find %s -type f'
+  \ 'fallback': 'find %s -type d -depth +0 -name ".*" -prune -o -type f -print'
   \ }
 nmap ,n :NERDTreeFind<CR>
 nmap ,m :NERDTreeToggle<CR>
