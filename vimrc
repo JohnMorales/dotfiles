@@ -1,5 +1,34 @@
 filetype off
-execute pathogen#infect()
+"execute pathogen#infect()
+
+" Vundle configuration
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" A bit meta..
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'git://github.com/kien/ctrlp.vim.git'
+Plugin 'git://github.com/scrooloose/nerdtree.git'
+Plugin 'git://github.com/taiansu/nerdtree-ag.git'
+Plugin 'git://github.com/altercation/vim-colors-solarized.git'
+Plugin 'git://github.com/tpope/vim-surround.git'
+Plugin 'git://github.com/bling/vim-airline.git'
+Plugin 'git://github.com/scrooloose/syntastic.git'
+Plugin 'git://github.com/tpope/vim-repeat.git'
+Plugin 'git://github.com/terryma/vim-multiple-cursors.git'
+Plugin 'git://github.com/kana/vim-textobj-user.git'
+Plugin 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
+Plugin 'git://github.com/Raimondi/delimitMate.git'
+Plugin 'git://github.com/Valloric/YouCompleteMe.git'
+Plugin 'git://github.com/SirVer/ultisnips.git'
+Plugin 'git://github.com/honza/vim-snippets.git'
+Plugin 'git://github.com/JohnMorales/bootstrap-snippets.git'
+
+
+call vundle#end()            " required
+filetype plugin indent on
+" End vundle
 
 set nowrap
 set ai
@@ -21,9 +50,6 @@ runtime macros/matchit.vim
 set backupdir=~/.backup,/tmp
 set dir=/tmp
 set nocompatible
-if has("autocmd")
-  filetype indent plugin on
-endif
 " Status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%b][0x%B]
 
@@ -32,7 +58,6 @@ set t_ti= t_te=
 set incsearch
 set hlsearch
 set ignorecase
-filetype plugin indent on
 
 " let g:solarized_termcolors=256
 "set t_Co=256
