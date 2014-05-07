@@ -60,7 +60,7 @@ set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%
 " Disable clearing scrollback buffer when exiting vim
 set t_ti= t_te=
 set incsearch
-set hlsearch
+set nohls
 set ignorecase
 
 " let g:solarized_termcolors=256
