@@ -10,6 +10,7 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'git://github.com/kien/ctrlp.vim.git'
 Plugin 'git://github.com/scrooloose/nerdtree.git'
+Plugin 'git://github.com/epmatsw/ag.vim.git'
 Plugin 'git://github.com/taiansu/nerdtree-ag.git'
 Plugin 'git://github.com/altercation/vim-colors-solarized.git'
 Plugin 'git://github.com/tpope/vim-surround.git'
@@ -24,7 +25,8 @@ Plugin 'git://github.com/Valloric/YouCompleteMe.git'
 Plugin 'git://github.com/SirVer/ultisnips.git'
 Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/bootstrap-snippets.git'
-Plugin 'git://github.com/JazzCore/ctrlp-cmatcher.git'
+Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
+"Plugin 'git://github.com/JazzCore/ctrlp-cmatcher.git'
 
 
 call vundle#end()            " required
@@ -32,7 +34,7 @@ filetype plugin indent on
 " End vundle
 
 " cmatcher
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 set nowrap
 set ai
