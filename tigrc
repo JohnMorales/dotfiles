@@ -55,7 +55,7 @@ bind main R !git rebase -i %(commit)^
 bind main P !git cherry-pick %(commit)
 bind main X !?git push
 bind main F !@sh -c "git show %(commit) --pretty=format: --name-only | xargs | xsel -ib"
-bind main E !<sh -c "vim -c 'Gedit %(commit)' $(ls | head -1)"
+bind main E !?sh -c "git show %(commit):%(file) | vim -"
 bind main V !<sh -c "vim $(git show %(commit) --pretty=format: --name-only | xargs)"
 
 # }}}
@@ -69,10 +69,13 @@ bind diff A !git add %(file)              # Add current file
 bind diff C !git commit -av               # Add and commit
 bind diff P !git add -p %(file)           # Partially add current file
 bind diff F !@sh -c "git show %(commit) --pretty=format: --name-only | xargs | xsel -ib"
-bind diff E !<sh -c "vim -c 'Gedit %(commit)' $(ls | head -1)"
+#bind diff E !<sh -c "vim -c '%(commit)' $(ls | head -1)"
 bind diff V !<sh -c "vim $(git show %(commit) --pretty=format: --name-only | xargs)"
+bind diff R !sh -c "mkdir -p $(dirname %(file));git show %(commit):%(file) > %(file)"
+bind diff O !sh -c "git show %(commit):%(file) > %(file); vim %(file)"
 
 # }}}
+# k
 # Tree {{{
 
 bind tree V !vim %(file)
@@ -99,3 +102,4 @@ bind stage C !@git commit # Commit staging changes
 # }}}
 
 # }}}
+#

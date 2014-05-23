@@ -119,11 +119,11 @@ build_bump() {
   ver=$(grep version metadata.rb|awk -F"[.']" '{print $4}')
   new_version=$((ver+1))
   echo "Updating metadata to $new_version"
-  sed -i -e "/version/s/${ver}/${new_version}/" metadata.rb
+  sed -e "/version/s/${ver}/${new_version}/" -i '' metadata.rb
 }
 minor_bump() {
   ver=$(grep version metadata.rb|awk -F"[.']" '{print $3}')
   new_version=$((ver+1))
   echo "Updating metadata to $new_version"
-  sed -i -e "/version/s/\.${ver}\./\.${new_version}\./" metadata.rb
+  sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
 }
