@@ -127,3 +127,4 @@ minor_bump() {
   echo "Updating metadata to $new_version"
   sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
 }
+alias vi=vim
