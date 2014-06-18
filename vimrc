@@ -1,4 +1,4 @@
-filetype off
+filetype on
 "execute pathogen#infect()
 
 " Vundle configuration
@@ -26,12 +26,19 @@ Plugin 'git://github.com/SirVer/ultisnips.git'
 Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/bootstrap-snippets.git'
 Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
-"Plugin 'git://github.com/JazzCore/ctrlp-cmatcher.git'
+Plugin 'git://github.com/majutsushi/tagbar.git'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-projectionist' " Project specific plugins.
+Plugin 'dbakker/vim-projectroot'
+Plugin 'ivalkeen/vim-ctrlp-tjump'
 
 
 call vundle#end()            " required
 filetype plugin indent on
 " End vundle
+" After installing a new plugin, reload the vimrc and run :PluginInstall
 
 " cmatcher
 "let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
@@ -114,7 +121,8 @@ noremap <F8> :TagbarToggle <CR>
 "nmap ,tr :w \|!rspec -I ./ % --format=doc --color <cr>
 "
 " Build tags for current directory using exuberant c-tags
-nmap ,ta :!ctags -R . <cr>
+set tags=./tags;
+nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R .<cr>
 
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -189,8 +197,8 @@ let g:ctrlp_user_command = {
     \ },
   \ 'fallback': 'find %s -type d -depth +0 -name ".*" -prune -o -type f -print'
   \ }
-nmap ,n :NERDTreeFind<CR>
-nmap ,m :NERDTreeToggle<CR>
+nmap <silent> ,n :NERDTreeFind<CR>
+nmap <silent> ,m :NERDTreeToggle<CR>
 
 function! AppendModeline()
   let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
@@ -253,3 +261,13 @@ nmap ,t :TagbarToggle<CR>
 
 let g:ycm_key_list_previous_completion = ['<UP>']
 let delimitMate_expand_cr = 1
+let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.xml', 'Gemfile' ]
+
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
+let g:ctrlp_tjump_only_silent = 1
+
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
