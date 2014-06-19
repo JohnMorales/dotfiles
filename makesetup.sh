@@ -39,6 +39,10 @@ test -d ~/.backup || mkdir ~/.backup
 #test -d $VIMPLUGINDIR/tagbar.vim || git clone https://github.com/majutsushi/tagbar.git $VIMPLUGINDIR/tagbar.vim
 test -d $VIMPLUGINDIR/vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/vundle.vim
 
+if [ -d $VIMPLUGINDIR/ultisnips/ftdetect ] && ! [ -d ~/.vim/ftdetect ]; then
+  mkdir ~/.vim/ftdetect
+  ln -s ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect/
+fi;
 
 
 link_config_file() {
