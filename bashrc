@@ -149,3 +149,12 @@ minor_bump() {
   sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
 }
 alias vi=vim
+
+
+export JAVA_HOME="$(/usr/libexec/java_home)"
+if [ -f ~/.awskey ]; then
+  . ~/.awskey
+fi;
+export EC2_AMITOOL_HOME="/usr/local/Cellar/ec2-ami-tools/1.5.2/libexec"
+export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
+alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem"
