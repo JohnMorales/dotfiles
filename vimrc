@@ -129,14 +129,14 @@ nmap ,, <C-^>
 nnoremap <silent> <Leader>hm :%!xxd<cr> " Hex mode
 nnoremap <silent> <Leader>bh :%!xxd -r<cr> " Back from hex
 
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+" nnoremap th  :tabfirst<CR>
+" nnoremap tj  :tabnext<CR>
+" nnoremap tk  :tabprev<CR>
+" nnoremap tl  :tablast<CR>
+" nnoremap tt  :tabedit<Space>
+" nnoremap tn  :tabnext<Space>
+" nnoremap tm  :tabm<Space>
+" nnoremap td  :tabclose<CR>
 nmap <C-h> <C-w><Left>
 nmap <C-l> <C-w><Right>
 nmap <C-k> <C-w><Up>
@@ -209,6 +209,8 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 nnoremap <leader>ev :ed $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+"
+" Duplicate line
 map <C-d> YP
 nmap cp cw<C-r>0<esc>b
 

@@ -1,22 +1,23 @@
 [user]
-	name = JohnMorales
-	email = jmorales@gmail.com
+  name = JohnMorales
+  email = jmorales@gmail.com
 [color]
- branch = auto
- diff = auto
- status = auto
+  branch = auto
+  diff = auto
+  status = auto
+  ui = auto
 [color "branch"]
- current = yellow reverse
- local = yellow
- remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
- meta = yellow bold
- frag = magenta bold
- old = red
- new = cyan
+  meta = white
+  frag = magenta bold
+  old = green bold
+  new = green
 [color "status"]
- added = yellow
- changed = green
- untracked = cyan
+  added = yellow
+  changed = green
+  untracked = cyan
 [push]
-	default = simple
+  default = simple
