@@ -69,7 +69,6 @@ set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%
 " Disable clearing scrollback buffer when exiting vim
 set t_ti= t_te=
 set incsearch
-set nohls
 set ignorecase
 
 " let g:solarized_termcolors=256
@@ -123,24 +122,12 @@ noremap <F8> :TagbarToggle <CR>
 " Build tags for current directory using exuberant c-tags
 set tags=./tags;
 nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R .<cr>
-
-" Map ,e and ,v to open files in the same directory as the current file
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gj :CommandTFlush<cr>\|:CommandT public/javascripts<cr>
-
-let g:CommandTCursorStartMap='<leader>f'
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
+nnoremap <silent> <Leader>u :ProjectRootExe Ag<cr>
 
 nmap ,, <C-^>
+
+nnoremap <silent> <Leader>hm :%!xxd<cr> " Hex mode
+nnoremap <silent> <Leader>bh :%!xxd -r<cr> " Back from hex
 
 nnoremap th  :tabfirst<CR>
 nnoremap tj  :tabnext<CR>
@@ -155,20 +142,32 @@ nmap <C-l> <C-w><Right>
 nmap <C-k> <C-w><Up>
 nmap <C-j> <C-w><Down>
 nmap <C-t> :CtrlPBuffer<CR>
+" Project level tags
+nnoremap <leader>f :CtrlPTag<cr>
+" File level tags
+nnoremap <leader>m :CtrlPBufTag<cr>
+" Jump to tags
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+" Show recent files
 nmap <leader>r :CtrlPMRU<CR>
 " contents of last global command in new window
-nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
+"nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 
 " toggle line numbers
 " nmap <F12> :set number!<CR>
 
+" Fat-fingering q.
 nmap :Q :q
+
+" Delete trailing whitespaces.
 nmap <leader>tr :%s/\s\+$//g<CR>:w<CR>:e<CR>
 
 " TODO: figure out what PMenu and SpecialKey do.
 " highlight Pmenu ctermbg=238 gui=bold
 " highlight PMenu gui=bold guibg=#CECECE guifg=#444444
 " highlight SpecialKey guifg=#4a4a59
+highlight Search ctermfg=10 ctermbg=0
 
 map <leader>j !python -m json.tool<CR>
 let g:indent_guides_enable_on_vim_startup = 1
@@ -208,7 +207,7 @@ function! AppendModeline()
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :ed $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 map <C-d> YP
 nmap cp cw<C-r>0<esc>b
@@ -263,11 +262,9 @@ let g:ycm_key_list_previous_completion = ['<UP>']
 let delimitMate_expand_cr = 1
 let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.xml', 'Gemfile' ]
 
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
 let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
 let g:ctrlp_tjump_only_silent = 1
 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
