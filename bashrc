@@ -27,13 +27,14 @@ fi
 # Aliases
 #
 ##############################################
-alias vms='VBoxManage list runningvms'
+alias vms='VBoxManage list runningvms' # See virtualbox running machines.
 alias ls='ls -lph --color'
-alias t2='tree -Fth -L 2 --du |less'
-alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp"
+alias t2='tree -Fth -L 2 --du |less' #see tree with size up to 2 levels deep
+alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
 alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
+alias be="bundle exec" # When running a command and forcing bundled gems
 
 
 
