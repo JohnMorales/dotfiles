@@ -1,8 +1,14 @@
+# Snagged from https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
+# complete hostnames from this file
+: ${HOSTFILE=~/.ssh/known_hosts}
+# readline config
+: ${INPUTRC=~/.inputrc}
+
 ##############################################
 # Vim
 #
 ##############################################
-
+[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 set -o vi
 export EDITOR=vim
 
@@ -21,7 +27,6 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 if [ "$(type -t rbenv)" == "file" ]; then
   eval "$(rbenv init -)"
 fi
-
 
 ##############################################
 # Aliases
