@@ -8,7 +8,6 @@
 # Vim
 #
 ##############################################
-[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 set -o vi
 export EDITOR=vim
 
