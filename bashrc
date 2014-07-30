@@ -1,9 +1,3 @@
-# Snagged from https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
-# complete hostnames from this file
-: ${HOSTFILE=~/.ssh/known_hosts}
-# readline config
-: ${INPUTRC=~/.inputrc}
-
 ##############################################
 # Vim
 #
