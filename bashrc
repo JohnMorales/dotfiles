@@ -2,7 +2,6 @@
 # Vim
 #
 ##############################################
-
 set -o vi
 export EDITOR=vim
 
@@ -22,17 +21,18 @@ if [ "$(type -t rbenv)" == "file" ]; then
   eval "$(rbenv init -)"
 fi
 
-
 ##############################################
 # Aliases
 #
 ##############################################
-alias vms='VBoxManage list runningvms'
+alias vms='VBoxManage list runningvms' # See virtualbox running machines.
 alias ls='ls -lph --color'
-alias t2='tree -Fth -L 2 --du |less'
-alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp"
+alias t2='tree -Fth -L 2 --du |less' #see tree with size up to 2 levels deep
+alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
 alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
+alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
+alias be="bundle exec" # When running a command and forcing bundled gems
 
 
 
@@ -186,3 +186,13 @@ Green="[0;32m\]"
 GIT_PROMPT_START="${BoldGreen}\h ${Yellow}\w${ResetColor}"
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
+##############################################
+# AWS settings
+#
+##############################################
+export EC2_AMITOOL_HOME="/usr/local/Cellar/ec2-ami-tools/1.5.2/libexec"
+export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
+export JAVA_HOME="$(/usr/libexec/java_home)"
+if [ -f ~/.awskey ]; then
+  . ~/.awskey
+fi;
