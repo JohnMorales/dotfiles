@@ -136,6 +136,17 @@ minor_bump() {
   echo "Updating metadata to $new_version"
   sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
 }
+# open vim in the gem directory
+gem_edit() {
+  gem=$1
+  gem_dir=$(bundle show $gem)
+  exit_status=$?
+  if [ $exit_status -ne 0 ]; then
+    gem_dir=$(dirname $(dirname $(gem which $gem)))
+  fi;
+  #echo "dir: " $gem_dir
+  (cd $gem_dir; vim)
+}
 
 #DIR Colors
 export CLICOLOR=1
@@ -202,3 +213,6 @@ export JAVA_HOME="$(/usr/libexec/java_home)"
 if [ -f ~/.awskey ]; then
   . ~/.awskey
 fi;
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
