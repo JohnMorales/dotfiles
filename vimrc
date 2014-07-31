@@ -73,21 +73,27 @@ set t_ti= t_te=
 set incsearch
 set ignorecase
 
+" taken from https://github.com/vim-scripts/ingo-library/blob/master/autoload/ingo/str.vim
+function! Trim( string )
+  return substitute(a:string, '^\_s*\(.\{-}\)\_s*$', '\1', '')
+endfunction
+
 " let g:solarized_termcolors=256
 "set t_Co=256
 " Jellybeans colors
 " let g:solarized_termcolors=16
 let g:solarized_bold = 0
-if $ITERM_PROFILE == "SolarizedLight"
+let bg_profile = Trim(substitute(system("tmux showenv -g ITERM_PROFILE"), ".*=", "", ""))
+if bg_profile ==? "SolarizedLight"
   " echo "Setting light background"
   set background=light
   colorscheme solarized
   set cursorline
-elseif $ITERM_PROFILE == "Misterioso"
+elseif bg_profile ==? "Misterioso"
   " echo "Setting dark background"
   set background=dark
   colorscheme tomorrow-night
-elseif $ITERM_PROFILE == "SolarizedDark"
+elseif bg_profile ==? "SolarizedDark"
   " echo "Setting dark background"
   set background=dark
   colorscheme solarized
@@ -258,7 +264,10 @@ map <leader>d c<div><C-R>"</div><ESC>
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-inoremap jk <Esc>
+
+"http://learnvimscriptthehardway.stevelosh.com/chapters/10.html
+inoremap jk <Esc> 
+
 nmap ,t :TagbarToggle<CR>
 
 
