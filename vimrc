@@ -35,6 +35,7 @@ Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
+Plugin 'vadv/vim-chef'
 
 
 call vundle#end()            " required
@@ -199,7 +200,7 @@ endif
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
   \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 1: ['.git', 'cd %s && git ls-files -oc'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ },
   \ 'fallback': 'find %s -type d -depth +0 -name ".*" -prune -o -type f -print'
