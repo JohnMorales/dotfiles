@@ -1,4 +1,5 @@
-filetype on
+set nocompatible
+filetype off
 "execute pathogen#infect()
 
 " Vundle configuration
@@ -24,8 +25,9 @@ Plugin 'git://github.com/Raimondi/delimitMate.git'
 "Plugin 'git://github.com/Valloric/YouCompleteMe.git'
 
 Plugin 'git://github.com/Shougo/neocomplete.git'
+Plugin 'git://github.com/Shougo/neosnippet.git'
 Plugin 'git://github.com/SirVer/ultisnips.git'
-Plugin 'git://github.com/honza/vim-snippets.git'
+"Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/vim-bootstrap3-snippets.git'
 Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Plugin 'git://github.com/majutsushi/tagbar.git'
@@ -65,7 +67,6 @@ set modelines=5
 runtime macros/matchit.vim
 set backupdir=~/.backup,/tmp
 set dir=/tmp
-set nocompatible
 " Status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%b][0x%B]
 
@@ -248,13 +249,6 @@ endfunc
 set number
 set relativenumber
 "set number
-" Custom extenstions
-if !exists("autocommands_loaded")
-  let autocommands_loaded = 1
-  au BufReadPost *.hbs set ft=html
-  au BufReadPost *.bats set ft=sh
-  au BufReadPost *.md set ft=markdown
-endif
 "set verbose=9
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
@@ -262,9 +256,9 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
 map <leader>d c<div><C-R>"</div><ESC>
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "http://learnvimscriptthehardway.stevelosh.com/chapters/10.html
 inoremap jk <Esc> 
@@ -272,17 +266,39 @@ inoremap jk <Esc>
 nmap ,t :TagbarToggle<CR>
 
 
-let g:ycm_key_list_previous_completion = ['<UP>']
-let delimitMate_expand_cr = 1
+"let g:ycm_key_list_previous_completion = ['<UP>']
+"let delimitMate_expand_cr = 1
 let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.xml', 'Gemfile' ]
 
 let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
 let g:ctrlp_tjump_only_silent = 1
 
+" setting filetypes for files with multiple extensions
+" http://stackoverflow.com/questions/8413781/automatically-set-multiple-file-types-in-filetype-if-a-file-has-multiple-exten
+function MultiExtensionFiletype()
+  let ft_default=&filetype
+  let ft_prefix=substitute(matchstr(expand('%'),'\..\+\.'),'\.','','g')
+  sil exe "set filetype=" . ft_prefix  . "." . ft_default
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto commands
+"
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
+autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+" there are more in the neocomplete section
+" Custom extenstions
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
+  au BufReadPost *.hbs set ft=html
+  au BufReadPost *.bats set ft=sh
+  au BufReadPost *.md set ft=markdown
+endif
+autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete
 "
@@ -317,14 +333,14 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+  "return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? "\<C-j>" : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><tab>  pumvisible() ? "\<C-j>" : "\<Tab>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
@@ -371,4 +387,3 @@ endif
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
