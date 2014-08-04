@@ -22,12 +22,9 @@ Plugin 'git://github.com/terryma/vim-multiple-cursors.git'
 Plugin 'git://github.com/kana/vim-textobj-user.git'
 Plugin 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
 Plugin 'git://github.com/Raimondi/delimitMate.git'
-"Plugin 'git://github.com/Valloric/YouCompleteMe.git'
-
 Plugin 'git://github.com/Shougo/neocomplete.git'
-Plugin 'git://github.com/Shougo/neosnippet.git'
 Plugin 'git://github.com/SirVer/ultisnips.git'
-"Plugin 'git://github.com/honza/vim-snippets.git'
+Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/vim-bootstrap3-snippets.git'
 Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Plugin 'git://github.com/majutsushi/tagbar.git'
@@ -256,7 +253,7 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
 map <leader>d c<div><C-R>"</div><ESC>
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
@@ -333,14 +330,24 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
+function! s:Ulti_ExpandOrJump_and_getRes()
+  call UltiSnips#ExpandSnippetOrJump()
+  return g:ulti_expand_or_jump_res
+endfunction
+
+function! s:handle_cr_with_popup()
+  return <SID>Ulti_ExpandOrJump_and_getRes() > 0 ?  "" : neocomplete#close_popup() 
+endfunction
+
 function! s:my_cr_function()
   "return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  return pumvisible() ? "\<C-j>" : "\<CR>"
+  return pumvisible() ? <SID>handle_cr_with_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><tab>  pumvisible() ? "\<C-j>" : "\<Tab>"
+imap <expr><tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
