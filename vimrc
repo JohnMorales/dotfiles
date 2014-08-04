@@ -30,7 +30,7 @@ Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Plugin 'git://github.com/majutsushi/tagbar.git'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-bundler'
+"Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
@@ -128,7 +128,7 @@ noremap <F8> :TagbarToggle <CR>
 "
 " Build tags for current directory using exuberant c-tags
 set tags=./tags;
-nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R .<cr>
+nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R . $(bundle show --paths)<cr>
 nnoremap <silent> <Leader>u :ProjectRootExe Ag<cr>
 
 nmap ,, <C-^>
