@@ -29,6 +29,7 @@ Plugin 'git://github.com/JohnMorales/vim-bootstrap3-snippets.git'
 Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Plugin 'git://github.com/majutsushi/tagbar.git'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
 "Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-projectionist' " Project specific plugins.
@@ -45,6 +46,8 @@ filetype plugin indent on
 " cmatcher
 "let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
+" hack to support shift enter in console vim ref:http://stackoverflow.com/questions/5388562/cant-map-s-cr-in-vim
+imap ✠ <S-CR>
 set nowrap
 set ai
 set tabstop=2
