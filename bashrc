@@ -168,13 +168,17 @@ fi;
 #
 ##############################################
 
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
-
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
+else
+  echo "Missing bash completion, brew install bash-completion"
 fi
+
+if ! type __git_heads 2>/dev/null | head -n1 | grep function >/dev/null && ! [[ -f ~/.git-completion.bash && $(. ~/.git-completion.bash) -eq 0 ]]; then
+  echo "Missing git completion."
+fi
+
+
 
 if [ -f ~/.dockerrc ]; then
   . ~/.dockerrc

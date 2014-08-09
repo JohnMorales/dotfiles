@@ -36,6 +36,7 @@ Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'vadv/vim-chef'
+Plugin 'ecomba/vim-ruby-refactoring'
 
 
 call vundle#end()            " required
