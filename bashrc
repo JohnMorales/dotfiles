@@ -174,6 +174,7 @@ else
   echo "Missing bash completion, brew install bash-completion"
 fi
 
+#http://git-scm.com/book/en/Git-Basics-Tips-and-Tricks
 if ! type __git_heads 2>/dev/null | head -n1 | grep function >/dev/null && ! [[ -f ~/.git-completion.bash && $(. ~/.git-completion.bash) -eq 0 ]]; then
   echo "Missing git completion."
 fi
