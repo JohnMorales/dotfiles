@@ -37,6 +37,7 @@ Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'vadv/vim-chef'
 Plugin 'ecomba/vim-ruby-refactoring'
+Plugin 'kchmck/vim-coffee-script'
 
 
 call vundle#end()            " required
