@@ -130,6 +130,7 @@ minor_bump() {
   echo "Updating metadata to $new_version"
   sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
 }
+
 # open vim in the gem directory
 gem_edit() {
   gem=$1
@@ -142,7 +143,45 @@ gem_edit() {
   (cd $gem_dir; vim)
 }
 
-#DIR Colors
+# mimic linux service name start|stop|restart
+service() {
+  service_name=$1
+  action=${2:-restart}
+  launch_agent_config=$(/bin/ls ~/Library/LaunchAgents/ | grep $service_name)
+  if [ $(echo "$launch_agent_config" | wc -l) -gt 1 ]; then
+    echo "Found more than 1 configuration, please be more specific"
+    return 1
+  fi
+  echo -n "$action on $launch_agent_config..."
+  case $action in
+    restart)
+        launchctl unload ~/Library/LaunchAgents/$launch_agent_config
+        return_code=$?
+        if [ $return_code -eq 0 ]; then 
+          launchctl load ~/Library/LaunchAgents/$launch_agent_config
+          return_code=$?
+        fi;
+        ;;
+    stop)
+        launchctl unload ~/Library/LaunchAgents/$launch_agent_config
+        return_code=$?
+        ;;
+    start)
+        launchctl load ~/Library/LaunchAgents/$launch_agent_config
+        return_code=$?
+        ;;
+  esac
+  if [ $return_code -eq 0 ]; then
+    echo "OK"
+  else
+    echo "Failed"
+  fi;
+}
+
+##############################################
+# Colors
+#
+##############################################
 export CLICOLOR=1
 if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
   eval $(dircolors ~/.dir_colors_light)
