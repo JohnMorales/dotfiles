@@ -21,3 +21,5 @@
   untracked = cyan
 [push]
   default = simple
+[core]
+	excludesfile = /Users/johnmorales/.gitignore_global
