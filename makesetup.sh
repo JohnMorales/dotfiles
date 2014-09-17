@@ -93,3 +93,7 @@ if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
 fi
 
 
+# link in jsc
+if [ -x /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc ] && ! [ -L /usr/local/bin/jsc ]; then
+ ln -s /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc /usr/local/bin/jsc
+fi
