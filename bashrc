@@ -178,6 +178,15 @@ service() {
   fi;
 }
 
+make_powsite()
+{
+  site_name=$1
+  mkdir /tmp/$site_name
+  ln -s $(readlink -f .) /tmp/${site_name}/public
+  ln -s /tmp/$site_name ~/.pow/$site_name
+  echo "site located at http://${site_name}.dev/"
+}
+
 ##############################################
 # Colors
 #
