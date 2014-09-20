@@ -206,7 +206,7 @@ let g:ctrlp_user_command = {
     \ 1: ['.git', 'cd %s && git ls-files -oc'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ },
-  \ 'fallback': 'find %s -type d -depth +0 -name ".*" -prune -o -type f -print'
+  \ 'fallback': '/usr/bin/find %s -maxdepth 4 -type d -depth +0 -name ".*" -prune -o -type f -print'
   \ }
 nmap <silent> ,n :NERDTreeFind<CR>
 nmap <silent> ,m :NERDTreeToggle<CR>
