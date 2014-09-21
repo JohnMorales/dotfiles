@@ -180,7 +180,8 @@ service() {
 
 pow_make_site()
 {
-  site_name=$1
+  # if no site_name is provided use the current directory (remove /app to assume bower sites)
+  site_name=${1:-$(basename ${PWD%%/app})}
   if [ -z "$site_name" ]; then
     echo "Must provide site_name"
     return
