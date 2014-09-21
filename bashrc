@@ -157,7 +157,7 @@ service() {
     restart)
         launchctl unload ~/Library/LaunchAgents/$launch_agent_config
         return_code=$?
-        if [ $return_code -eq 0 ]; then 
+        if [ $return_code -eq 0 ]; then
           launchctl load ~/Library/LaunchAgents/$launch_agent_config
           return_code=$?
         fi;
@@ -178,12 +178,20 @@ service() {
   fi;
 }
 
-make_powsite()
+pow_make_site()
 {
   site_name=$1
-  mkdir /tmp/$site_name
-  ln -s $(readlink -f .) /tmp/${site_name}/public
-  ln -s /tmp/$site_name ~/.pow/$site_name
+  if [ -z "$site_name" ]; then
+    echo "Must provide site_name"
+    return
+  fi
+  echo "Creating $site_name"
+  tmp_site=/tmp/$site_name
+  mkdir -p $tmp_site
+  public_dir=${tmp_site}/public
+  [ -d $public_dir ] && rm $public_dir
+  ln -s $(readlink -f .) $public_dir
+  [ -L ~/.pow/$site_name ] || ln -s $tmp_site ~/.pow/$site_name
   echo "site located at http://${site_name}.dev/"
 }
 

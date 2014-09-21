@@ -23,7 +23,9 @@ Plugin 'git://github.com/kana/vim-textobj-user.git'
 Plugin 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
 Plugin 'git://github.com/Raimondi/delimitMate.git'
 Plugin 'git://github.com/Shougo/neocomplete.git'
-Plugin 'git://github.com/SirVer/ultisnips.git'
+Plugin 'git://github.com/Shougo/neosnippet.vim.git'
+" Switching to neosnippets
+" Plugin 'git://github.com/SirVer/ultisnips.git'
 Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/vim-bootstrap3-snippets.git'
 Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
@@ -258,9 +260,9 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
 map <leader>d c<div><C-R>"</div><ESC>
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "http://learnvimscriptthehardway.stevelosh.com/chapters/10.html
 inoremap jk <Esc> 
@@ -335,7 +337,7 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 function! s:Ulti_ExpandOrJump_and_getRes()
   call UltiSnips#ExpandSnippetOrJump()
@@ -346,13 +348,13 @@ function! s:handle_cr_with_popup()
   return <SID>Ulti_ExpandOrJump_and_getRes() > 0 ?  "" : neocomplete#close_popup() 
 endfunction
 
-function! s:my_cr_function()
-  "return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? <SID>handle_cr_with_popup() : "\<CR>"
-endfunction
+"function! s:my_cr_function()
+"  "return neocomplete#close_popup() . "\<CR>"
+"  " For no inserting <CR> key.
+"  return pumvisible() ? <SID>handle_cr_with_popup() : "\<CR>"
+"endfunction
 " <TAB>: completion.
-imap <expr><tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
+"imap <expr><tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
@@ -399,3 +401,31 @@ endif
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Neosnippet
+"
+"
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+
+" Using vim-snippets instead
+let g:neosnippet#disable_runtime_snippets = { '_': 1 }
+" Enable snipmate style snippets
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory= [ '~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/vim-bootstrap3-snippets/neosnippets' ]
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
