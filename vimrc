@@ -14,7 +14,7 @@ Plugin 'git://github.com/scrooloose/nerdtree.git'
 Plugin 'git://github.com/epmatsw/ag.vim.git'
 Plugin 'git://github.com/taiansu/nerdtree-ag.git'
 Plugin 'git://github.com/altercation/vim-colors-solarized.git'
-Plugin 'git://github.com/tpope/vim-surround.git'
+"Plugin 'git://github.com/tpope/vim-surround.git'
 Plugin 'git://github.com/bling/vim-airline.git'
 Plugin 'git://github.com/scrooloose/syntastic.git'
 Plugin 'git://github.com/tpope/vim-repeat.git'
@@ -24,9 +24,12 @@ Plugin 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
 Plugin 'git://github.com/Raimondi/delimitMate.git'
 Plugin 'git://github.com/Shougo/neocomplete.git'
 Plugin 'git://github.com/Shougo/neosnippet.vim.git'
+Plugin 'git://github.com/Shougo/neosnippet-snippets.git'
 " Switching to neosnippets
 " Plugin 'git://github.com/SirVer/ultisnips.git'
-Plugin 'git://github.com/honza/vim-snippets.git'
+" Neosnippet doesn't fully support vim-snippets. (select mode snippets are not
+" supported.
+" Plugin 'git://github.com/honza/vim-snippets.git'
 Plugin 'git://github.com/JohnMorales/vim-bootstrap3-snippets.git'
 Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Plugin 'git://github.com/majutsushi/tagbar.git'
@@ -324,7 +327,7 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
+    \ 'default' : '/usr/share/dict/words',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
@@ -414,22 +417,24 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"       \ "\<Plug>(neosnippet_expand_or_jump)"
+"       \: pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"       \ "\<Plug>(neosnippet_expand_or_jump)"
+"       \: "\<TAB>"
 
 " Using vim-snippets instead
-let g:neosnippet#disable_runtime_snippets = { '_': 1 }
+"let g:neosnippet#disable_runtime_snippets = { '_': 1 }
 " Enable snipmate style snippets
-let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory= [ '~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/vim-bootstrap3-snippets/neosnippets' ]
+let g:neosnippet#snippets_directory= [ '~/.vim/bundle/neosnippet-snippets/neosnippets', '~/.vim/bundle/vim-bootstrap3-snippets/neosnippets' ]
 
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+nnoremap <leader>se :<C-U>NeoSnippetEdit -split<cr>
