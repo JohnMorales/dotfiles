@@ -118,17 +118,17 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
-build_bump() {
+patch_bump() {
   ver=$(grep version metadata.rb|awk -F"[.']" '{print $4}')
   new_version=$((ver+1))
-  echo "Updating metadata to $new_version"
-  sed -e "/version/s/${ver}/${new_version}/" -i '' metadata.rb
+  sed -e "/version/s/${ver}\(['\"]\)/${new_version}\1/" -i '' metadata.rb
+  git diff metadata.rb
 }
 minor_bump() {
   ver=$(grep version metadata.rb|awk -F"[.']" '{print $3}')
   new_version=$((ver+1))
-  echo "Updating metadata to $new_version"
   sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
+  git diff metadata.rb
 }
 
 # open vim in the gem directory
@@ -142,7 +142,13 @@ gem_edit() {
   #echo "dir: " $gem_dir
   (cd $gem_dir; vim)
 }
-
+show_vms_on_host()
+{
+ echo "Running vms:"
+ ssh $1 "ps aux | grep VBoxHeadless | grep -v grep | grep -o 'comment [^ ]*' | awk '{print \$2}'"
+ echo "Defined vms:"
+ ssh $1 "find /home/vm -type d  2>/dev/null | grep Logs | awk 'FS=\"/\" { print \$5 }' "
+}
 # mimic linux service name start|stop|restart
 service() {
   service_name=$1

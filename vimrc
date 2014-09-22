@@ -119,7 +119,9 @@ set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 :set complete-=k complete+=k
 
 syntax on
+" highlight previous search term.
 noremap <F4> :set hlsearch! <cr>
+" show tagbar
 noremap <F8> :TagbarToggle <CR>
 
 "inoremap jj <esc>
@@ -181,7 +183,6 @@ nmap <leader>tr :%s/\s\+$//g<CR>:w<CR>:e<CR>
 " highlight Pmenu ctermbg=238 gui=bold
 " highlight PMenu gui=bold guibg=#CECECE guifg=#444444
 " highlight SpecialKey guifg=#4a4a59
-highlight Search ctermfg=10 ctermbg=0
 
 map <leader>j !python -m json.tool<CR>
 let g:indent_guides_enable_on_vim_startup = 1
