@@ -169,7 +169,10 @@ vnoremap <c-]> :CtrlPtjumpVisual<cr>
 nmap <leader>r :CtrlPMRU<CR>
 " contents of last global command in new window
 "nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
-
+" TODO
+"nmap <leader>n 
+" select the current block
+nmap <leader>v var
 " toggle line numbers
 " nmap <F12> :set number!<CR>
 
