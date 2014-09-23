@@ -24,7 +24,7 @@ Plugin 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
 Plugin 'git://github.com/Raimondi/delimitMate.git'
 Plugin 'git://github.com/Shougo/neocomplete.git'
 Plugin 'git://github.com/Shougo/neosnippet.vim.git'
-Plugin 'git://github.com/Shougo/neosnippet-snippets.git'
+Plugin 'git://github.com/JohnMorales/neosnippet-snippets.git'
 " Switching to neosnippets
 " Plugin 'git://github.com/SirVer/ultisnips.git'
 " Neosnippet doesn't fully support vim-snippets. (select mode snippets are not
@@ -438,3 +438,5 @@ if has('conceal')
 endif
 
 nnoremap <leader>se :<C-U>NeoSnippetEdit -split<cr>
+let g:neosnippet#scope_aliases = {}
+let g:neosnippet#scope_aliases['ruby'] = 'eruby,ruby,ruby-rails'
