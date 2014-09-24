@@ -9,30 +9,31 @@ call vundle#begin()
 " A bit meta..
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'git://github.com/kien/ctrlp.vim.git'
-Plugin 'git://github.com/scrooloose/nerdtree.git'
-Plugin 'git://github.com/epmatsw/ag.vim.git'
-Plugin 'git://github.com/taiansu/nerdtree-ag.git'
-Plugin 'git://github.com/altercation/vim-colors-solarized.git'
-"Plugin 'git://github.com/tpope/vim-surround.git'
-Plugin 'git://github.com/bling/vim-airline.git'
-Plugin 'git://github.com/scrooloose/syntastic.git'
-Plugin 'git://github.com/tpope/vim-repeat.git'
-Plugin 'git://github.com/terryma/vim-multiple-cursors.git'
-Plugin 'git://github.com/kana/vim-textobj-user.git'
-Plugin 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
-Plugin 'git://github.com/Raimondi/delimitMate.git'
-Plugin 'git://github.com/Shougo/neocomplete.git'
-Plugin 'git://github.com/Shougo/neosnippet.vim.git'
-Plugin 'git://github.com/JohnMorales/neosnippet-snippets.git'
-" Switching to neosnippets
-" Plugin 'git://github.com/SirVer/ultisnips.git'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'epmatsw/ag.vim.git'
+Plugin 'taiansu/nerdtree-ag.git'
+Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'bling/vim-airline.git'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'tpope/vim-repeat.git'
+" ctrl-n seems to cause multiple issues.
+"Plugin 'terryma/vim-multiple-cursors.git'
+Plugin 'kana/vim-textobj-user.git'
+Plugin 'nelstrom/vim-textobj-rubyblock.git'
+Plugin 'Raimondi/delimitMate.git'
+" Switching back to ycm+ultisnips
 " Neosnippet doesn't fully support vim-snippets. (select mode snippets are not
 " supported.
-" Plugin 'git://github.com/honza/vim-snippets.git'
-Plugin 'git://github.com/JohnMorales/vim-bootstrap3-snippets.git'
-Plugin 'git://github.com/nathanaelkane/vim-indent-guides.git'
-Plugin 'git://github.com/majutsushi/tagbar.git'
+"Plugin 'Shougo/neocomplete.git'
+"Plugin 'Shougo/neosnippet.vim.git'
+"Plugin 'JohnMorales/neosnippet-snippets.git'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips.git'
+Plugin 'JohnMorales/vim-snippets'
+Plugin 'JohnMorales/vim-bootstrap3-snippets'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'majutsushi/tagbar'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
@@ -267,9 +268,35 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
 map <leader>d c<div><C-R>"</div><ESC>
-"let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_key_list_select_completion = [ '<Down>', '<Enter>' ]
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_comments = 1 
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" end YouCompleteMe
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ultisnips
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" end ultisnips
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "http://learnvimscriptthehardway.stevelosh.com/chapters/10.html
 inoremap jk <Esc> 
@@ -277,8 +304,6 @@ inoremap jk <Esc>
 nmap ,t :TagbarToggle<CR>
 
 
-"let g:ycm_key_list_previous_completion = ['<UP>']
-"let delimitMate_expand_cr = 1
 let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.xml', 'Gemfile' ]
 
 let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
@@ -297,10 +322,10 @@ endfunction
 "
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+au FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+au FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+au FileType ruby,eruby let g:rubycomplete_rails = 1
+au FileType ruby,eruby set ft=ruby.eruby.chef
 " there are more in the neocomplete section
 " Custom extenstions
 if !exists("autocommands_loaded")
@@ -308,6 +333,7 @@ if !exists("autocommands_loaded")
   au BufReadPost *.hbs set ft=html
   au BufReadPost *.bats set ft=sh
   au BufReadPost *.md set ft=markdown
+  au BufReadPost */features/*_spec.rb set ft=capy.ruby.eruby.chef
 endif
 autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -316,45 +342,45 @@ autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '/usr/share/dict/words',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
+"let g:acp_enableAtStartup = 0
+"" Use neocomplete.
+"let g:neocomplete#enable_at_startup = 1
+"" Use smartcase.
+"let g:neocomplete#enable_smart_case = 1
+"" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"
+"" Define dictionary.
+"let g:neocomplete#sources#dictionary#dictionaries = {
+"    \ 'default' : '/usr/share/dict/words',
+"    \ 'vimshell' : $HOME.'/.vimshell_hist',
+"    \ 'scheme' : $HOME.'/.gosh_completions'
+"        \ }
+"
+"" Define keyword.
+"if !exists('g:neocomplete#keyword_patterns')
+"    let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"
+"" Plugin key-mappings.
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+"
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 "inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-
-function! s:Ulti_ExpandOrJump_and_getRes()
-  call UltiSnips#ExpandSnippetOrJump()
-  return g:ulti_expand_or_jump_res
-endfunction
-
-function! s:handle_cr_with_popup()
-  return <SID>Ulti_ExpandOrJump_and_getRes() > 0 ?  "" : neocomplete#close_popup() 
-endfunction
-
+"
+"function! s:Ulti_ExpandOrJump_and_getRes()
+"  call UltiSnips#ExpandSnippetOrJump()
+"  return g:ulti_expand_or_jump_res
+"endfunction
+"
+"function! s:handle_cr_with_popup()
+"  return <SID>Ulti_ExpandOrJump_and_getRes() > 0 ?  "" : neocomplete#close_popup() 
+"endfunction
+"
 "function! s:my_cr_function()
 "  "return neocomplete#close_popup() . "\<CR>"
 "  " For no inserting <CR> key.
@@ -363,10 +389,10 @@ endfunction
 " <TAB>: completion.
 "imap <expr><tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
@@ -390,16 +416,16 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" 
+" " Enable heavy omni completion.
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"   let g:neocomplete#sources#omni#input_patterns = {}
+" endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
@@ -413,10 +439,10 @@ endif
 " Neosnippet
 "
 "
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
+" 
 " imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 "       \ "\<Plug>(neosnippet_expand_or_jump)"
 "       \: pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -430,13 +456,19 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory= [ '~/.vim/bundle/neosnippet-snippets/neosnippets', '~/.vim/bundle/vim-bootstrap3-snippets/neosnippets' ]
+" let g:neosnippet#snippets_directory= [ '~/.vim/bundle/neosnippet-snippets/neosnippets', '~/.vim/bundle/vim-bootstrap3-snippets/neosnippets' ]
+" 
+" " For snippet_complete marker.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=i
+" endif
+" 
+" nnoremap <leader>se :<C-U>NeoSnippetEdit -split<cr>
+" let g:neosnippet#scope_aliases = {}
+" let g:neosnippet#scope_aliases['ruby'] = 'eruby,ruby,ruby-rails'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" end neosnippet
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-nnoremap <leader>se :<C-U>NeoSnippetEdit -split<cr>
-let g:neosnippet#scope_aliases = {}
-let g:neosnippet#scope_aliases['ruby'] = 'eruby,ruby,ruby-rails'
