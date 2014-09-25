@@ -44,6 +44,7 @@ Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'vadv/vim-chef'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'godlygeek/tabular'
 
 
 call vundle#end()            " required
