@@ -327,7 +327,6 @@ endfunction
 au FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 au FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 au FileType ruby,eruby let g:rubycomplete_rails = 1
-au FileType ruby,eruby set ft=ruby.eruby.chef
 " there are more in the neocomplete section
 " Custom extenstions
 if !exists("autocommands_loaded")
@@ -335,7 +334,10 @@ if !exists("autocommands_loaded")
   au BufReadPost *.hbs set ft=html
   au BufReadPost *.bats set ft=sh
   au BufReadPost *.md set ft=markdown
-  au BufReadPost */features/*_spec.rb set ft=capy.ruby.eruby.chef
+  au BufReadPost */features/*_spec.rb set ft=capy.ruby
+  au BufReadPost *_spec.rb set ft=rspec.rails.ruby
+  au BufReadPost */recipes/*.rb set ft=ruby.chef
+  au BufReadPost *.erb set ft=ruby.eruby
 endif
 autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
