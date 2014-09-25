@@ -36,9 +36,10 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-rails'
 "Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-projectionist' " Project specific plugins.
+Plugin 'tpope/vim-rake' " Project specific plugins.
+Plugin 'tpope/vim-rails'
 Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'vadv/vim-chef'
