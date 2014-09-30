@@ -45,7 +45,7 @@ Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'vadv/vim-chef'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'godlygeek/tabular'
+"Plugin 'godlygeek/tabular'
 
 
 call vundle#end()            " required
@@ -276,6 +276,7 @@ map <leader>d c<div><C-R>"</div><ESC>
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = [ '<Down>', '<Enter>' ]
+let g:ycm_key_list_previous_completion = [ '<Up>']
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_comments = 1 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -283,6 +284,17 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end YouCompleteMe
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" delimitMate
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"inoremap <S-Tab> <Plug>delimitMateS-Tab
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" enddelimitMate
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
