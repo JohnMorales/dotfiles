@@ -346,10 +346,6 @@ if !exists("autocommands_loaded")
   au BufReadPost *.hbs set ft=html
   au BufReadPost *.bats set ft=sh
   au BufReadPost *.md set ft=markdown
-  au BufReadPost */features/*_spec.rb set ft=capy.ruby
-  au BufReadPost *_spec.rb set ft=rspec.rails.ruby
-  au BufReadPost */recipes/*.rb set ft=ruby.chef
-  au BufReadPost *.erb set ft=ruby.eruby
 endif
 autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -484,6 +480,35 @@ autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 " let g:neosnippet#scope_aliases['ruby'] = 'eruby,ruby,ruby-rails'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end neosnippet
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Projectionist
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:projectionist_heuristics = {
+      \ "recipes&attributes": {
+      \   "recipes/*.rb": {"type": "chef.ruby"},
+      \   "templates/*/*.erb": {"type": "erb.chef.ruby"},
+      \ },
+      \ "config/application.rb&bin/rails": {
+      \   "spec/*.rb": {"type": "rails.rspec"},
+      \   "spec/features/*_spec.rb": {"type": "capy.rspec.rails.ruby"},
+      \   "spec/*/*_spec.rb": {"type": "rspec.rails.ruby"},
+      \ }
+      \ }
+autocmd User ProjectionistActivate call s:activate()
+
+function! s:activate() abort
+  for [root, value] in projectionist#query('type')
+    UltiSnipsAddFiletypes value
+    break
+  endfor
+endfunction
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" end Projectionist
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
