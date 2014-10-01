@@ -274,7 +274,7 @@ map <leader>d c<div><C-R>"</div><ESC>
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_key_list_select_completion = [ '<Enter>', '<Down>'] # Need to remember that YCM expects you to accept the text by just space
+let g:ycm_key_list_select_completion = [ '<Enter>', '<Down>'] " Need to remember that YCM expects you to accept the text by just space
 let g:ycm_key_list_previous_completion = [ '<Up>']
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_comments = 1 
