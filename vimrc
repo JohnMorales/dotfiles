@@ -129,7 +129,7 @@ noremap <F4> :set hlsearch! <cr>
 " show tagbar
 noremap <F8> :TagbarToggle <CR>
 
-"inoremap jj <esc>
+inoremap jj <esc>
 
 " Find todos
 "nmap ,p :w \|!grep -r '\# TODO:' ./ \| grep ^./<cr>
