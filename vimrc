@@ -214,7 +214,7 @@ endif
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
   \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files -oc'],
+    \ 1: ['.git', 'cd %s && git ls-files -oc --exclude-standard'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ },
   \ 'fallback': '/usr/bin/find %s -maxdepth 4 -type d -depth +0 -name ".*" -prune -o -type f -print'
