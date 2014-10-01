@@ -30,8 +30,8 @@ Plugin 'Raimondi/delimitMate.git'
 "Plugin 'JohnMorales/neosnippet-snippets.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips.git'
-Plugin 'JohnMorales/vim-snippets'
-Plugin 'JohnMorales/vim-bootstrap3-snippets'
+Plugin 'git@github.com:JohnMorales/vim-snippets.git'
+Plugin 'git@github.com:JohnMorales/vim-bootstrap3-snippets.git'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-ruby/vim-ruby'
@@ -42,7 +42,6 @@ Plugin 'tpope/vim-rake' " Project specific plugins.
 Plugin 'tpope/vim-rails'
 Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
-Plugin 'vadv/vim-chef'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'kchmck/vim-coffee-script'
 "Plugin 'godlygeek/tabular'
@@ -491,21 +490,22 @@ autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:projectionist_heuristics = {
-      \ "recipes&attributes": {
+      \ "recipes/&attributes/": {
       \   "recipes/*.rb": {"type": "chef.ruby"},
-      \   "templates/*/*.erb": {"type": "erb.chef.ruby"},
+      \   "templates/*/*.erb": {"type": "erb.chef.ruby"}
       \ },
       \ "config/application.rb&bin/rails": {
       \   "spec/*.rb": {"type": "rails.rspec"},
       \   "spec/features/*_spec.rb": {"type": "capy.rspec.rails.ruby"},
-      \   "spec/*/*_spec.rb": {"type": "rspec.rails.ruby"},
+      \   "spec/*/*_spec.rb": {"type": "rspec.rails.ruby"}
       \ }
       \ }
 autocmd User ProjectionistActivate call s:activate()
 
-function! s:activate() abort
+function! s:activate()
   for [root, value] in projectionist#query('type')
-    UltiSnipsAddFiletypes value
+    echom "Adding snippets " . value
+    call UltiSnips#AddFiletypes(value)
     break
   endfor
 endfunction
