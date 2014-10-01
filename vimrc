@@ -35,7 +35,7 @@ Plugin 'JohnMorales/vim-bootstrap3-snippets'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-endwise'
+"Plugin 'tpope/vim-endwise'
 "Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'tpope/vim-rake' " Project specific plugins.
@@ -275,13 +275,14 @@ map <leader>d c<div><C-R>"</div><ESC>
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_key_list_select_completion = [ '<Down>', '<Enter>' ]
+let g:ycm_key_list_select_completion = [ '<Down>']
 let g:ycm_key_list_previous_completion = [ '<Up>']
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_comments = 1 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1"
+let g:ycm_seed_identifiers_with_syntax = 1
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end YouCompleteMe
 "
@@ -336,9 +337,10 @@ endfunction
 "
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
-au FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-au FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-au FileType ruby,eruby let g:rubycomplete_rails = 1
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1
+let g:rubycomplete_rails = 1
+
 " there are more in the neocomplete section
 " Custom extenstions
 if !exists("autocommands_loaded")
