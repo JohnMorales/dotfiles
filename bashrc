@@ -34,6 +34,12 @@ alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
 
+### 
+# Python
+##
+if [ -f ~/.force_phython_virtual_envs ]; then
+  . ~/.force_phython_virtual_envs
+fi;
 
 
 ##############################################
@@ -149,6 +155,7 @@ show_vms_on_host()
  echo "Defined vms:"
  ssh $1 "find /home/vm -type d  2>/dev/null | grep Logs | awk 'FS=\"/\" { print \$5 }' "
 }
+
 # mimic linux service name start|stop|restart
 service() {
   service_name=$1
@@ -184,6 +191,7 @@ service() {
   fi;
 }
 
+## quickly create a site to view html content
 pow_make_site()
 {
   # if no site_name is provided use the current directory (remove /app to assume bower sites)
@@ -278,3 +286,4 @@ fi;
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
