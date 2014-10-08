@@ -201,13 +201,43 @@ pow_make_site()
     return
   fi
   echo "Creating $site_name"
-  tmp_site=/tmp/$site_name
-  mkdir -p $tmp_site
-  public_dir=${tmp_site}/public
+  site=~/sites/$site_name
+  mkdir -p $site
+  public_dir=${site}/public
   [ -d $public_dir ] && rm $public_dir
   ln -s $(readlink -f .) $public_dir
-  [ -L ~/.pow/$site_name ] || ln -s $tmp_site ~/.pow/$site_name
+  [ -L ~/.pow/$site_name ] || ln -s $site ~/.pow/$site_name
   echo "site located at http://${site_name}.dev/"
+}
+
+pow_show_sites()
+{
+ for i in `/bin/ls ~/.pow`;
+    do printf "%-50s" http://${i}.dev/;
+    dir=~/.pow/$i/
+    if [ -d $dir/public ]; then
+      dir=$dir/public
+    fi;
+    readlink -f $dir;
+  done
+}
+
+pow_make_index()
+{
+  for p in `/bin/ls`; do printf '<a href="%s">%s</a></br>' $p $p >> index.html; done
+}
+
+pow_rm_site()
+{
+  local site_name=${1:-$(basename ${PWD%%/app})}
+  if [ -z "$site_name" ]; then
+    echo "Must provide site_name"
+    return
+  fi
+  local site=~/sites/$site_name
+  public_dir=${site}/public
+  [ -L ~/.pow/$site_name ] && rm ~/.pow/$site_name
+  [ -d $site ] && rm -r $site
 }
 
 ##############################################

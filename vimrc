@@ -323,14 +323,6 @@ let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.x
 let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
 let g:ctrlp_tjump_only_silent = 1
 
-" setting filetypes for files with multiple extensions
-" http://stackoverflow.com/questions/8413781/automatically-set-multiple-file-types-in-filetype-if-a-file-has-multiple-exten
-function MultiExtensionFiletype()
-  let ft_default=&filetype
-  let ft_prefix=substitute(matchstr(expand('%'),'\..\+\.'),'\.','','g')
-  sil exe "set filetype=" . ft_prefix  . "." . ft_default
-endfunction
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto commands
 "
@@ -348,7 +340,6 @@ if !exists("autocommands_loaded")
   au BufReadPost *.bats set ft=sh
   au BufReadPost *.md set ft=markdown
 endif
-autocmd BufReadPost *.*.* call MultiExtensionFiletype()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete
 "
@@ -495,6 +486,8 @@ let g:projectionist_heuristics = {
       \   "templates/*/*.erb": {"type": "erb.chef.ruby"}
       \ },
       \ "config/application.rb&bin/rails": {
+      \   "app/*.js.coffee": {"type": "coffee.javascript"},
+      \   "app/views/*.erb": {"type": "erb.html.ruby"},
       \   "spec/*.rb": {"type": "rails.rspec"},
       \   "spec/features/*_spec.rb": {"type": "capy.rspec.rails.ruby"},
       \   "spec/*/*_spec.rb": {"type": "rspec.rails.ruby"}
@@ -515,3 +508,16 @@ endfunction
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+function! LoadAndDisplayRSpecQuickfix()
+  let quickfix_filename = "./quickfix.out"
+  if filereadable(quickfix_filename) && getfsize(quickfix_filename) != 0
+    silent execute ":cfile " . quickfix_filename
+    botright cwindow
+    cc
+  else
+    redraw!
+    echohl WarningMsg | echo "Quickfix file " . quickfix_filename . " is missing or empty." | echohl None
+  endif
+endfunction
+
+noremap <silent> <Leader>q :call LoadAndDisplayRSpecQuickfix()<CR>

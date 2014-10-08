@@ -31,7 +31,7 @@ if [ ! -L ~/.$destination -a ! -f ~/.$destination.keep ]; then
 fi
 }
 
-FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc my.cnf pryrc editrc inputrc)
+FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc my.cnf pryrc editrc inputrc rspec)
 for i in ${FILES[@]}
   do
     link_config_file $i;
