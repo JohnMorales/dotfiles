@@ -28,7 +28,7 @@ Plugin 'Raimondi/delimitMate.git'
 "Plugin 'Shougo/neocomplete.git'
 "Plugin 'Shougo/neosnippet.vim.git'
 "Plugin 'JohnMorales/neosnippet-snippets.git'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips.git'
 Plugin 'git@github.com:JohnMorales/vim-snippets.git'
 Plugin 'git@github.com:JohnMorales/vim-bootstrap3-snippets.git'
@@ -44,6 +44,8 @@ Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'marijnh/tern_for_vim.git'
+Plugin 'elzr/vim-json.git'
 "Plugin 'godlygeek/tabular'
 
 
@@ -304,8 +306,22 @@ imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsListSnippets="<c-l>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpForwardTrigger="<c-j>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"default mapping interferes with vim see  *UltiSnips-triggers*
+inoremap <c-x><c-k> <c-x><c-k> 
+function! ExpandPossibleShorterSnippet()
+  if len(UltiSnips#SnippetsInCurrentScope()) == 1 "only one candidate...
+    let curr_key = keys(UltiSnips#SnippetsInCurrentScope())[0]
+    normal diw
+    exe "normal a" . curr_key
+    exe "normal a "
+    return 1
+  endif
+  return 0
+endfunction
+inoremap <silent> <C-L> <C-R>=(ExpandPossibleShorterSnippet() == 0? '': UltiSnips#ExpandSnippet())<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end ultisnips
 "
