@@ -31,7 +31,22 @@ if [ ! -L ~/.$destination -a ! -f ~/.$destination.keep ]; then
 fi
 }
 
-FILES=(vimrc bashrc gemrc gitconfig gitignore tmux.conf bash_profile tigrc my.cnf pryrc editrc inputrc rspec)
+FILES=(
+vimrc
+bashrc
+gemrc
+gitconfig
+gitignore
+tmux.conf
+bash_profile
+tigrc
+my.cnf
+pryrc
+editrc
+inputrc
+rspec
+jshintrc
+)
 for i in ${FILES[@]}
   do
     link_config_file $i;
@@ -81,6 +96,13 @@ PACKAGES=(
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
+done;
+node_packages=(
+ jscs
+ jshint
+)
+for i in ${node_packages[*]}; do
+  npm install -g $i
 done;
 
 

@@ -235,6 +235,7 @@ pow_rm_site()
     return
   fi
   local site=~/sites/$site_name
+  echo "Checking if we can remove ${site}"
   public_dir=${site}/public
   [ -L ~/.pow/$site_name ] && rm ~/.pow/$site_name
   [ -d $site ] && rm -r $site

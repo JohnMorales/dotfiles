@@ -46,6 +46,7 @@ Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'marijnh/tern_for_vim.git'
 Plugin 'elzr/vim-json.git'
+Plugin 'milkypostman/vim-togglelist'
 "Plugin 'godlygeek/tabular'
 
 
@@ -542,6 +543,26 @@ function! s:activate()
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end Projectionist
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_javascript_checkers = [ 'jscs', 'jshint' ]
+let g:syntastic_always_populate_loc_list = 1 "send errors to location list.
+let g:syntastic_aggregate_errors = 1 "send errors to location list.
+let g:syntastic_check_on_open = 1
+let g:syntastic_cursor_column = 0 " 'this speeds of navigation significantly' |syntastic_cursor_columns|
+let g:syntastic_auto_jump = 2  " setting to 2 will only autojump on error
+let g:syntastic_auto_loc_list = 0 "open loc list when error
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"ui-"]
+let g:syntastic_javascript_jshint_quiet_messages = { "regex": "'angular' is not defined" }
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"ui-"]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" end syntastic
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
