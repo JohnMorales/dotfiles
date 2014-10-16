@@ -48,6 +48,7 @@ Plugin 'marijnh/tern_for_vim.git'
 Plugin 'elzr/vim-json.git'
 Plugin 'milkypostman/vim-togglelist'
 "Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/BufOnly.vim'
 
 
 call vundle#end()            " required
@@ -271,7 +272,7 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags = 'html\|div\|table\|p'
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
-map <leader>d c<div><C-R>"</div><ESC>
+nmap <leader>O :BufOnly<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline
 "
