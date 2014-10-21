@@ -241,6 +241,12 @@ pow_rm_site()
   [ -d $site ] && rm -r $site
 }
 
+show_yaml_key() {
+ local key_name=$1
+ local file_name=$2
+ sed -n "/^$key_name:/, /^[[:alpha:]]/ p" $file_name | head -n -1
+}
+
 ##############################################
 # Colors
 #
