@@ -93,6 +93,7 @@ PACKAGES=(
   grep
   pv
   meld
+  js-yaml
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i

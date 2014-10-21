@@ -125,7 +125,7 @@ endif
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
 " Add dictionary to complete list
-:set complete-=k complete+=k
+set complete-=k complete+=k
 
 syntax on
 " highlight previous search term.
@@ -581,3 +581,13 @@ function! LoadAndDisplayRSpecQuickfix()
 endfunction
 
 noremap <silent> <Leader>q :call LoadAndDisplayRSpecQuickfix()<CR>
+
+"""""
+" yaml
+"""""
+function! s:fold_yaml_sections()
+  ":%s/^\([a-z].*\):/\0 #{{{1 \1/g
+  "set foldmethod=marker
+  "":w
+endfunction
+autocmd FileType yaml :call s:fold_yaml_sections()
