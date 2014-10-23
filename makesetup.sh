@@ -9,7 +9,9 @@ DEVELOPMENT=~/Development
 #curl -Sso ~/.vim/autoload/pathogen.vim \
 #    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 mkdir -p $VIMPLUGINDIR
-test -d ~/.backup || mkdir ~/.backup
+for d in swap backup undo; do                # make vim dirs
+  test -d ~/.vim/$d || mkdir ~/.vim/$d
+done
 test -d $VIMPLUGINDIR/vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/vundle.vim
 
 if [ -d $VIMPLUGINDIR/ultisnips/ftdetect ] && ! [ -d ~/.vim/ftdetect ]; then

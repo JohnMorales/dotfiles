@@ -156,6 +156,11 @@ show_vms_on_host()
  ssh $1 "find /home/vm -type d  2>/dev/null | grep Logs | awk 'FS=\"/\" { print \$5 }' "
 }
 
+true_color()
+{
+ printf "\x1b[38;2;255;100;0mTRUECOLOR\x1b[0m\n" 
+}
+
 # mimic linux service name start|stop|restart
 service() {
   service_name=$1
@@ -254,13 +259,14 @@ show_yaml_key() {
 export CLICOLOR=1
 if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
   eval $(dircolors ~/.dir_colors_light)
-else
+fi;
+if [[ "SolarizedDark" == $ITERM_PROFILE ]]; then
   eval $(dircolors ~/.dir_colors_dark)
 fi
 if [ "$TMUX" ] && [ "$(tmux showenv -g ITERM_PROFILE)" ]; then
   eval $(tmux showenv -g ITERM_PROFILE)
 fi
-if [ -t 1 ]; then
+if [ -t 1 ]; then # `-t fd`  True if file descriptor fd is open and refers to a terminal.
   if [ "$ITERM_PROFILE" == "SolarizedLight" ]; then
     echo "setting background to light";
     light

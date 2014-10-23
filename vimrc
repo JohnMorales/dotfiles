@@ -49,6 +49,7 @@ Plugin 'elzr/vim-json.git'
 Plugin 'milkypostman/vim-togglelist'
 "Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/BufOnly.vim'
+Bundle 'https://github.com/freeo/vim-kalisi'
 
 
 call vundle#end()            " required
@@ -88,9 +89,48 @@ set t_ti= t_te=
 set incsearch
 set ignorecase
 
+" Don't show the startup message
+set shortmess=I
+
 " taken from https://github.com/vim-scripts/ingo-library/blob/master/autoload/ingo/str.vim
 function! Trim( string )
   return substitute(a:string, '^\_s*\(.\{-}\)\_s*$', '\1', '')
+endfunction
+
+" Turn on persistent undo
+" Thanks, Mr Wadsten: github.com/mikewadsten/dotfiles/
+if has('persistent_undo')
+    set undodir=~/.vim/undo/
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
+
+" Use backups
+" Source:
+"   http://stackoverflow.com/a/15317146
+set backup
+set writebackup
+set backupdir=~/.vim/backup/
+
+" Use a specified swap folder
+" Source:
+"   http://stackoverflow.com/a/15317146
+set directory=~/.vim/swap/
+
+" Check if a colorscheme exists
+" http://stackoverflow.com/a/5703164
+function! HasColorScheme(scheme)
+    let basepath = '~/.vim/bundle/'
+
+    for plug in g:color_schemes
+        let path = basepath . '/' . plug . '/colors/' . a:scheme . '.vim'
+        if filereadable(expand(path))
+            return 1
+        endif
+    endfor
+
+    return 0
 endfunction
 
 " let g:solarized_termcolors=256
@@ -98,28 +138,33 @@ endfunction
 " Jellybeans colors
 " let g:solarized_termcolors=16
 let g:solarized_bold = 0
-let bg_profile = Trim(substitute(system("tmux showenv -g ITERM_PROFILE"), ".*=", "", ""))
+"let bg_profile = Trim(substitute(system("tmux showenv -g ITERM_PROFILE"), ".*=", "", ""))
+let bg_profile = $ITERM_PROFILE
+echom bg_profile
 if bg_profile ==? "SolarizedLight"
-  " echo "Setting light background"
+   echo "Setting light background"
   set background=light
   colorscheme solarized
   set cursorline
 elseif bg_profile ==? "Misterioso"
-  " echo "Setting dark background"
+   echo "Setting dark background"
   set background=dark
   colorscheme tomorrow-night
 elseif bg_profile ==? "SolarizedDark"
-  " echo "Setting dark background"
+   echo "Setting dark background"
   set background=dark
   colorscheme solarized
   set cursorline
 else
-  set background=dark
-  colorscheme default
+  "set background=dark
+  "colorscheme default
+  colorscheme kalisi
+  let g:airline_theme='kalisi'
+  set background=light
 endif
 "colorscheme jellybeans
 "Only useful if using transparent backgrounds.
-" let g:solarized_termtrans=1
+"let g:solarized_termtrans=1
 
 " Add dictionary completion
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -167,6 +212,17 @@ nmap <C-l> <C-w><Right>
 nmap <C-k> <C-w><Up>
 nmap <C-j> <C-w><Down>
 nmap <C-t> :CtrlPBuffer<CR>
+
+" Control enhancements in insert mode
+imap <C-F> <right>
+imap <C-B> <left>
+imap <M-BS> <esc>vBc
+imap <C-P> <up>
+imap <C-N> <down>
+
+" Map Ctrl+V to paste in Insert mode
+imap <C-V> <C-R>*
+
 " Project level tags
 nnoremap <leader>f :CtrlPTag<cr>
 " File level tags
@@ -281,6 +337,8 @@ nmap <leader>O :BufOnly<cr>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_enable_branch = 1
+let g:airline_enable_syntastic = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
