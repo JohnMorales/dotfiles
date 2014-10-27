@@ -251,6 +251,11 @@ show_yaml_key() {
  local file_name=$2
  sed -n "/^$key_name:/, /^[[:alpha:]]/ p" $file_name | head -n -1
 }
+update_profile() {
+  if [ "$TMUX" ] && [ "$(tmux showenv ITERM_PROFILE)" ]; then
+    eval $(tmux showenv ITERM_PROFILE)
+  fi
+}
 
 ##############################################
 # Colors
@@ -269,9 +274,6 @@ fi
 if [[ "Base16Light" == $ITERM_PROFILE ]]; then
   . ~/Development/base-16/shell/base16-default.light.sh
 fi
-# if [ "$TMUX" ] && [ "$(tmux showenv -g ITERM_PROFILE)" ]; then
-#   eval $(tmux showenv -g ITERM_PROFILE)
-# fi
 
 ##############################################
 # Externals
