@@ -263,19 +263,15 @@ fi;
 if [[ "SolarizedDark" == $ITERM_PROFILE ]]; then
   eval $(dircolors ~/.dir_colors_dark)
 fi
-if [ "$TMUX" ] && [ "$(tmux showenv -g ITERM_PROFILE)" ]; then
-  eval $(tmux showenv -g ITERM_PROFILE)
+if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
+  . ~/.config/base16-shell/base16-default.sh
 fi
-if [ -t 1 ]; then # `-t fd`  True if file descriptor fd is open and refers to a terminal.
-  if [ "$ITERM_PROFILE" == "SolarizedLight" ]; then
-    echo "setting background to light";
-    light
-  fi;
-  if [ "$ITERM_PROFILE" == "SolarizedDark" ]; then
-    echo "setting background to dark";
-    dark
-  fi;
-fi;
+if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
+  . ~/.config/base16-shell/base16-default.light.sh
+fi
+# if [ "$TMUX" ] && [ "$(tmux showenv -g ITERM_PROFILE)" ]; then
+#   eval $(tmux showenv -g ITERM_PROFILE)
+# fi
 
 ##############################################
 # Externals

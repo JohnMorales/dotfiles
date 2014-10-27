@@ -50,6 +50,7 @@ Plugin 'milkypostman/vim-togglelist'
 "Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/BufOnly.vim'
 Bundle 'https://github.com/freeo/vim-kalisi'
+Plugin 'chriskempson/base16-vim'
 
 
 call vundle#end()            " required
@@ -137,21 +138,25 @@ endfunction
 "set t_Co=256
 " Jellybeans colors
 " let g:solarized_termcolors=16
-let g:solarized_bold = 0
-"let bg_profile = Trim(substitute(system("tmux showenv -g ITERM_PROFILE"), ".*=", "", ""))
-let bg_profile = $ITERM_PROFILE
-echom bg_profile
+"let g:solarized_bold = 0
+let bg_profile = Trim(substitute(system("tmux showenv ITERM_PROFILE"), ".*=", "", ""))
+"let bg_profile = $ITERM_PROFILE
+"echom bg_profile
 if bg_profile ==? "SolarizedLight"
-   echo "Setting light background"
   set background=light
   colorscheme solarized
   set cursorline
 elseif bg_profile ==? "Misterioso"
-   echo "Setting dark background"
   set background=dark
   colorscheme tomorrow-night
+elseif bg_profile ==? "Base16Light"
+  set background=light
+  colorscheme base16-default
+elseif bg_profile ==? "Base16Dark"
+  let base16colorspace=256
+  set background=dark
+  colorscheme base16-default
 elseif bg_profile ==? "SolarizedDark"
-   echo "Setting dark background"
   set background=dark
   colorscheme solarized
   set cursorline
@@ -159,7 +164,6 @@ else
   "set background=dark
   "colorscheme default
   colorscheme kalisi
-  let g:airline_theme='kalisi'
   set background=light
 endif
 "colorscheme jellybeans
@@ -217,8 +221,8 @@ nmap <C-t> :CtrlPBuffer<CR>
 imap <C-F> <right>
 imap <C-B> <left>
 imap <M-BS> <esc>vBc
-imap <C-P> <up>
-imap <C-N> <down>
+"imap <C-P> <up>
+"imap <C-N> <down>
 
 " Map Ctrl+V to paste in Insert mode
 imap <C-V> <C-R>*
@@ -235,7 +239,7 @@ nmap <leader>r :CtrlPMRU<CR>
 " contents of last global command in new window
 "nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 " TODO
-"nmap <leader>n 
+"nmap <leader>n
 " select the current block
 nmap <leader>v var
 " toggle line numbers
@@ -334,11 +338,13 @@ nmap <leader>O :BufOnly<cr>
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+set encoding=utf-8
+"let g:airline_theme='kalisi'
 let g:airline_enable_branch = 1
 let g:airline_enable_syntastic = 1
+" enable tabs for buffers at the top
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -348,6 +354,22 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
+let g:airline_powerline_fonts = 1
+let g:airline_symbols = {}
+" unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end airline
 "
@@ -361,7 +383,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 let g:ycm_key_list_select_completion = [ '<Enter>', '<Down>'] " Need to remember that YCM expects you to accept the text by just space
 let g:ycm_key_list_previous_completion = [ '<Up>']
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_complete_in_comments = 1 
+let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -392,7 +414,7 @@ let g:UltiSnipsListSnippets="<c-l>" " cannot be c-n and c-p because you could ge
 let g:UltiSnipsJumpForwardTrigger="<c-j>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "default mapping interferes with vim see  *UltiSnips-triggers*
-inoremap <c-x><c-k> <c-x><c-k> 
+inoremap <c-x><c-k> <c-x><c-k>
 function! ExpandPossibleShorterSnippet()
   if len(UltiSnips#SnippetsInCurrentScope()) == 1 "only one candidate...
     let curr_key = keys(UltiSnips#SnippetsInCurrentScope())[0]
@@ -411,7 +433,7 @@ inoremap <silent> <C-L> <C-R>=(ExpandPossibleShorterSnippet() == 0? '': UltiSnip
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "http://learnvimscriptthehardway.stevelosh.com/chapters/10.html
-inoremap jk <Esc> 
+inoremap jk <Esc>
 
 nmap ,t :TagbarToggle<CR>
 
@@ -425,7 +447,7 @@ let g:ctrlp_tjump_only_silent = 1
 " auto commands
 "
 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
@@ -480,7 +502,7 @@ endif
 "endfunction
 "
 "function! s:handle_cr_with_popup()
-"  return <SID>Ulti_ExpandOrJump_and_getRes() > 0 ?  "" : neocomplete#close_popup() 
+"  return <SID>Ulti_ExpandOrJump_and_getRes() > 0 ?  "" : neocomplete#close_popup()
 "endfunction
 "
 "function! s:my_cr_function()
@@ -523,7 +545,7 @@ endif
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" 
+"
 " " Enable heavy omni completion.
 " if !exists('g:neocomplete#sources#omni#input_patterns')
 "   let g:neocomplete#sources#omni#input_patterns = {}
@@ -544,7 +566,7 @@ endif
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " xmap <C-k>     <Plug>(neosnippet_expand_target)
-" 
+"
 " imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 "       \ "\<Plug>(neosnippet_expand_or_jump)"
 "       \: pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -559,12 +581,12 @@ endif
 
 " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory= [ '~/.vim/bundle/neosnippet-snippets/neosnippets', '~/.vim/bundle/vim-bootstrap3-snippets/neosnippets' ]
-" 
+"
 " " For snippet_complete marker.
 " if has('conceal')
 "   set conceallevel=2 concealcursor=i
 " endif
-" 
+"
 " nnoremap <leader>se :<C-U>NeoSnippetEdit -split<cr>
 " let g:neosnippet#scope_aliases = {}
 " let g:neosnippet#scope_aliases['ruby'] = 'eruby,ruby,ruby-rails'

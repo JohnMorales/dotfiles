@@ -1,3 +1,0 @@
---require=~/Development/rspec/vim_formatter.rb
---format VimFormatter
---out quickfix.out

@@ -117,6 +117,13 @@ if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
   ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace
 fi
 
+if [ ! -d $Development/base-16/shell ]; then
+  git clone https://github.com/chriskempson/base16-shell.git $Development/base-16/shell
+fi
+
+if [ ! -d $Development/base-16/iterm ]; then
+  git clone https://github.com/chriskempson/base16-iterm2 $Development/base-16/iterm
+fi
 
 # link in jsc
 if [ -x /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc ] && ! [ -L /usr/local/bin/jsc ]; then
