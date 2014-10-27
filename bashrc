@@ -264,10 +264,10 @@ if [[ "SolarizedDark" == $ITERM_PROFILE ]]; then
   eval $(dircolors ~/.dir_colors_dark)
 fi
 if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
-  . ~/.config/base16-shell/base16-default.sh
+  . ~/Development/base-16/shell/base16-default.sh
 fi
-if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
-  . ~/.config/base16-shell/base16-default.light.sh
+if [[ "Base16Light" == $ITERM_PROFILE ]]; then
+  . ~/Development/base-16/shell/base16-default.light.sh
 fi
 # if [ "$TMUX" ] && [ "$(tmux showenv -g ITERM_PROFILE)" ]; then
 #   eval $(tmux showenv -g ITERM_PROFILE)

@@ -141,8 +141,8 @@ endfunction
 " Jellybeans colors
 " let g:solarized_termcolors=16
 "let g:solarized_bold = 0
-let bg_profile = Trim(substitute(system("tmux showenv ITERM_PROFILE"), ".*=", "", ""))
-"let bg_profile = $ITERM_PROFILE
+"let bg_profile = Trim(substitute(system("tmux showenv ITERM_PROFILE"), ".*=", "", ""))
+let bg_profile = $ITERM_PROFILE
 "echom bg_profile
 if bg_profile ==? "SolarizedLight"
   set background=light

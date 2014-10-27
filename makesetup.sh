@@ -95,7 +95,6 @@ PACKAGES=(
   grep
   pv
   meld
-  js-yaml
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
@@ -103,6 +102,7 @@ done;
 node_packages=(
  jscs
  jshint
+ js-yaml
 )
 for i in ${node_packages[*]}; do
   npm install -g $i
@@ -117,12 +117,12 @@ if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
   ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace
 fi
 
-if [ ! -d $Development/base-16/shell ]; then
-  git clone https://github.com/chriskempson/base16-shell.git $Development/base-16/shell
+if [ ! -d $DEVELOPMENT/base-16/shell ]; then
+  git clone https://github.com/chriskempson/base16-shell.git $DEVELOPMENT/base-16/shell
 fi
 
-if [ ! -d $Development/base-16/iterm ]; then
-  git clone https://github.com/chriskempson/base16-iterm2 $Development/base-16/iterm
+if [ ! -d $DEVELOPMENT/base-16/iterm ]; then
+  git clone https://github.com/chriskempson/base16-iterm2 $DEVELOPMENT/base-16/iterm
 fi
 
 # link in jsc
