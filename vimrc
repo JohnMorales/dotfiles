@@ -51,6 +51,7 @@ Plugin 'milkypostman/vim-togglelist'
 Plugin 'vim-scripts/BufOnly.vim'
 Bundle 'https://github.com/freeo/vim-kalisi'
 Plugin 'chriskempson/base16-vim'
+Plugin 'chrisbra/NrrwRgn'
 
 
 call vundle#end()            " required
@@ -81,6 +82,7 @@ set modeline
 set modelines=5
 runtime macros/matchit.vim
 set backupdir=~/.backup,/tmp
+set pastetoggle=<F4>
 set dir=/tmp
 " Status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ [%p%%]\ Buf:%n\ [%b][0x%B]
@@ -178,7 +180,7 @@ set complete-=k complete+=k
 
 syntax on
 " highlight previous search term.
-noremap <F4> :set hlsearch! <cr>
+"noremap <F4> :set hlsearch! <cr>
 " show tagbar
 noremap <F8> :TagbarToggle <CR>
 
@@ -666,8 +668,13 @@ noremap <silent> <Leader>q :call LoadAndDisplayRSpecQuickfix()<CR>
 " yaml
 """""
 function! s:fold_yaml_sections()
-  ":%s/^\([a-z].*\):/\0 #{{{1 \1/g
   "set foldmethod=marker
   "":w
 endfunction
 autocmd FileType yaml :call s:fold_yaml_sections()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NrrwRgn
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Leader>sb V%\nr<c-w>_ " show block in new window
