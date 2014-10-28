@@ -251,6 +251,7 @@ show_yaml_key() {
  local file_name=$2
  sed -n "/^$key_name:/, /^[[:alpha:]]/ p" $file_name | head -n -1
 }
+
 update_profile() {
   if [ "$TMUX" ] && [ "$(tmux showenv ITERM_PROFILE)" ]; then
     eval $(tmux showenv ITERM_PROFILE)

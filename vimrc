@@ -152,6 +152,7 @@ elseif bg_profile ==? "Misterioso"
   set background=dark
   colorscheme tomorrow-night
 elseif bg_profile ==? "Base16Light"
+  let base16colorspace=256
   set background=light
   colorscheme base16-default
 elseif bg_profile ==? "Base16Dark"
