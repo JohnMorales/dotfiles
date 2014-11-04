@@ -104,15 +104,11 @@ git_dirty() {
 create_local_gemset() {
   echo './.gems' > .rbenv-gemsets
 }
-light() {
-  export ITERM_PROFILE=SolarizedLight
+tmux_light() {
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-light.conf
-  tmux set-environment -g ITERM_PROFILE SolarizedLight
 }
-dark() {
-  export ITERM_PROFILE=SolarizedDark
+tmux_dark() {
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-dark.conf
-  tmux set-environment -g ITERM_PROFILE SolarizedDark
 }
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -263,18 +259,40 @@ update_profile() {
 #
 ##############################################
 export CLICOLOR=1
-if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
-  eval $(dircolors ~/.dir_colors_light)
-fi;
-if [[ "SolarizedDark" == $ITERM_PROFILE ]]; then
-  eval $(dircolors ~/.dir_colors_dark)
-fi
-if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
-  . ~/Development/base-16/shell/base16-default.sh
-fi
-if [[ "Base16Light" == $ITERM_PROFILE ]]; then
-  . ~/Development/base-16/shell/base16-default.light.sh
-fi
+configure_terminal_colors() {
+  if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
+    eval $(dircolors ~/.dir_colors_light)
+    tmux_light
+  fi;
+  if [[ "SolarizedDark" == $ITERM_PROFILE ]]; then
+    eval $(dircolors ~/.dir_colors_dark)
+    tmux_dark
+  fi
+  if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
+    . ~/Development/base-16/shell/base16-default.sh
+    tmux_dark
+  fi
+  if [[ "Base16Light" == $ITERM_PROFILE ]]; then
+    . ~/Development/base-16/shell/base16-default.light.sh
+    tmux_light
+  fi
+}
+clrscheme_sol_light() {
+  export ITERM_PROFILE=SolarizedLight
+  configure_terminal_colors
+}
+clrscheme_sol_dark() {
+  export ITERM_PROFILE=SolarizedDark
+  configure_terminal_colors
+}
+clrscheme_b16_dark() {
+  export ITERM_PROFILE=Base16Dark
+  configure_terminal_colors
+}
+clrscheme_b16_light() {
+  export ITERM_PROFILE=Base16Light
+  configure_terminal_colors
+}
 
 ##############################################
 # Externals
