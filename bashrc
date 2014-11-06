@@ -34,7 +34,7 @@ alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
 
-### 
+###
 # Python
 ##
 if [ -f ~/.force_phython_virtual_envs ]; then
@@ -154,7 +154,7 @@ show_vms_on_host()
 
 true_color()
 {
- printf "\x1b[38;2;255;100;0mTRUECOLOR\x1b[0m\n" 
+ printf "\x1b[38;2;255;100;0mTRUECOLOR\x1b[0m\n"
 }
 
 # mimic linux service name start|stop|restart
@@ -269,8 +269,20 @@ configure_terminal_colors() {
     tmux_dark
   fi
   if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
-    . ~/Development/base-16/shell/base16-default.sh
+    . ~/Development/base-16/shell/base16-default.dark.sh
     tmux_dark
+  fi
+  if [[ "Dark" == $ITERM_PROFILE ]]; then
+    . ~/Development/base-16/shell/base16-default.dark.sh
+    tmux_dark
+  fi
+  if [[ "RailscastsDark" == $ITERM_PROFILE ]]; then
+    . ~/Development/base-16/shell/base16-railscasts.dark.sh
+    tmux_dark
+  fi
+  if [[ "Light" == $ITERM_PROFILE ]]; then
+    . ~/Development/base-16/shell/base16-default.light.sh
+    tmux_light
   fi
   if [[ "Base16Light" == $ITERM_PROFILE ]]; then
     . ~/Development/base-16/shell/base16-default.light.sh
@@ -291,6 +303,22 @@ clrscheme_b16_dark() {
 }
 clrscheme_b16_light() {
   export ITERM_PROFILE=Base16Light
+  configure_terminal_colors
+}
+clrscheme_rails_light() {
+  export ITERM_PROFILE=RailscastsLight
+  configure_terminal_colors
+}
+clrscheme_rails_dark() {
+  export ITERM_PROFILE=RailscastsDark
+  configure_terminal_colors
+}
+clrscheme_light() {
+  export ITERM_PROFILE=Light
+  configure_terminal_colors
+}
+clrscheme_dark() {
+  export ITERM_PROFILE=Dark
   configure_terminal_colors
 }
 

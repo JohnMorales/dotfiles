@@ -138,6 +138,7 @@ endfunction
 
 " let g:solarized_termcolors=256
 "set t_Co=256
+"set t_Co=88
 " Jellybeans colors
 " let g:solarized_termcolors=16
 "let g:solarized_bold = 0
@@ -151,12 +152,24 @@ if bg_profile ==? "SolarizedLight"
 elseif bg_profile ==? "Misterioso"
   set background=dark
   colorscheme tomorrow-night
-elseif bg_profile ==? "Base16Light"
+elseif bg_profile ==? "Light"
   let base16colorspace=256
   set background=light
   colorscheme base16-default
-elseif bg_profile ==? "Base16Dark"
+elseif bg_profile ==? "Base16Light"
+  "let base16colorspace=256
+  set background=light
+  colorscheme base16-default
+elseif bg_profile ==? "Dark"
   let base16colorspace=256
+  set background=dark
+  colorscheme base16-default
+elseif bg_profile ==? "RailscastsDark"
+  let base16colorspace=256
+  set background=dark
+  colorscheme base16-railscasts
+elseif bg_profile ==? "Base16Dark"
+  "let base16colorspace=256
   set background=dark
   colorscheme base16-default
 elseif bg_profile ==? "SolarizedDark"
