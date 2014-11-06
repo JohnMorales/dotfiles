@@ -201,12 +201,16 @@ pow_make_site()
     echo "Must provide site_name"
     return
   fi
-  echo "Creating $site_name"
-  site=~/sites/$site_name
-  mkdir -p $site
-  public_dir=${site}/public
-  [ -d $public_dir ] && rm $public_dir
-  ln -s $(readlink -f .) $public_dir
+  if [ -f config.ru ]; then
+    local site=$(readlink -f .)
+  else
+    echo "Creating $site_name"
+    local site=~/sites/$site_name
+    mkdir -p $site
+    local public_dir=${site}/public
+    [ -d $public_dir ] && rm $public_dir
+    ln -s $(readlink -f .) $public_dir
+  fi
   [ -L ~/.pow/$site_name ] || ln -s $site ~/.pow/$site_name
   echo "site located at http://${site_name}.dev/"
 }
@@ -237,7 +241,7 @@ pow_rm_site()
   fi
   local site=~/sites/$site_name
   echo "Checking if we can remove ${site}"
-  public_dir=${site}/public
+  local public_dir=${site}/public
   [ -L ~/.pow/$site_name ] && rm ~/.pow/$site_name
   [ -d $site ] && rm -r $site
 }
