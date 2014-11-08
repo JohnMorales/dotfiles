@@ -37,9 +37,9 @@ alias be="bundle exec" # When running a command and forcing bundled gems
 ###
 # Python
 ##
-if [ -f ~/.force_phython_virtual_envs ]; then
-  . ~/.force_phython_virtual_envs
-fi;
+# if [ -f ~/.force_phython_virtual_envs ]; then
+#   # . ~/.force_phython_virtual_envs
+# fi;
 
 
 ##############################################

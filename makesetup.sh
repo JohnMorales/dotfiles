@@ -95,6 +95,7 @@ PACKAGES=(
   grep
   pv
   meld
+  tmux-MacOSX-pasteboard
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
