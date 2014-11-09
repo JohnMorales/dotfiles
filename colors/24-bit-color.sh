@@ -9,7 +9,7 @@
 
 setBackgroundColor()
 {
-    echo -en "\x1b[48;2;$1;$2;$3""m"
+    printf '\x1b[48;2;%s;%s;%sm' $1 $2 $3
 }
 
 resetOutput()

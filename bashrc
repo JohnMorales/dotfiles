@@ -262,7 +262,7 @@ update_profile() {
 # Colors
 #
 ##############################################
-export CLICOLOR=1
+export CLICOLOR=1 #Enable colors on a mac
 configure_terminal_colors() {
   if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
     eval $(dircolors ~/.dir_colors_light)
@@ -277,15 +277,16 @@ configure_terminal_colors() {
     tmux_dark
   fi
   if [[ "Dark" == $ITERM_PROFILE ]]; then
-    . ~/Development/base-16/shell/base16-default.dark.sh
+#    . ~/Development/base-16/shell/base16-default.dark.sh
     tmux_dark
   fi
   if [[ "RailscastsDark" == $ITERM_PROFILE ]]; then
-    . ~/Development/base-16/shell/base16-railscasts.dark.sh
+#    . ~/Development/base-16/shell/base16-railscasts.dark.sh
     tmux_dark
   fi
   if [[ "Light" == $ITERM_PROFILE ]]; then
-    . ~/Development/base-16/shell/base16-default.light.sh
+# the base-16/shell scripts are to support 256 colors, if just using 16 then don't bother
+#    . ~/Development/base-16/shell/base16-default.light.sh
     tmux_light
   fi
   if [[ "Base16Light" == $ITERM_PROFILE ]]; then
@@ -325,6 +326,7 @@ clrscheme_dark() {
   export ITERM_PROFILE=Dark
   configure_terminal_colors
 }
+configure_terminal_colors
 
 ##############################################
 # Externals
@@ -360,9 +362,8 @@ fi;
 #Customizing git prompt
 ResetColor="[0m\]"
 Yellow="[0;33m\]"
-BoldGreen="[1;32m\]"
 Green="[0;32m\]"
-GIT_PROMPT_START="${BoldGreen}\h ${Yellow}\w${ResetColor}"
+GIT_PROMPT_START="${Green}\h ${Yellow}\w${ResetColor}"
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
 ##############################################

@@ -157,7 +157,7 @@ elseif bg_profile ==? "Light"
   set background=light
   colorscheme base16-default
 elseif bg_profile ==? "Base16Light"
-  "let base16colorspace=256
+  let base16colorspace=256
   set background=light
   colorscheme base16-default
 elseif bg_profile ==? "Dark"
@@ -169,7 +169,7 @@ elseif bg_profile ==? "RailscastsDark"
   set background=dark
   colorscheme base16-railscasts
 elseif bg_profile ==? "Base16Dark"
-  "let base16colorspace=256
+  let base16colorspace=256
   set background=dark
   colorscheme base16-default
 elseif bg_profile ==? "SolarizedDark"
