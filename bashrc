@@ -360,11 +360,7 @@ fi;
 ##############################################
 
 #Customizing git prompt
-# ResetColor="[0m\]"
-# Yellow="[0;33m\]"
-# Green="[0;32m\]"
-# GIT_PROMPT_START="${Green}\h ${Yellow}\w${ResetColor}"
-# [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
+[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
 ##############################################
 # AWS settings
