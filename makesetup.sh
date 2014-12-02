@@ -95,6 +95,7 @@ PACKAGES=(
   grep
   pv
   reattach-to-user-namespace
+  node
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
