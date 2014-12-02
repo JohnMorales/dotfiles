@@ -96,6 +96,7 @@ PACKAGES=(
   pv
   reattach-to-user-namespace
   node
+  bash-completion
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
