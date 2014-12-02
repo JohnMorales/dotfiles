@@ -110,14 +110,6 @@ for i in ${node_packages[*]}; do
 done;
 
 
-# install tmux-pastboard hack fix.
-if [ ! -d $DEVELOPMENT/tmux-MacOSX-pasteboard ]; then
-  git clone https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard.git $DEVELOPMENT/tmux-MacOSX-pasteboard
-  cd $DEVELOPMENT/tmux-MacOSX-pasteboard
-  make
-  ln -s `pwd`/reattach-to-user-namespace /usr/local/bin/reattach-to-user-namespace
-fi
-
 if [ ! -d $DEVELOPMENT/base-16/shell ]; then
   git clone https://github.com/chriskempson/base16-shell.git $DEVELOPMENT/base-16/shell
 fi
