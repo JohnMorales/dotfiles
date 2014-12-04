@@ -368,7 +368,9 @@ fi;
 ##############################################
 export EC2_AMITOOL_HOME="/usr/local/Cellar/ec2-ami-tools/1.5.2/libexec"
 export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
-export JAVA_HOME="$(/usr/libexec/java_home)"
+if [ -f /usr/libexec/java_home ]; then
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi;
 if [ -f ~/.awskey ]; then
   . ~/.awskey
 fi;
@@ -376,3 +378,6 @@ fi;
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+
+export NVM_DIR="/Users/johnmorales/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
