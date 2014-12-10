@@ -34,6 +34,9 @@ alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
 alias whatismyip="curl http://ipecho.net/plain;echo"
+if [ -f ~/.smb_creds ]; then
+  alias smbclient="smbclient -A ~/.smb_creds"
+fi
 
 ###
 # Python

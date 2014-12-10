@@ -35,6 +35,7 @@ fi
 
 FILES=(
 vimrc
+nvimrc
 bashrc
 gemrc
 gitconfig
