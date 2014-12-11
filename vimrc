@@ -22,6 +22,7 @@ Plugin 'tpope/vim-repeat.git'
 Plugin 'kana/vim-textobj-user.git'
 Plugin 'nelstrom/vim-textobj-rubyblock.git'
 Plugin 'Raimondi/delimitMate.git'
+Plugin 'maxbrunsfeld/vim-emacs-bindings.git'
 " Switching back to ycm+ultisnips
 " Neosnippet doesn't fully support vim-snippets. (select mode snippets are not
 " supported.
@@ -198,6 +199,7 @@ syntax on
 " show tagbar
 noremap <F8> :TagbarToggle <CR>
 
+"quickly get out of insert mode so that you can navigate (and practice quick keys)
 inoremap jj <esc>
 
 " Find todos
@@ -227,11 +229,17 @@ nnoremap <silent> <Leader>bh :%!xxd -r<cr> " Back from hex
 " nnoremap tn  :tabnext<Space>
 " nnoremap tm  :tabm<Space>
 " nnoremap td  :tabclose<CR>
-nmap <C-h> <C-w><Left>
-nmap <C-l> <C-w><Right>
-nmap <C-k> <C-w><Up>
-nmap <C-j> <C-w><Down>
-nmap <C-t> :CtrlPBuffer<CR>
+
+" Using alt keys for quick window movements Maybe for windows/linux setups...
+" nmap <A-h> <C-w><Left>
+" nmap <A-l> <C-w><Right>
+" nmap <A-k> <C-w><Up>
+" nmap <A-j> <C-w><Down>
+nmap ˙ <C-w><Left>
+nmap ¬ <C-w><Right>
+nmap ˚ <C-w><Up>
+nmap ∆ <C-w><Down>
+
 
 " Control enhancements in insert mode
 imap <C-F> <right>
@@ -243,15 +251,17 @@ imap <M-BS> <esc>vBc
 " Map Ctrl+V to paste in Insert mode
 imap <C-V> <C-R>*
 
-" Project level tags
-nnoremap <leader>f :CtrlPTag<cr>
-" File level tags
-nnoremap <leader>m :CtrlPBufTag<cr>
-" Jump to tags
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
-" Show recent files
-nmap <leader>r :CtrlPMRU<CR>
+" Project level tags (alt-p)
+nnoremap π :CtrlPTag<cr>
+" File level tags (alt-f)
+nnoremap ƒ :CtrlPBufTag<cr>
+" Jump to tags (alt-])
+nnoremap ‘ :CtrlPtjump<cr>
+vnoremap ‘ :CtrlPtjumpVisual<cr>
+" Show buffer (Alt-t)
+nmap † :CtrlPBuffer<CR>
+" Show recent files (Alt-r)
+nmap ® :CtrlPMRU<CR>
 " contents of last global command in new window
 "nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 " TODO
