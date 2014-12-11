@@ -103,6 +103,9 @@ PACKAGES=(
 for i in ${PACKAGES[*]}; do
   install_brew_package $i
 done;
+# install neovim
+brew tap neovim/homebrew-neovim
+brew install --HEAD neovim
 node_packages=(
  jscs
  jshint
