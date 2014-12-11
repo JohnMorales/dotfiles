@@ -99,6 +99,7 @@ PACKAGES=(
   reattach-to-user-namespace
   node
   bash-completion
+  jq
 )
 for i in ${PACKAGES[*]}; do
   install_brew_package $i

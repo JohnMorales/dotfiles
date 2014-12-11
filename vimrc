@@ -11,7 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'scrooloose/nerdtree.git'
-Plugin 'epmatsw/ag.vim.git'
+Plugin 'rking/ag.vim.git' " use this version due to the dependency from nerdtree-ag
 Plugin 'taiansu/nerdtree-ag.git'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'bling/vim-airline.git'
@@ -696,6 +696,18 @@ function! s:fold_yaml_sections()
   "":w
 endfunction
 autocmd FileType yaml :call s:fold_yaml_sections()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ag
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:agprg="ag --ignore tags --column --smart-case"
+let g:aghighlight=1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" End Ag
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NrrwRgn
 "
