@@ -5,6 +5,7 @@ set runtimepath^=~/.nvim/bundle/nerdtree
 set runtimepath^=~/.nvim/bundle/base16-vim
 set runtimepath^=~/.nvim/bundle/YouCompleteMe
 set runtimepath^=~/.nvim/bundle/vim-airline
+"set runtimepath^=~/.nvim/bundle/vim-lldb
 
 "colorscheme molokai
 let base16colorspace=256

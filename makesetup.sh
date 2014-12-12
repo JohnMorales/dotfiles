@@ -64,6 +64,23 @@ mkdir -p ~/.irssi/scripts
 if [ ! -L ~/.irssi/scripts/autorun ]; then
   ln -s `pwd`/irssi ~/.irssi/scripts/autorun
 fi
+if [ -f ~/.gitignore_global ] && ! [ -L ~/.gitignore_global ]
+then
+  if ! [ -f ~/.gitignore ]; then
+    mv ~/.gitignore_global ~/.gitignore
+  else
+    mv ~/.gitignore_global ~/.gitignore_global.bak
+  fi
+fi
+[ -L ~/.gitignore_global ] || ln -s $(readlink -f ~/.gitignore) ~/.gitignore_global
+if [ -f ~/.gitignore_global.bak ]; then
+  echo "move gitignore_globals and delete bak."
+  diff -u ~/.gitignore_global ~/.gitignore_global.bak
+fi
+if [ -f ~/.gitignore.bak ]; then
+  echo "move gitignores and delete bak."
+  diff -u ~/.gitignore ~/.gitignore.bak
+fi
 
 #installing coreutils to get the latest gnu tools, lscolors, etc.
 if [ ! -d /usr/local/opt/coreutils/ ] && $IS_MAC; then

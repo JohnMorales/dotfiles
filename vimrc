@@ -53,6 +53,7 @@ Plugin 'vim-scripts/BufOnly.vim'
 Bundle 'https://github.com/freeo/vim-kalisi'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chrisbra/NrrwRgn'
+Plugin 'gilligan/vim-lldb'
 
 
 call vundle#end()            " required
