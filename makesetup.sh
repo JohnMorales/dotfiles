@@ -146,3 +146,8 @@ fi
 if [ -x /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc ] && ! [ -L /usr/local/bin/jsc ]; then
  ln -s /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc /usr/local/bin/jsc
 fi
+
+# link vmware's ovftool
+if ! [ -L /usr/local/bin/ovftool ]; then
+  ln -s /Applications/VMware\ Fusion.app/Contents/Library/VMware\ OVF\ Tool/ovftool /usr/local/bin
+fi

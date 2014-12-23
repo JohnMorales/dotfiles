@@ -54,6 +54,8 @@ Bundle 'https://github.com/freeo/vim-kalisi'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'gilligan/vim-lldb'
+Plugin 'edkolev/promptline.vim'
+Plugin 'edkolev/tmuxline.vim'
 
 
 call vundle#end()            " required
@@ -669,6 +671,8 @@ let g:syntastic_auto_loc_list = 0 "open loc list when error
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"ui-"]
 let g:syntastic_javascript_jshint_quiet_messages = { "regex": "'angular' is not defined" }
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"ui-"]
+let g:syntastic_c_check_header = 1 " check headers
+let g:syntastic_c_include_dirs = [ '/usr/local/include' ]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end syntastic
 "
@@ -715,3 +719,24 @@ let g:aghighlight=1
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <Leader>sb V%\nr<c-w>_ " show block in new window
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" promptline
+"
+"
+" add git info...
+" other themes available in autoload/promptline/themes/*
+" run `:PromptlineSnapshot [file] [theme]` e.g. `PromptlineSnapshot ~/.shell_prompt.sh airline` to create new theme
+" powerline is customized with a hash of the following keys: a, b, c, x, y, z, warn
+let g:promptline_preset = {
+        \'a'    : [ promptline#slices#host() ],
+        \'b'    : [ promptline#slices#cwd() ],
+        \'c'    : [ promptline#slices#vcs_branch() ],
+        \'warn' : [ promptline#slices#last_exit_code() ] }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tmuxline
+"
+"
+"" other presets available in `~/.vim/bundle/tmuxline.vim/autoload/tmuxline/themes/`
+" change below and run `:Tmuxline`

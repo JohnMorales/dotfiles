@@ -364,7 +364,10 @@ fi;
 ##############################################
 
 #Customizing git prompt
-[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
+#[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
+
+# airline prompt
+[ -f ~/.shell_prompt.sh ] && . ~/.shell_prompt.sh
 
 ##############################################
 # AWS settings
