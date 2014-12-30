@@ -382,10 +382,12 @@ fi;
 ##############################################
 
 #Customizing git prompt
-#[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
+# removing the newline.
+GIT_PROMPT_END_USER=" ${White}${Time12a}${ResetColor} "
+[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
 # airline prompt
-[ -f ~/.shell_prompt.sh ] && . ~/.shell_prompt.sh
+#[ -f ~/.shell_prompt.sh ] && . ~/.shell_prompt.sh
 
 ##############################################
 # AWS settings
