@@ -6,6 +6,17 @@ set -o vi
 export EDITOR=vim
 
 
+####
+# tmux history
+# make sure history shows up in all tmux windows
+####
+export HISTSIZE=9000
+export HISTCONTROL=ignoredups:erasedups #don't write duplicate entries.
+shopt -s histappend # append to the history file, instead of the default which is to overwrite
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # add and reload the history file.
+[ -d ~/.history ] || mkdir ~/.history
+export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
+
 ##############################################
 # Path
 #
@@ -196,6 +207,13 @@ service() {
   fi;
 }
 
+# Get the version of the cookbook on the chef server
+chef_compare_server_version() {
+  local cookbook=$(basename $(pwd))
+  server_version=$(knife cookbook list | grep $cookbook | awk '{ print $2 }')
+  local_version=$(grep version metadata.rb | awk '{ print $2 }')
+  echo "local version $local_version, server version $server_version"
+}
 ## quickly create a site to view html content
 pow_make_site()
 {
