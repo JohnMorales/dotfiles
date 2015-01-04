@@ -279,6 +279,15 @@ update_profile() {
     eval $(tmux showenv ITERM_PROFILE)
   fi
 }
+# Ideally, this would not be needed if you open a proper iterm session, 
+# i.e. use command-o instead of command-i (command-i will use the same profile value as the original profile, even though you've switched)
+# unfornuately the update-environment setting in tmux is for new sessions not attaching to existing sessions.
+# Currently I have to manually call this every time I switch to a new profile
+set_tmux_profile() {
+  if [ "$TMUX" ]; then
+    tmux setenv -g ITERM_PROFILE $ITERM_PROFILE
+  fi
+}
 
 ##############################################
 # Colors
@@ -286,6 +295,7 @@ update_profile() {
 ##############################################
 export CLICOLOR=1 #Enable colors on a mac
 configure_terminal_colors() {
+  echo "PROFILE: $ITERM_PROFILE"
   if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
     eval $(dircolors ~/.dir_colors_light)
     tmux_light

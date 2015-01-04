@@ -1,7 +1,12 @@
 Host docker.aws
 User jmorales
 HostName ec2-54-173-59-52.compute-1.amazonaws.com
+
 Host spicy
+User jmorales
+HostName spicy.local
+
+Host spicy.local
 User jmorales
 HostName spicy.local
 

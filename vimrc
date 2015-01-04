@@ -29,7 +29,7 @@ Plugin 'maxbrunsfeld/vim-emacs-bindings.git'
 "Plugin 'Shougo/neocomplete.git'
 "Plugin 'Shougo/neosnippet.vim.git'
 "Plugin 'JohnMorales/neosnippet-snippets.git'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips.git'
 Plugin 'git@github.com:JohnMorales/vim-snippets.git'
 Plugin 'git@github.com:JohnMorales/vim-bootstrap3-snippets.git'
@@ -54,6 +54,7 @@ Plugin 'freeo/vim-kalisi'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'gilligan/vim-lldb'
+Plugin 'fatih/vim-go.git'
 " Plugin 'edkolev/promptline.vim'
 " Plugin 'edkolev/tmuxline.vim'
 
@@ -438,7 +439,7 @@ imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<F21>" " mapped to F21 is mapped to '\033 [21;2~' in iterm
+let g:UltiSnipsExpandTrigger="<S-f12>" " mapped to shift-f10 or F21 is mapped to '\033 [21;2~' in iterm
 let g:UltiSnipsListSnippets="<c-l>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpForwardTrigger="<c-j>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
