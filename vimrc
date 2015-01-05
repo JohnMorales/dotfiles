@@ -150,11 +150,15 @@ endfunction
 "let bg_profile = Trim(substitute(system("tmux showenv ITERM_PROFILE"), ".*=", "", ""))
 let bg_profile = $ITERM_PROFILE
 "echom bg_profile
-if !empty($BASE16_THEME)
-  let base16colorspace=256
-  exec "set background=" . $BASE16_VARIATION
-  "echom 'setting colorscheme to ' . $BASE16_THEME
-  colorscheme $BASE16_THEME
+if filereadable(expand("~/.vimrc_background"))
+  source ~/.vimrc_background
+else
+  if !empty($BASE16_THEME)
+    let base16colorspace=256
+    exec "set background=" . $BASE16_VARIATION
+    "echom 'setting colorscheme to ' . $BASE16_THEME
+    colorscheme $BASE16_THEME
+  endif
 endif
 "colorscheme jellybeans
 "Only useful if using transparent backgrounds.
