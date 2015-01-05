@@ -294,71 +294,7 @@ set_tmux_profile() {
 #
 ##############################################
 export CLICOLOR=1 #Enable colors on a mac
-configure_terminal_colors() {
-  echo "PROFILE: $ITERM_PROFILE"
-  if [[ "SolarizedLight" == $ITERM_PROFILE ]]; then
-    eval $(dircolors ~/.dir_colors_light)
-    tmux_light
-  fi;
-  if [[ "SolarizedDark" == $ITERM_PROFILE ]]; then
-    eval $(dircolors ~/.dir_colors_dark)
-    tmux_dark
-  fi
-  if [[ "Base16Dark" == $ITERM_PROFILE ]]; then
-    . ~/Development/base-16/shell/base16-default.dark.sh
-    tmux_dark
-  fi
-  if [[ "Dark" == $ITERM_PROFILE ]]; then
-#    . ~/Development/base-16/shell/base16-default.dark.sh
-    tmux_dark
-  fi
-  if [[ "RailscastsDark" == $ITERM_PROFILE ]]; then
-#    . ~/Development/base-16/shell/base16-railscasts.dark.sh
-    tmux_dark
-  fi
-  if [[ "Light" == $ITERM_PROFILE ]]; then
-# the base-16/shell scripts are to support 256 colors, if just using 16 then don't bother
-#    . ~/Development/base-16/shell/base16-default.light.sh
-    tmux_light
-  fi
-  if [[ "Base16Light" == $ITERM_PROFILE ]]; then
-    . ~/Development/base-16/shell/base16-default.light.sh
-    tmux_light
-  fi
-}
-clrscheme_sol_light() {
-  export ITERM_PROFILE=SolarizedLight
-  configure_terminal_colors
-}
-clrscheme_sol_dark() {
-  export ITERM_PROFILE=SolarizedDark
-  configure_terminal_colors
-}
-clrscheme_b16_dark() {
-  export ITERM_PROFILE=Base16Dark
-  configure_terminal_colors
-}
-clrscheme_b16_light() {
-  export ITERM_PROFILE=Base16Light
-  configure_terminal_colors
-}
-clrscheme_rails_light() {
-  export ITERM_PROFILE=RailscastsLight
-  configure_terminal_colors
-}
-clrscheme_rails_dark() {
-  export ITERM_PROFILE=RailscastsDark
-  configure_terminal_colors
-}
-clrscheme_light() {
-  export ITERM_PROFILE=Light
-  configure_terminal_colors
-}
-clrscheme_dark() {
-  export ITERM_PROFILE=Dark
-  configure_terminal_colors
-}
-configure_terminal_colors
+eval "$(~/Development/base-16/shell/profile_helper.sh)"
 
 ##############################################
 # Externals

@@ -150,42 +150,11 @@ endfunction
 "let bg_profile = Trim(substitute(system("tmux showenv ITERM_PROFILE"), ".*=", "", ""))
 let bg_profile = $ITERM_PROFILE
 "echom bg_profile
-if bg_profile ==? "SolarizedLight"
-  set background=light
-  colorscheme solarized
-  set cursorline
-elseif bg_profile ==? "Misterioso"
-  set background=dark
-  colorscheme tomorrow-night
-elseif bg_profile ==? "Light"
+if !empty($BASE16_THEME)
   let base16colorspace=256
-  set background=light
-  colorscheme base16-default
-elseif bg_profile ==? "Base16Light"
-  let base16colorspace=256
-  set background=light
-  colorscheme base16-default
-elseif bg_profile ==? "Dark"
-  let base16colorspace=256
-  set background=dark
-  colorscheme base16-default
-elseif bg_profile ==? "RailscastsDark"
-  let base16colorspace=256
-  set background=dark
-  colorscheme base16-railscasts
-elseif bg_profile ==? "Base16Dark"
-  let base16colorspace=256
-  set background=dark
-  colorscheme base16-default
-elseif bg_profile ==? "SolarizedDark"
-  set background=dark
-  colorscheme solarized
-  set cursorline
-else
-  "set background=dark
-  "colorscheme default
-  colorscheme kalisi
-  set background=light
+  exec "set background=" . $BASE16_VARIATION
+  "echom 'setting colorscheme to ' . $BASE16_THEME
+  colorscheme $BASE16_THEME
 endif
 "colorscheme jellybeans
 "Only useful if using transparent backgrounds.
