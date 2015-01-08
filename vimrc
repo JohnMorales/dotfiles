@@ -413,7 +413,7 @@ imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<S-f12>" " mapped to shift-f10 or F21 is mapped to '\033 [21;2~' in iterm
+let g:UltiSnipsExpandTrigger="<S-f12>" " mapped to shift-f10 or F21 is mapped to '\033 [24;2~' in iterm
 let g:UltiSnipsListSnippets="<c-l>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpForwardTrigger="<c-j>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"

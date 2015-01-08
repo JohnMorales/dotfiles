@@ -289,12 +289,18 @@ set_tmux_profile() {
   fi
 }
 
+show_function_keys() {
+  printf "%-5s%5s\n" "key" "value"; infocmp -1  | awk -F= '/kf/ { key=$1; sub("kf", "", key); printf("%-5d %s\n", key, $2) }'  | sort -n
+}
+
 ##############################################
 # Colors
 #
 ##############################################
 export CLICOLOR=1 #Enable colors on a mac
-eval "$(~/Development/base-16/shell/profile_helper.sh)"
+if [ -n "$PS1" ]; then
+  eval "$(~/Development/base-16/shell/profile_helper.sh)"
+fi
 
 ##############################################
 # Externals
