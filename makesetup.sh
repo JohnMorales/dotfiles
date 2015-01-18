@@ -49,6 +49,7 @@ editrc
 inputrc
 rspec
 jshintrc
+smb_mount.sh
 )
 for i in ${FILES[@]}
   do

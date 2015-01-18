@@ -69,11 +69,14 @@ filetype plugin indent on
 
 " hack to support shift enter in console vim ref:http://stackoverflow.com/questions/5388562/cant-map-s-cr-in-vim
 imap ✠ <S-CR>
-set nowrap
+set wrap
+set linebreak
+set nolist
 set ai
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set textwidth=79
 set shiftround
 set expandtab
 set ruler
@@ -384,14 +387,14 @@ let g:airline_symbols = {}
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_key_list_select_completion = [ '<Enter>', '<Down>'] " Need to remember that YCM expects you to accept the text by just space
+let g:ycm_key_list_select_completion = [ '<Enter>', '<Down>'] " Need to remember that YCM expects you to accept the text by just space (or use ctrl-y to accept)
 let g:ycm_key_list_previous_completion = [ '<Up>']
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+"imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end YouCompleteMe
 "

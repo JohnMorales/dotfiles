@@ -279,7 +279,7 @@ update_profile() {
     eval $(tmux showenv ITERM_PROFILE)
   fi
 }
-# Ideally, this would not be needed if you open a proper iterm session, 
+# Ideally, this would not be needed if you open a proper iterm session,
 # i.e. use command-o instead of command-i (command-i will use the same profile value as the original profile, even though you've switched)
 # unfornuately the update-environment setting in tmux is for new sessions not attaching to existing sessions.
 # Currently I have to manually call this every time I switch to a new profile
@@ -292,6 +292,8 @@ set_tmux_profile() {
 show_function_keys() {
   printf "%-5s%5s\n" "key" "value"; infocmp -1  | awk -F= '/kf/ { key=$1; sub("kf", "", key); printf("%-5d %s\n", key, $2) }'  | sort -n
 }
+
+. ~/.smb_mount.sh
 
 ##############################################
 # Colors
