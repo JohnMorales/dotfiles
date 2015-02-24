@@ -69,11 +69,14 @@ filetype plugin indent on
 
 " hack to support shift enter in console vim ref:http://stackoverflow.com/questions/5388562/cant-map-s-cr-in-vim
 imap ✠ <S-CR>
-set nowrap
+set wrap
+set linebreak
+set nolist
 set ai
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set textwidth=79
 set shiftround
 set expandtab
 set ruler

@@ -47,6 +47,8 @@ alias be="bundle exec" # When running a command and forcing bundled gems
 alias whatismyip="curl http://ipecho.net/plain;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
 alias tigb="tig HEAD ^master --first-parent --no-merges" # show only the commits until master, without merges
+
+
 if [ -f ~/.smb_creds ]; then
   alias smbclient="smbclient -A ~/.smb_creds"
 fi
@@ -293,7 +295,7 @@ update_profile() {
     eval $(tmux showenv ITERM_PROFILE)
   fi
 }
-# Ideally, this would not be needed if you open a proper iterm session, 
+# Ideally, this would not be needed if you open a proper iterm session,
 # i.e. use command-o instead of command-i (command-i will use the same profile value as the original profile, even though you've switched)
 # unfornuately the update-environment setting in tmux is for new sessions not attaching to existing sessions.
 # Currently I have to manually call this every time I switch to a new profile
@@ -306,6 +308,10 @@ set_tmux_profile() {
 show_function_keys() {
   printf "%-5s%5s\n" "key" "value"; infocmp -1  | awk -F= '/kf/ { key=$1; sub("kf", "", key); printf("%-5d %s\n", key, $2) }'  | sort -n
 }
+
+## Samba functions
+[ -f ~/.smb_mount.sh ] && . ~/.smb_mount.sh
+
 
 ##############################################
 # Colors
