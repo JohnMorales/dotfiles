@@ -45,6 +45,8 @@ alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
 alias whatismyip="curl http://ipecho.net/plain;echo"
+alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
+alias tigb="tig HEAD ^master --first-parent --no-merges" # show only the commits until master, without merges
 if [ -f ~/.smb_creds ]; then
   alias smbclient="smbclient -A ~/.smb_creds"
 fi
@@ -174,29 +176,33 @@ true_color()
 
 # mimic linux service name start|stop|restart
 service() {
-  service_name=$1
-  action=${2:-restart}
-  launch_agent_config=$(/bin/ls ~/Library/LaunchAgents/ | grep $service_name)
+  local service_name=$1
+  local action=${2:-restart}
+  local launch_agent_config="$(find ~/Library/LaunchAgents /System/Library/LaunchAgents/ /System/Library/LaunchDaemons/ -iregex ".*$service_name.*")"
   if [ $(echo "$launch_agent_config" | wc -l) -gt 1 ]; then
-    echo "Found more than 1 configuration, please be more specific"
+    printf "Found more than 1 configuration, please be more specific:\n$launch_agent_config\n"
     return 1
+  fi
+  if [ -z $launch_agent_config ]; then
+    echo "No service found for $service_name"
+    return 1;
   fi
   echo -n "$action on $launch_agent_config..."
   case $action in
     restart)
-        launchctl unload ~/Library/LaunchAgents/$launch_agent_config
+        launchctl unload "$launch_agent_config"
         return_code=$?
         if [ $return_code -eq 0 ]; then
-          launchctl load ~/Library/LaunchAgents/$launch_agent_config
+          launchctl load "$launch_agent_config"
           return_code=$?
         fi;
         ;;
     stop)
-        launchctl unload ~/Library/LaunchAgents/$launch_agent_config
+        launchctl unload "$launch_agent_config"
         return_code=$?
         ;;
     start)
-        launchctl load ~/Library/LaunchAgents/$launch_agent_config
+        launchctl load "$launch_agent_config"
         return_code=$?
         ;;
   esac
@@ -226,15 +232,23 @@ pow_make_site()
   if [ -f config.ru ]; then
     local site=$(readlink -f .)
   else
-    echo "Creating $site_name"
     local site=~/sites/$site_name
+  fi
+  read -n1 -p "Create site at $site? " response
+  echo ""
+  if [ $response == "y" ]; then
+    echo "Creating $site_name"
     mkdir -p $site
     local public_dir=${site}/public
     [ -d $public_dir ] && rm $public_dir
     ln -s $(readlink -f .) $public_dir
+    [ -L ~/.pow/$site_name ] || ln -s $site ~/.pow/$site_name
+    echo "site located at http://${site_name}.dev/"
+  else
+   echo "Not creating site."
   fi
-  [ -L ~/.pow/$site_name ] || ln -s $site ~/.pow/$site_name
-  echo "site located at http://${site_name}.dev/"
+
+
 }
 
 pow_show_sites()

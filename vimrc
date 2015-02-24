@@ -384,14 +384,15 @@ let g:airline_symbols = {}
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_key_list_select_completion = [ '<Enter>', '<Down>'] " Need to remember that YCM expects you to accept the text by just space
+let g:ycm_key_list_select_completion = [ '<Down>'] " Need to remember that YCM expects you to accept the text by just space
 let g:ycm_key_list_previous_completion = [ '<Up>']
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf= 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+"imap <expr> <CR> pumvisible() ? \"\<c-y>\" : \"<Plug>delimitMateCR\"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end YouCompleteMe
 "
@@ -413,10 +414,11 @@ imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<S-f12>" " mapped to shift-f10 or F21 is mapped to '\033 [24;2~' in iterm
+let g:UltiSnipsExpandTrigger="<S-F12>" " mapped to shift-f10 or F21 is mapped to '\033 [24;2~' in iterm
 let g:UltiSnipsListSnippets="<c-l>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpForwardTrigger="<c-j>" " cannot be c-n and c-p because you could get a prompt while you are entering values of a snippet.
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"
 "default mapping interferes with vim see  *UltiSnips-triggers*
 inoremap <c-x><c-k> <c-x><c-k>
 function! ExpandPossibleShorterSnippet()
@@ -715,3 +717,26 @@ nmap <Leader>sb V%\nr<c-w>_ " show block in new window
 "
 "" other presets available in `~/.vim/bundle/tmuxline.vim/autoload/tmuxline/themes/`
 " change below and run `:Tmuxline`
+"
+" Vim autopastemode
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
