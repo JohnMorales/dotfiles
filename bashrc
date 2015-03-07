@@ -25,6 +25,12 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./b
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 ##############################################
+# GO
+#
+##############################################
+export GOPATH=~/Development/go
+export PATH=$PATH:$GOPATH/bin
+##############################################
 # Ruby
 #
 ##############################################
@@ -37,7 +43,7 @@ fi
 #
 ##############################################
 alias vms='VBoxManage list runningvms' # See virtualbox running machines.
-alias ls='ls -lph --color'
+alias lls='ls -lph --color'
 alias t2='tree -Fth -L 2 --du |less' #see tree with size up to 2 levels deep
 alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
 alias clear_dns="sudo killall -HUP mDNSResponder"
