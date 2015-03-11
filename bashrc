@@ -5,6 +5,12 @@
 set -o vi
 export EDITOR=vim
 
+####
+# Go lang
+####
+#Note that this must not be the same path as your Go installation.
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 ####
 # tmux history
@@ -139,17 +145,38 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+semver_bump() {
+  local file=$1
+  local bumper=$2
+  local awk_script=$(cat <<'SCRIPT'
+{
+    v=$2
+    gsub("'", "", v);
+    split(v, p, ".");
+    major=p[1];
+    minor=p[2];
+    patch=p[3];
+    print major "." minor "." patch
+    bumper;
+    print major "." minor "." patch
+}
+SCRIPT
+)
+
+  local versions=$(awk -f <(echo "${awk_script/bumper/$bumper}") <(grep version $file))
+  local cur_ver=$(echo "$versions" | head -n1 )
+  local new_version=$(echo "$versions" | tail -n1)
+  sed -e "/version/s/${cur_ver}/${new_version}/" -i '' $file
+  git diff $file
+}
 patch_bump() {
-  ver=$(grep version metadata.rb|awk -F"[.']" '{print $4}')
-  new_version=$((ver+1))
-  sed -e "/version/s/${ver}\(['\"]\)/${new_version}\1/" -i '' metadata.rb
-  git diff metadata.rb
+  semver_bump metadata.rb "patch++"
 }
 minor_bump() {
-  ver=$(grep version metadata.rb|awk -F"[.']" '{print $3}')
-  new_version=$((ver+1))
-  sed -e "/version/s/\.${ver}\./\.${new_version}\./" -i ''  metadata.rb
-  git diff metadata.rb
+  semver_bump metadata.rb "minor++;patch=0;"
+}
+major_bump() {
+  semver_bump metadata.rb "major++;minor=0;patch=0;"
 }
 
 # open vim in the gem directory
