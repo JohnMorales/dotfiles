@@ -1,25 +1,34 @@
-[user]
-  name = JohnMorales
-  email = jmorales@gmail.com
+[include]
+  path = ~/.gitconfig_username
 [color]
   branch = auto
   diff = auto
   status = auto
-  ui = auto
+  ui = true
 [color "branch"]
   current = yellow reverse
   local = yellow
   remote = green
 [color "diff"]
-  meta = white
+  meta = yellow bold
   frag = magenta bold
-  old = green bold
-  new = green
+  old = red
+  new = cyan
 [color "status"]
   added = yellow
   changed = green
   untracked = cyan
 [push]
   default = simple
-[core]
-	excludesfile = /Users/johnmorales/.gitignore_global
+  excludesfile = ~/.gitignore_global
+[alias]
+  gr = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
+[diff]
+  tool = diffmerge
+[difftool "diffmerge"]
+  com = "diffmerge \"$LOCAL\" \"$REMOTE\" "
+[merge]
+  tool = diffmerge
+[mergetool "diffmerge"]
+  trustExitCode = true
+  cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" "
