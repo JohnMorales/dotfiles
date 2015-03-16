@@ -14,21 +14,19 @@ User john
 HostName 10.0.1.5
 
 #BEGIN - AWS
-Host test.aws
-User jmorales
-HostName ec2-54-172-106-71.compute-1.amazonaws.com
-
-Host ten4.aws
-User ec2-user
-IdentityFile ~/.ssh/JM-MacbookPro.pem
-HostName ec2-54-86-9-64.compute-1.amazonaws.com
-
-Host docker.aws
-User jmorales
-HostName ec2-54-173-59-52.compute-1.amazonaws.com
-
-Host dockerhost1.aws
-User ec2-user
-IdentityFile ~/.ssh/JM-MacbookPro.pem
+Host aws.dockerhost1
+IdentityFile ~/.ssh/JM-MacbookPro
 HostName ec2-54-152-242-190.compute-1.amazonaws.com
+User ec2-user
+
+Host aws.ten4_website_backend
+IdentityFile ~/.ssh/JM-MacbookPro
+HostName ec2-54-86-9-64.compute-1.amazonaws.com
+User ec2-user
+
+Host aws.apiservers
+IdentityFile ~/.ssh/0
+HostName ec2-54-172-151-115.compute-1.amazonaws.com
+User ec2-user
+
 #END - AWS
