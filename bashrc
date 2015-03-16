@@ -56,7 +56,7 @@ alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
-alias whatismyip="curl http://ipecho.net/plain;echo"
+alias whatismyip="curl -s http://ipecho.net/plain;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
 alias tigb="tig HEAD ^master --first-parent --no-merges" # show only the commits until master, without merges
 
@@ -416,7 +416,23 @@ update_aws_ssh()
   cp ~/.ssh/config ~/.ssh/config.bak
   cp ~/.ssh/config ~/.ssh/config.tmp
   sed '/BEGIN - AWS/,/END - AWS/ d' ~/.ssh/config.tmp > ~/.ssh/config 
-  ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
+  ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s.pem\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
+}
+
+update_ssh_security_group()
+{
+  local sec_group=ssh_only_from_home
+  local newip=$(whatismyip)
+  local oldip=$(aws ec2 describe-security-groups --filters Name=ip-permission.from-port,Values=22 --query 'SecurityGroups[*].IpPermissions[*].IpRanges[*].CidrIp' |  grep -oE '([0-9]+\.?){4}' |xargs echo -n)
+  if [ -n "$newip" ] && [ "$newip" != "$oldip" ]; then
+    echo "Setting $sec_group to '$newip' old ip was '$oldip'"
+    if [ -n "$oldip" ]; then
+      aws ec2 revoke-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22 --cidr ${oldip}/32
+    fi
+    aws ec2 authorize-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22 --cidr ${newip}/32
+  else
+    echo "Security group already set to $newip"
+  fi
 }
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

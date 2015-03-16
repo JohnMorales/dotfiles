@@ -15,17 +15,17 @@ HostName 10.0.1.5
 
 #BEGIN - AWS
 Host aws.dockerhost1
-IdentityFile ~/.ssh/JM-MacbookPro
+IdentityFile ~/.ssh/JM-MacbookPro.pem
 HostName ec2-54-152-242-190.compute-1.amazonaws.com
 User ec2-user
 
 Host aws.ten4_website_backend
-IdentityFile ~/.ssh/JM-MacbookPro
+IdentityFile ~/.ssh/JM-MacbookPro.pem
 HostName ec2-54-86-9-64.compute-1.amazonaws.com
 User ec2-user
 
 Host aws.apiservers
-IdentityFile ~/.ssh/0
+IdentityFile ~/.ssh/0.pem
 HostName ec2-54-172-151-115.compute-1.amazonaws.com
 User ec2-user
 
