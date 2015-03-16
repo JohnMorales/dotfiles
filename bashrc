@@ -346,6 +346,10 @@ fi
 
 
 
+update_docker_host_addr() {
+ local docker_host=$(ping -c1 docker.local | awk '{ getline; sub(/:/,"", $4); print $4;exit }')
+ sed -i'' -e "s/DOCKER_HOST_ADDR=.*/DOCKER_HOST_ADDR=$docker_host/" ~/.dockerrc
+}
 if [ -f ~/.dockerrc ]; then
   . ~/.dockerrc
 fi
@@ -380,6 +384,12 @@ if [ -f ~/.awskey ]; then
   . ~/.awskey
 fi;
 
+update_aws_ssh()
+{
+  cp ~/.ssh/config ~/.ssh/config.tmp
+  sed '/BEGIN - AWS/,/END - AWS/ d' ~/.ssh/config.tmp > ~/.ssh/config 
+  ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk ' BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' }
+}
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 

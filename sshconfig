@@ -1,10 +1,6 @@
 Host docker.local
 User jmorales
 
-Host docker.aws
-User jmorales
-HostName ec2-54-173-59-52.compute-1.amazonaws.com
-
 Host spicy
 User jmorales
 HostName spicy.local
@@ -13,15 +9,26 @@ Host spicy.local
 User jmorales
 HostName spicy.local
 
+Host xmbc.livingroom
+User john
+HostName 10.0.1.5
+
+#BEGIN - AWS
 Host test.aws
 User jmorales
 HostName ec2-54-172-106-71.compute-1.amazonaws.com
 
-Host spicy
+Host ten4.aws
+User ec2-user
+IdentityFile ~/.ssh/JM-MacbookPro.pem
+HostName ec2-54-86-9-64.compute-1.amazonaws.com
+
+Host docker.aws
 User jmorales
-HostName spicy.local
+HostName ec2-54-173-59-52.compute-1.amazonaws.com
 
-
-Host xmbc.livingroom
-User john
-HostName 10.0.1.5
+Host dockerhost1.aws
+User ec2-user
+IdentityFile ~/.ssh/JM-MacbookPro.pem
+HostName ec2-54-152-242-190.compute-1.amazonaws.com
+#END - AWS
