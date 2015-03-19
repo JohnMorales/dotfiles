@@ -12,13 +12,16 @@ mkdir -p $VIMPLUGINDIR
 for d in swap backup undo; do                # make vim dirs
   test -d ~/.vim/$d || mkdir ~/.vim/$d
 done
-test -d $VIMPLUGINDIR/vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/vundle.vim
+test -d $VIMPLUGINDIR/Vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/Vundle.vim
 
 if [ -d $VIMPLUGINDIR/ultisnips/ftdetect ] && ! [ -d ~/.vim/ftdetect ]; then
   mkdir ~/.vim/ftdetect
   ln -s ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect/
 fi;
 
+has_brew() {
+  which brew >/dev/null
+}
 
 link_config_file() {
 file=$1
@@ -84,7 +87,7 @@ if [ -f ~/.gitignore.bak ]; then
 fi
 
 #installing coreutils to get the latest gnu tools, lscolors, etc.
-if [ ! -d /usr/local/opt/coreutils/ ] && $IS_MAC; then
+if [ ! -d /usr/local/opt/coreutils/ ] && has_brew; then
   brew install coreutils
 fi
 
@@ -98,7 +101,7 @@ test -f ~/.dir_colors_dark || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.a
 test -f ~/.dir_colors_light || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-light ~/.dir_colors_light
 
 #Install dupes
-if which brew >/dev/null; then
+if has_brew; then
 	test -d /usr/local/Library/Taps/homebrew-dupes || brew tap homebrew/dupes
 fi
 
@@ -106,7 +109,7 @@ fi
 install_package() {
 package=$1
 echo "checking for package $i"
-if which brew >/dev/null; then
+if has_brew; then
 	test -d /usr/local/Cellar/$package || brew install $package
 fi
 if [ -f /etc/redhat-release ]; then
@@ -131,7 +134,7 @@ for i in ${PACKAGES[*]}; do
   install_brew_package $i
 done;
 # install neovim
-if which brew>/dev/null; then
+if has_brew; then
 brew tap neovim/homebrew-neovim
 brew install --HEAD neovim
 fi
@@ -150,7 +153,7 @@ if [ ! -d $DEVELOPMENT/base-16/shell ]; then
 fi
 
 # link in jsc
-if IS_MAC; then
+if [ "$IS_MAC" == "true" ]; then
 	if [ -x /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc ] && ! [ -L /usr/local/bin/jsc ]; then
 	 ln -s /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc /usr/local/bin/jsc
 	fi
