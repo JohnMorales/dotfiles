@@ -131,7 +131,7 @@ PACKAGES=(
   jq
 )
 for i in ${PACKAGES[*]}; do
-  install_brew_package $i
+  install_package $i
 done;
 # install neovim
 if has_brew; then
