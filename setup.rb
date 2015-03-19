@@ -75,7 +75,7 @@ execute "update ycm" do
   cwd "#{vim_plugin_dir}/YouCompleteMe"
   user current_user
   group current_user
-  only_if "git remote update && [ $(git rev-parse @) != $(git rev-parse @{u}) ]"
+  only_if "(git remote update && [ $(git rev-parse @) != $(git rev-parse @{u}) ]) || [ $(find . -name 'ycm_core*' -not -name '*.cpp' | wc -l) -eq 0 ]"
 end
 execute "update ycm submodules" do
   command "git submodule update --init --recursive"
@@ -110,30 +110,19 @@ end
   end
 end
 
+## NodeJS/IOJS
 execute "install nvm" do
-  command "curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh"
+  command "curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash"
   user current_user
   group current_user
   not_if "[ -d ~/.nvm ]"
 end
 execute "install iojs" do
-  command ". ~/.nvm/nvm.sh;nvm install 0.10"
+  command ". ~/.nvm/nvm.sh;nvm install iojs;nvm alias default iojs"
   user current_user
   group current_user
 end
-directory File.expand_path("~/bin") do
-  action :create
-  owner current_user
-  group current_user
-end
-execute "configure npm to use ~/bin" do
-  command "npm config set prefix ~/bin"
-  user current_user
-  group current_user
-end
-
-
-
+#
 ## NodeJS packages
 %w{
    bower
@@ -143,7 +132,7 @@ end
    gulp
 }.each do |pkg|
   execute "install #{pkg}" do
-    command ". #{File.expand_path("~/.nvm/nvm.sh")} && npm install -g #{pkg}"
+    command ". ~/.nvm/nvm.sh && npm install -g #{pkg}"
     user current_user
   end
 end
