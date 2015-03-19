@@ -112,7 +112,7 @@ echo "checking for package $i"
 if has_brew; then
 	test -d /usr/local/Cellar/$package || brew install $package
 fi
-if [ "$(head -n1 /etc/lsb-release | awk -F= '{printf("%s", $2}')" == "Ubuntu" ]; then
+if [ "$(head -n1 /etc/lsb-release | awk -F= '{printf("%s", $2);}')" == "Ubuntu" ]; then
   apt-get install $package
 fi
 if [ -f /etc/redhat-release ]; then
