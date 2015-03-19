@@ -37,7 +37,6 @@ generic_packages = %w{
   tmux
   wget
   pv
-  nodejs
   bash-completion
   jq
   cmake
@@ -72,31 +71,30 @@ execute "clone vundle" do
 end
 
 execute "update ycm" do
+  command "git pull"
+  cwd "#{vim_plugin_dir}/YouCompleteMe"
+  user current_user
+  group current_user
+  only_if "git remote update && [ $(git rev-parse @) != $(git rev-parse @{u}) ]"
+end
+execute "update ycm submodules" do
   command "git submodule update --init --recursive"
   cwd "#{vim_plugin_dir}/YouCompleteMe"
   user current_user
+  group current_user
+  action :nothing
+  subscribes :run, "execute[update ycm]"
 end
 execute "compile ycm" do
   command "./install.sh"
   cwd "#{vim_plugin_dir}/YouCompleteMe"
   user current_user
+  group current_user
   environment({ "YCM_CORES" => "1" })
+  action :nothing
+  subscribes :run, "execute[update ycm]"
+  subscribes :run, "execute[update ycm submodules]"
 end
-
-## NodeJS packages
-%w{
-   bower
-   jscs
-   jshint
-   js-yaml
-   gulp
-}.each do |pkg|
-  execute "install #{pkg}" do
-    command "npm install -g pkg"
-    user current_user
-  end
-end
-
 
 ## Github projects.
 {
@@ -107,6 +105,46 @@ end
   execute "clone #{project}" do
     command "git clone https://github.com/#{project}.git #{dest}"
     user current_user
+    group current_user
     not_if "[ -d #{dest} ]"
   end
 end
+
+execute "install nvm" do
+  command "curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh"
+  user current_user
+  group current_user
+  not_if "[ -d ~/.nvm ]"
+end
+execute "install iojs" do
+  command ". ~/.nvm/nvm.sh;nvm install 0.10"
+  user current_user
+  group current_user
+end
+directory File.expand_path("~/bin") do
+  action :create
+  owner current_user
+  group current_user
+end
+execute "configure npm to use ~/bin" do
+  command "npm config set prefix ~/bin"
+  user current_user
+  group current_user
+end
+
+
+
+## NodeJS packages
+%w{
+   bower
+   jscs
+   jshint
+   js-yaml
+   gulp
+}.each do |pkg|
+  execute "install #{pkg}" do
+    command ". #{File.expand_path("~/.nvm/nvm.sh")} && npm install -g #{pkg}"
+    user current_user
+  end
+end
+
