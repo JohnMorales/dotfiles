@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     libgdbm-dev \
     vim \
     zlib1g-dev
-RUN useradd jmorales && mkdir /home/jmorales/ && chown jmorales:jmorales /home/jmorales
+RUN useradd -m jmorales && (echo "jmorales:yagni" | chpasswd ) && usermod -aG sudo jmorales
 USER jmorales
 WORKDIR /home/jmorales
 RUN git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -24,3 +24,4 @@ RUN curl -O https://gist.githubusercontent.com/liamdawson/5b20f45ae59755dcbc9d/r
 RUN cat 2.2.1-typo.patch | ~/.rbenv/bin/rbenv install --patch 2.2.1
 RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 RUN ~/.rbenv/bin/rbenv global 2.2.1
+RUN ~/.rbenv/shims/gem install chef
