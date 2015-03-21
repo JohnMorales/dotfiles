@@ -1,6 +1,5 @@
 # chef recipe to configure profile
 #
-require 'pry'; binding.pry
 current_user = ENV["SUDO_USER"]
 dotfiles_dir = File.expand_path("..", __FILE__)
 development_dir = File.expand_path("~/Development")
@@ -98,7 +97,8 @@ end
 
 ## Github projects.
 {
- 'chriskempson/base16-shell' => "#{development_dir}/base-16/shell",
+ 'magicmonty/bash-git-prompt' => "~/.bash-git-prompt",
+ 'JohnMorales/base16-shell' => "#{development_dir}/base-16/shell",
  'seebi/dircolors-solarized' => "#{development_dir}/dircolors-solarized",
  'seebi/tmux-colors-solarized' => "#{development_dir}/tmux-colors-solarized"
 }.each do |project, dest|
@@ -132,8 +132,10 @@ end
    gulp
 }.each do |pkg|
   execute "install #{pkg}" do
-    command ". ~/.nvm/nvm.sh && npm install -g #{pkg}"
+    command ". ~/.nvm/nvm.sh; npm install -g #{pkg}"
     user current_user
+    group current_user
+    not_if ". ~/.nvm/nvm.sh; npm list -g #{pkg}"
   end
 end
 

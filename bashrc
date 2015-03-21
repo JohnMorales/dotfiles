@@ -360,13 +360,16 @@ fi
 #
 ##############################################
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
+if which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
-else
-  echo "Missing bash completion, brew install bash-completion"
+elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+elif [ -z "$BASH_COMPLETION" ]; then
+  echo "Missing bash completion, brew install bash-completion or /etc/bash_completion"
 fi
 
 #http://git-scm.com/book/en/Git-Basics-Tips-and-Tricks
+[ -f ~/.git-completion.bash ] || curl -L -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash  > ~/.git-completion.bash
 if ! type __git_heads 2>/dev/null | head -n1 | grep function >/dev/null && ! [[ -f ~/.git-completion.bash && $(. ~/.git-completion.bash) -eq 0 ]]; then
   echo "Missing git completion."
 fi
