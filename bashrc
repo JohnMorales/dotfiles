@@ -1,4 +1,9 @@
 ##############################################
+# TERMINAL
+#
+##############################################
+export TERM=xterm-256color
+##############################################
 # Vim
 #
 ##############################################
@@ -56,7 +61,7 @@ alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
-alias whatismyip="curl http://ipecho.net/plain;echo"
+alias whatismyip="curl -s http://ipecho.net/plain;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
 alias tigb="tig HEAD ^master --first-parent --no-merges" # show only the commits until master, without merges
 
@@ -360,13 +365,16 @@ fi
 #
 ##############################################
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
+if which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
-else
-  echo "Missing bash completion, brew install bash-completion"
+elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+elif [ -z "$BASH_COMPLETION" ]; then
+  echo "Missing bash completion, brew install bash-completion or /etc/bash_completion"
 fi
 
 #http://git-scm.com/book/en/Git-Basics-Tips-and-Tricks
+[ -f ~/.git-completion.bash ] || curl -L -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash  > ~/.git-completion.bash
 if ! type __git_heads 2>/dev/null | head -n1 | grep function >/dev/null && ! [[ -f ~/.git-completion.bash && $(. ~/.git-completion.bash) -eq 0 ]]; then
   echo "Missing git completion."
 fi
@@ -416,11 +424,27 @@ update_aws_ssh()
   cp ~/.ssh/config ~/.ssh/config.bak
   cp ~/.ssh/config ~/.ssh/config.tmp
   sed '/BEGIN - AWS/,/END - AWS/ d' ~/.ssh/config.tmp > ~/.ssh/config 
-  ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
+  ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s.pem\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
+}
+
+update_ssh_security_group()
+{
+  local sec_group=ssh_only_from_home
+  local newip=$(whatismyip)
+  local oldip=$(aws ec2 describe-security-groups --filters Name=ip-permission.from-port,Values=22 --query 'SecurityGroups[*].IpPermissions[*].IpRanges[*].CidrIp' |  grep -oE '([0-9]+\.?){4}' |xargs echo -n)
+  if [ -n "$newip" ] && [ "$newip" != "$oldip" ]; then
+    echo "Setting $sec_group to '$newip' old ip was '$oldip'"
+    if [ -n "$oldip" ]; then
+      aws ec2 revoke-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22 --cidr ${oldip}/32
+    fi
+    aws ec2 authorize-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22 --cidr ${newip}/32
+  else
+    echo "Security group already set to $newip"
+  fi
 }
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-
-export NVM_DIR="/Users/johnmorales/.nvm"
+### nvm
+NVM_DIR=${NVM_DIR:=~/.nvm}
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

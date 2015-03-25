@@ -50,10 +50,10 @@ Plugin 'elzr/vim-json.git'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/BufOnly.vim'
-Plugin 'freeo/vim-kalisi'
+"Plugin 'freeo/vim-kalisi'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chrisbra/NrrwRgn'
-Plugin 'gilligan/vim-lldb'
+"Plugin 'gilligan/vim-lldb'
 Plugin 'fatih/vim-go.git'
 " Plugin 'edkolev/promptline.vim'
 " Plugin 'edkolev/tmuxline.vim'
@@ -337,6 +337,10 @@ set number
 set relativenumber
 "set number
 "set verbose=9
+
+" must be set to utf-8 in order for listchars to have unicode characters
+scriptencoding utf-8
+set encoding=utf-8
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "let g:html_indent_tags = 'html\|div\|table\|p'
@@ -348,7 +352,6 @@ nmap <leader>O :BufOnly<cr>
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf-8
 "let g:airline_theme='kalisi'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1

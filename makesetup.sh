@@ -12,13 +12,16 @@ mkdir -p $VIMPLUGINDIR
 for d in swap backup undo; do                # make vim dirs
   test -d ~/.vim/$d || mkdir ~/.vim/$d
 done
-test -d $VIMPLUGINDIR/vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/vundle.vim
+test -d $VIMPLUGINDIR/Vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/Vundle.vim
 
 if [ -d $VIMPLUGINDIR/ultisnips/ftdetect ] && ! [ -d ~/.vim/ftdetect ]; then
   mkdir ~/.vim/ftdetect
   ln -s ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect/
 fi;
 
+has_brew() {
+  which brew >/dev/null
+}
 
 link_config_file() {
 file=$1
@@ -60,11 +63,11 @@ for i in ${FILES[@]}
 test -d ~/.irssi || mkdir ~/.irssi
 link_config_file "irssirc" "irssi/config"
 link_config_file "sshconfig" "ssh/config"
-test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized
-mkdir -p ~/.irssi/scripts
-if [ ! -L ~/.irssi/scripts/autorun ]; then
-  ln -s `pwd`/irssi ~/.irssi/scripts/autorun
-fi
+# test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized
+# mkdir -p ~/.irssi/scripts
+# if [ ! -L ~/.irssi/scripts/autorun ]; then
+#   ln -s `pwd`/irssi ~/.irssi/scripts/autorun
+# fi
 if [ -f ~/.gitignore_global ] && ! [ -L ~/.gitignore_global ]
 then
   if ! [ -f ~/.gitignore ]; then
@@ -84,26 +87,37 @@ if [ -f ~/.gitignore.bak ]; then
 fi
 
 #installing coreutils to get the latest gnu tools, lscolors, etc.
-if [ ! -d /usr/local/opt/coreutils/ ] && $IS_MAC; then
+if [ ! -d /usr/local/opt/coreutils/ ] && has_brew; then
   brew install coreutils
 fi
 
 #install tmux themes
-test -d $DEVELOPMENT/tmux-colors-solarized || git clone https://github.com/seebi/tmux-colors-solarized.git $DEVELOPMENT/tmux-colors-solarized
-
+if which tmux >/dev/null; then
+	test -d $DEVELOPMENT/tmux-colors-solarized || git clone https://github.com/seebi/tmux-colors-solarized.git $DEVELOPMENT/tmux-colors-solarized
+fi 
 # install dircolors themes
 test -d $DEVELOPMENT/dircolors-solarized || git clone https://github.com/seebi/dircolors-solarized.git $DEVELOPMENT/dircolors-solarized
 test -f ~/.dir_colors_dark || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-dark ~/.dir_colors_dark
 test -f ~/.dir_colors_light || ln -s $DEVELOPMENT/dircolors-solarized/dircolors.ansi-light ~/.dir_colors_light
 
 #Install dupes
-test -d /usr/local/Library/Taps/homebrew-dupes || brew tap homebrew/dupes
+if has_brew; then
+	test -d /usr/local/Library/Taps/homebrew-dupes || brew tap homebrew/dupes
+fi
 
 #brew utils
-install_brew_package() {
+install_package() {
 package=$1
 echo "checking for package $i"
-test -d /usr/local/Cellar/$package || brew install $package
+if has_brew; then
+	test -d /usr/local/Cellar/$package || brew install $package
+fi
+if [ "$(head -n1 /etc/lsb-release | awk -F= '{printf("%s", $2);}')" == "Ubuntu" ]; then
+  apt-get install $package
+fi
+if [ -f /etc/redhat-release ]; then
+	yum install $package
+fi
 }
 PACKAGES=(
   tree
@@ -115,16 +129,18 @@ PACKAGES=(
   grep
   pv
   reattach-to-user-namespace
-  node
+  iojs
   bash-completion
   jq
 )
 for i in ${PACKAGES[*]}; do
-  install_brew_package $i
+  install_package $i
 done;
 # install neovim
+if has_brew; then
 brew tap neovim/homebrew-neovim
 brew install --HEAD neovim
+fi
 node_packages=(
  jscs
  jshint
@@ -139,16 +155,15 @@ if [ ! -d $DEVELOPMENT/base-16/shell ]; then
   git clone https://github.com/chriskempson/base16-shell.git $DEVELOPMENT/base-16/shell
 fi
 
-if [ ! -d $DEVELOPMENT/base-16/iterm ]; then
-  git clone https://github.com/chriskempson/base16-iterm2 $DEVELOPMENT/base-16/iterm
-fi
-
 # link in jsc
-if [ -x /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc ] && ! [ -L /usr/local/bin/jsc ]; then
- ln -s /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc /usr/local/bin/jsc
+if [ "$IS_MAC" == "true" ]; then
+	if [ -x /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc ] && ! [ -L /usr/local/bin/jsc ]; then
+	 ln -s /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc /usr/local/bin/jsc
+	fi
+
+	# link vmware's ovftool
+	if ! [ -L /usr/local/bin/ovftool ]; then
+	  ln -s /Applications/VMware\ Fusion.app/Contents/Library/VMware\ OVF\ Tool/ovftool /usr/local/bin
+	fi
 fi
 
-# link vmware's ovftool
-if ! [ -L /usr/local/bin/ovftool ]; then
-  ln -s /Applications/VMware\ Fusion.app/Contents/Library/VMware\ OVF\ Tool/ovftool /usr/local/bin
-fi
