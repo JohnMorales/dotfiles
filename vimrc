@@ -101,6 +101,8 @@ set t_ti= t_te=
 set incsearch
 set ignorecase
 
+" Copy to clipboard
+vmap <C-c> :w !pbcopy<CR><CR>
 " Don't show the startup message
 set shortmess=I
 
@@ -459,8 +461,10 @@ let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
+"this is too slow
+"let g:rubycomplete_classes_in_global = 1
+"let g:rubycomplete_rails = 1
+let g:rubycomplete_use_bundler = 1
 
 " there are more in the neocomplete section
 " Custom extenstions
