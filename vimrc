@@ -197,7 +197,7 @@ inoremap jj <esc>
 "
 " Build tags for current directory using exuberant c-tags
 set tags=./tags;
-nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R . $(bundle show --paths)<cr>
+nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R . $(bundle show --paths) <cr>
 nnoremap <silent> <Leader>u :ProjectRootExe Ag<cr>
 
 nmap ,, <C-^>

@@ -347,6 +347,10 @@ show_function_keys() {
   printf "%-5s%5s\n" "key" "value"; infocmp -1  | awk -F= '/kf/ { key=$1; sub("kf", "", key); printf("%-5d %s\n", key, $2) }'  | sort -n
 }
 
+unset_aws() {
+  eval $(set | grep ^RDS | awk -F'=' '{ printf("unset %s\n", $1); }')
+}
+
 ## Samba functions
 [ -f ~/.smb_mount.sh ] && . ~/.smb_mount.sh
 
