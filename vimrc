@@ -55,6 +55,10 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'chrisbra/NrrwRgn'
 "Plugin 'gilligan/vim-lldb'
 Plugin 'fatih/vim-go.git'
+"Plugin 'editorconfig/editorconfig-vim.git'
+Plugin 'hail2u/vim-css3-syntax.git'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'ap/vim-css-color'
 " Plugin 'edkolev/promptline.vim'
 " Plugin 'edkolev/tmuxline.vim'
 
@@ -463,11 +467,11 @@ let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:rubycomplete_buffer_loading = 1
+"let g:rubycomplete_buffer_loading = 1
 "this is too slow
 "let g:rubycomplete_classes_in_global = 1
 "let g:rubycomplete_rails = 1
-let g:rubycomplete_use_bundler = 1
+"let g:rubycomplete_use_bundler = 1
 
 " there are more in the neocomplete section
 " Custom extenstions
@@ -575,6 +579,12 @@ endif
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sass/Scss
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType scss set iskeyword+=-
+"au BufRead,BufNewFile *.scss set filetype=scss.css
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Go
@@ -669,7 +679,7 @@ endfunction
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_javascript_checkers = [ 'jscs', 'jshint' ]
+let g:syntastic_javascript_checkers = [ 'eslint', 'jscs', 'jshint' ]
 let g:syntastic_always_populate_loc_list = 1 "send errors to location list.
 let g:syntastic_aggregate_errors = 1 "send errors to location list.
 let g:syntastic_check_on_open = 1
