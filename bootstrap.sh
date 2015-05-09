@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-[ -d ~/home ] || git clone git@github.com:JohnMorales/dotfiles.git ~/home
+[ -d ~/home ] || git clone https://github.com/JohnMorales/dotfiles ~/home
 cd ~/home
 git pull
-./makesetup.sh
+which chef >/dev/null || ./profile_init.sh
+chef-apply setup.rb
