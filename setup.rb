@@ -111,7 +111,7 @@ end
 
 ## NodeJS/IOJS
 execute "install nvm" do
-  command "curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash"
+  command "curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.1/install.sh | bash"
   user current_user
   group current_user
   not_if "[ -d ~/.nvm ]"
@@ -127,6 +127,7 @@ end
    bower
    jscs
    jshint
+   eslint
    js-yaml
    gulp
 }.each do |pkg|
