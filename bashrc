@@ -55,6 +55,7 @@ fi
 ##############################################
 alias vms='VBoxManage list runningvms' # See virtualbox running machines.
 alias lls='ls -lph --color'
+alias ls='ls --color'
 alias t2='tree -Fth -L 2 --du |less' #see tree with size up to 2 levels deep
 alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
 alias clear_dns="sudo killall -HUP mDNSResponder"
@@ -204,9 +205,20 @@ gem_edit() {
 show_vms_on_host()
 {
  echo "Running vms:"
- ssh $1 "ps aux | grep VBoxHeadless | grep -v grep | grep -o 'comment [^ ]*' | awk '{print \$2}'"
- echo "Defined vms:"
- ssh $1 "find /home/vm -type d  2>/dev/null | grep Logs | awk 'FS=\"/\" { print \$5 }' "
+ if [ -n "$1" ]; then
+    ssh $1 "ps aux | grep VBoxHeadless | grep -v grep | grep -o 'comment [^ ]*' | awk '{print \$2}'"
+    echo "Defined vms:"
+    ssh $1 "find /home/vm -type d  2>/dev/null | grep Logs | awk 'FS=\"/\" { print \$5 }' "
+  else
+    if [ -f ~/.vm_host_domain ]; then
+        local host_domain=$(cat ~/.vm_host_domain)
+        for i in gum mint beast fudge candy; do
+          echo "$i.$host_domain"
+          echo "-------------------------"
+          show_vms_on_host ${i}.$host_domain
+        done
+      fi
+  fi
 }
 
 true_color()
@@ -360,6 +372,9 @@ unset_aws() {
 #
 ##############################################
 export CLICOLOR=1 #Enable colors on a mac
+if [ -d ~/.dircolors ]; then
+  eval $(dircolors ~/.dircolors/dircolors.ansi-dark)
+fi
 if [ -n "$PS1" ]; then
   eval "$(~/Development/base-16/shell/profile_helper.sh)"
 fi
