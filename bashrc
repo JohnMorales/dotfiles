@@ -62,7 +62,7 @@ alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
 alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
 alias be="bundle exec" # When running a command and forcing bundled gems
-alias whatismyip="curl -s http://ipecho.net/plain;echo"
+alias whatismyip="curl -s https://domains.google.com/checkip;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
 alias tigb="tig HEAD ^master --first-parent --no-merges" # show only the commits until master, without merges
 

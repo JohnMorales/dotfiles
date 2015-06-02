@@ -680,7 +680,8 @@ endfunction
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_javascript_checkers = [ 'eslint', 'jscs', 'jshint' ]
+"let g:syntastic_javascript_checkers = [ 'eslint', 'jscs', 'jshint' ]
+let g:syntastic_javascript_checkers = [ 'eslint' ]
 let g:syntastic_always_populate_loc_list = 1 "send errors to location list.
 let g:syntastic_aggregate_errors = 1 "send errors to location list.
 let g:syntastic_check_on_open = 1
