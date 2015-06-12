@@ -60,6 +60,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'hail2u/vim-css3-syntax.git'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'ap/vim-css-color'
+Plugin 'yaymukund/vim-rabl'
 " Plugin 'edkolev/promptline.vim'
 " Plugin 'edkolev/tmuxline.vim'
 
@@ -88,6 +89,7 @@ set expandtab
 set ruler
 set cmdheight=2
 set laststatus=2
+"this keeps the cursor from hitting the top of the window when moving mouse up
 set scrolloff=3
 set virtualedit=all
 " Allow backspacing
@@ -240,17 +242,6 @@ imap <M-BS> <esc>vBc
 " Map Ctrl+V to paste in Insert mode
 imap <C-V> <C-R>*
 
-" Project level tags (alt-p)
-nnoremap π :CtrlPTag<cr>
-" File level tags (alt-f)
-nnoremap ƒ :CtrlPBufTag<cr>
-" Jump to tags (alt-])
-nnoremap ‘ :CtrlPtjump<cr>
-vnoremap ‘ :CtrlPtjumpVisual<cr>
-" Show buffer (Alt-t)
-nmap † :CtrlPBuffer<CR>
-" Show recent files (Alt-r)
-nmap ® :CtrlPMRU<CR>
 " contents of last global command in new window
 "nmap <F3> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>
 " TODO
@@ -290,6 +281,22 @@ endif
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ctrlp
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Project level tags (alt-p)
+nnoremap π :CtrlPTag<cr>
+" File level tags (alt-f)
+nnoremap ƒ :CtrlPBufTag<cr>
+" Jump to tags (alt-])
+nnoremap ‘ :CtrlPtjump<cr>
+vnoremap ‘ :CtrlPtjumpVisual<cr>
+" Show buffer (Alt-t)
+nmap † :CtrlPBuffer<CR>
+" Show recent files (Alt-r)
+nmap ® :CtrlPMRU<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = {
   \ 'types': {
@@ -298,6 +305,19 @@ let g:ctrlp_user_command = {
     \ },
   \ 'fallback': 'find %s -maxdepth 10 \( -type d -name ".*" -prune \) -o -type f -print'
   \ }
+let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\bower_components\|node_modules\|\v[\/]\.(git)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
+let g:ctrlp_show_hidden = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" end ctrlp
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 nmap <silent> ,n :NERDTreeFind<CR>
 nmap <silent> ,m :NERDTreeToggle<CR>
 
@@ -460,7 +480,6 @@ nmap ,t :TagbarToggle<CR>
 
 let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.xml', 'Gemfile' ]
 
-let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
 "let g:ctrlp_tjump_only_silent = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

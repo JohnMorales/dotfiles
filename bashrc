@@ -354,7 +354,18 @@ set_tmux_profile() {
     tmux setenv -g ITERM_PROFILE $ITERM_PROFILE
   fi
 }
+show_tmux_panes() {
+  for session in $(tmux list-sessions -F '#{session_name}'); do
+    tmux list-windows -t "$session" -F '#{window_index} "#{window_name}"' | while read win_index window; do
+      tmux list-panes -t "$session:$win_index" -F"#{pane_index} #{pane_tty} #{pane_pid}" | while read pane tty pid; do
+        printf "%-30s %30s\n" "Pane Addr: $session:$win_index:$pane (Window $window, Pane: $pane)" $tty
+        pstree $pid
+        printf "\n\n"
+      done
+    done
+  done
 
+}
 show_function_keys() {
   printf "%-5s%5s\n" "key" "value"; infocmp -1  | awk -F= '/kf/ { key=$1; sub("kf", "", key); printf("%-5d %s\n", key, $2) }'  | sort -n
 }
@@ -438,15 +449,15 @@ if [ -f ~/.awskey ]; then
   . ~/.awskey
 fi;
 
-update_aws_ssh()
+aws_update_ssh_hosts()
 {
   cp ~/.ssh/config ~/.ssh/config.bak
   cp ~/.ssh/config ~/.ssh/config.tmp
   sed '/BEGIN - AWS/,/END - AWS/ d' ~/.ssh/config.tmp > ~/.ssh/config 
-  ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s.pem\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
+  AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID AWS_SECRET_KEY=$AWS_SECRET_ACCESS_KEY ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s.pem\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
 }
 
-update_ssh_security_group()
+aws_update_ssh_from_home()
 {
   local sec_group=ssh_only_from_home
   local newip=$(whatismyip)
@@ -460,6 +471,11 @@ update_ssh_security_group()
   else
     echo "Security group already set to $newip"
   fi
+}
+
+aws_get_running_instance()
+{
+  aws ec2 describe-instances | jq '.Reservations[].Instances[]|{state: .State.Name,instance: .InstanceId,name: .Tags[0].Value} | select(.state=="running")'
 }
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

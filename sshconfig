@@ -14,9 +14,19 @@ User john
 HostName 10.0.1.5
 
 #BEGIN - AWS
-Host aws.dockerhost1
+Host aws.lifefuels_dockerhost-md-1
 IdentityFile ~/.ssh/JM-MacbookPro.pem
-HostName ec2-54-152-242-190.compute-1.amazonaws.com
+HostName ec2-54-86-109-96.compute-1.amazonaws.com
+User ec2-user
+
+Host aws.apiservers
+IdentityFile ~/.ssh/JM-MacbookPro.pem
+HostName ec2-52-7-106-143.compute-1.amazonaws.com
+User ec2-user
+
+Host aws.signedcloudfront2-dev
+IdentityFile ~/.ssh/JM-MacbookPro.pem
+HostName ec2-54-172-20-30.compute-1.amazonaws.com
 User ec2-user
 
 Host aws.ten4_website_backend
@@ -24,9 +34,9 @@ IdentityFile ~/.ssh/JM-MacbookPro.pem
 HostName ec2-54-86-9-64.compute-1.amazonaws.com
 User ec2-user
 
-Host aws.apiservers
-IdentityFile ~/.ssh/0.pem
-HostName ec2-54-172-151-115.compute-1.amazonaws.com
+Host aws.fuelserver
+IdentityFile ~/.ssh/JM-MacbookPro.pem
+HostName ec2-52-4-176-254.compute-1.amazonaws.com
 User ec2-user
 
 #END - AWS
