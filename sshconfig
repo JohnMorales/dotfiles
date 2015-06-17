@@ -24,11 +24,6 @@ IdentityFile ~/.ssh/JM-MacbookPro.pem
 HostName ec2-52-7-106-143.compute-1.amazonaws.com
 User ec2-user
 
-Host aws.signedcloudfront2-dev
-IdentityFile ~/.ssh/JM-MacbookPro.pem
-HostName ec2-54-172-20-30.compute-1.amazonaws.com
-User ec2-user
-
 Host aws.ten4_website_backend
 IdentityFile ~/.ssh/JM-MacbookPro.pem
 HostName ec2-54-86-9-64.compute-1.amazonaws.com
@@ -37,6 +32,11 @@ User ec2-user
 Host aws.fuelserver
 IdentityFile ~/.ssh/JM-MacbookPro.pem
 HostName ec2-52-4-176-254.compute-1.amazonaws.com
+User ec2-user
+
+Host aws.events
+IdentityFile ~/.ssh/JM-MacbookPro.pem
+HostName ec2-52-7-23-239.compute-1.amazonaws.com
 User ec2-user
 
 #END - AWS
