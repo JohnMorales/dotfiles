@@ -28,7 +28,7 @@ development_dir = File.expand_path("~/Development")
     group current_user
   end
 end
-# 
+#
 # install generic system packages
 generic_packages = %w{
   tree
@@ -40,7 +40,19 @@ generic_packages = %w{
   jq
   cmake
 }
-platform_specific = { 'mac' => %w{ grep pstree the_silver_searcher reattach-to-user-namespace coreutils }, 'linux' => %w{ python python-dev powerline } }
+platform_specific = {
+        'mac' => %w{
+          grep
+          pstree
+          the_silver_searcher
+          reattach-to-user-namespace
+          coreutils },
+        'linux' => %w{
+          python
+          python-dev
+          powerline
+    }
+}
 
 (generic_packages + platform_specific[node[:os]]).each do |pkg|
   package pkg do
