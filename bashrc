@@ -431,7 +431,8 @@ fi;
 
 #Customizing git prompt
 # removing the newline.
-GIT_PROMPT_END_USER=" ${White}${Time12a}${ResetColor}$ "
+#GIT_PROMPT_END_USER=" ${White}${Time12a}${ResetColor}$ "
+GIT_PROMPT_END=" \n\u@${White}\H${ResetColor}:\$ "
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
 # airline prompt

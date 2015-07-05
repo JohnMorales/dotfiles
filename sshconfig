@@ -1,6 +1,14 @@
 Host docker.local
 User jmorales
 
+Host the-rock
+User root
+HostName 10.0.1.24
+
+Host ten34
+User john
+HostName ten34.local
+
 Host spicy
 User jmorales
 HostName spicy.local
