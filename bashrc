@@ -24,7 +24,8 @@ export PATH=$PATH:$GOPATH/bin
 export HISTSIZE=9000
 export HISTCONTROL=ignoredups:erasedups #don't write duplicate entries.
 shopt -s histappend # append to the history file, instead of the default which is to overwrite
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # add and reload the history file.
+# don't write history on every command
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # add and reload the history file.
 [ -d ~/.history ] || mkdir ~/.history
 export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 
@@ -445,9 +446,9 @@ export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
 if [ -f /usr/libexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi;
-# if [ -f ~/.awskey ]; then
-#   . ~/.awskey
-# fi;
+if [ -f ~/.awskey ]; then
+  . ~/.awskey
+fi;
 
 if [ -f ~/.aws_scripts ]; then
   . ~/.aws_scripts
