@@ -61,7 +61,7 @@ alias t2='tree -Fth -L 2 --du |less' #see tree with size up to 2 levels deep
 alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
 alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
-alias aws_ssh="ssh -i ~/.ssh/JM-MacbookPro.pem" # forcing using aws key when sshing into ec2 machines
+alias ssh='cat ~/.ssh/config.d/* >~/.ssh/config; ssh' # this 'trick' cobbles my ssh_config together, prior to being ssh being called.
 alias be="bundle exec" # When running a command and forcing bundled gems
 alias whatismyip="curl -s https://domains.google.com/checkip;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges

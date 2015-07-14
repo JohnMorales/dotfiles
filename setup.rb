@@ -60,6 +60,12 @@ platform_specific = {
   end
 end
 
+directory File.expand_path("~/.ssh/config.d") do
+  action :create
+  owner current_user
+  group current_user
+end
+
 # configure vim.
 directory File.expand_path("~/.vim") do
   action :create

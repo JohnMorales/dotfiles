@@ -265,15 +265,15 @@ nmap <leader>tr :%s/\s\+$//g<CR>:w<CR>:e<CR>
 map <leader>j !python -m json.tool<CR>
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
+let g:indent_guides_guide_size = 1 " By sitting the guid size to 1, since the shiftwidth is 2, it will add a white space for every ident.
 let g:indent_guides_start_level = 2
 
 " Determine good colors for IdentGuides.
 " let g:cterm_colors = (&g:background == 'dark') ? ['darkgrey', 'black'] : ['lightgrey', 'white']
 " let g:gui_colors   = (&g:background == 'dark') ? ['grey15', 'grey30']  : ['grey70', 'grey85']
 if &g:background == 'dark'
-   hi IndentGuidesEven ctermbg='Black'
-   hi IndentGuidesOdd  ctermbg='Black'
+    hi IndentGuidesEven ctermbg=19
+   hi IndentGuidesOdd  ctermbg=18
 else
    hi IndentGuidesEven ctermbg='lightgrey'
    hi IndentGuidesOdd  ctermbg='lightgrey'
