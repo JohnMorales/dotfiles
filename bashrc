@@ -11,13 +11,6 @@ set -o vi
 export EDITOR=vim
 
 ####
-# Go lang
-####
-#Note that this must not be the same path as your Go installation.
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-####
 # tmux history
 # make sure history shows up in all tmux windows
 ####
@@ -33,13 +26,17 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 # Path
 #
 ##############################################
-PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 ##############################################
 # GO
 #
 ##############################################
+
+#Note that this must not be the same path as your Go installation.
+#export GOPATH=$HOME/go
+#export PATH=$PATH:$GOPATH/bin
 export GOPATH=~/Development/go
 export PATH=$PATH:$GOPATH/bin
 ##############################################
