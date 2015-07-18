@@ -444,9 +444,6 @@ export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
 if [ -f /usr/libexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi;
-if [ -f ~/.awskey ]; then
-  . ~/.awskey
-fi;
 
 if [ -f ~/.aws_scripts ]; then
   . ~/.aws_scripts
