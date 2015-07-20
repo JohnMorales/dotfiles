@@ -9,10 +9,22 @@ aws_show_pending_cloudfronts ()
 
 aws_update_ssh_hosts()
 {
-  cp ~/.ssh/config ~/.ssh/config.bak
-  cp ~/.ssh/config ~/.ssh/config.tmp
-  sed '/BEGIN - AWS/,/END - AWS/ d' ~/.ssh/config.tmp > ~/.ssh/config 
-  AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID AWS_SECRET_KEY=$AWS_SECRET_ACCESS_KEY ec2din  --filter instance-state-name=running  |grep -E "^INSTANCE|^TAG.*\WName\W" | awk 'BEGIN { print "#BEGIN - AWS" } {hostname=$4; keyfile=$7; getline; name=$5; gsub("/", "_", name);  printf("Host aws.%s\n", name); printf("IdentityFile ~/.ssh/%s.pem\n", keyfile); printf("HostName %s\n", hostname); printf("User ec2-user\n"); print "" } END { print "#END - AWS"}' >> ~/.ssh/config
+  aws ec2 describe-instances | jq -r '.Reservations[].Instances[]|"\(.PublicDnsName) \(.KeyName) \((((.Tags//[])[]|select(.Key == "Name"))//{}).Value) \(.InstanceId)"' | while read hostname keyfile name instanceid; do
+    if [ "$name" == "null" ]; then
+     >&2 echo "$instanceid does not have a tag!!"
+     continue
+    fi
+    name=${name//\//_}
+    cat <<OUTPUT
+Host aws.$name
+IdentityFile ~/.ssh/$keyfile.pem
+HostName $hostname
+User ec2-user
+
+OUTPUT
+  done > ~/.ssh/config.d/aws
+
+  cat ~/.ssh/config.d/* >~/.ssh/config;
 }
 
 aws_update_ssh_from_home()
@@ -23,7 +35,7 @@ aws_update_ssh_from_home()
   if [ -n "$newip" ] && [ "$newip" != "$oldip" ]; then
     echo "Setting $sec_group to '$newip' old ip was '$oldip'"
     if [ -n "$oldip" ]; then
-      aws ec2 revoke-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22 
+      aws ec2 revoke-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22
     fi
     aws ec2 authorize-security-group-ingress --group-name ${sec_group} --protocol tcp --port 22 --cidr ${newip}/32
   else
@@ -33,7 +45,7 @@ aws_update_ssh_from_home()
 
 aws_get_running_instances()
 {
-  aws ec2 describe-instances | jq '.Reservations[].Instances[]|{state: .State.Name,instance: .InstanceId,name: .Tags[0].Value} | select(.state=="running")'
+  aws ec2 describe-instances | jq '.Reservations[].Instances[]|{State: .State.Name,instance: .InstanceId, Name: (((.Tags//[])[]|select(.Key == "Name"))//{}).Value} | select(.State=="running")'
 }
 aws_show_instance()
 {
@@ -46,7 +58,7 @@ aws_show_instance()
 }
 aws_show_instances()
 {
-  aws ec2 describe-instances | jq '.Reservations[]|.Instances[]|{PublicDnsName,KeyName,InstanceId,Name: .Tags[0].Value}'
+  aws ec2 describe-instances | jq '.Reservations[]|.Instances[]|{PublicDnsName,KeyName,InstanceId,Name: (((.Tags//[])[]|select(.Key == "Name"))//{}).Value}'
 }
 aws_show_instance_security_groups()
 {
@@ -68,15 +80,35 @@ aws_show_spot_instance_requests()
 aws_copy_security_groups_to_instance()
 {
   local instance_id=$1
+  local to_instance=$2
   if [ -z $instance_id ]; then
     echo "Must provide an instance id"
     return
   fi
+  if [ -z $to_instance ]; then
+    echo "Must provide an instance id to copy to"
+    return
+  fi
   local groups=$(aws ec2 describe-instances --instance-ids $instance_id | jq '{ Groups: [.Reservations[].Instances[].SecurityGroups[].GroupId] }')
-  aws ec2 modify-instance-attribute --instance-id $instance_id --cli-input-json "$groups"
+  aws ec2 modify-instance-attribute --instance-id $to_instance --cli-input-json "$groups"
 }
 
-aws_set_instance_name() 
+aws_attach_security_group()
+{
+  local instance_id=$1
+  local security_group_desc=$2
+  if [ -z $instance_id ]; then
+    echo "Must provide an instance id"
+    return
+  fi
+  if ! [ -f $security_group_desc ]; then
+    echo "Must provide a security group file"
+    return
+  fi
+  aws ec2 modify-instance-attribute --instance-id $instance_id --cli-input-json "$(cat $security_group_desc)"
+}
+
+aws_set_instance_name()
 {
   local instance_id=$1
   if [ -z $instance_id ]; then
@@ -94,4 +126,14 @@ aws_show_security_group()
     return
   fi
   aws ec2 describe-security-groups | jq ".SecurityGroups[]|{GroupName,IpPermissions,IpPermissionsEgress}|select(.GroupName == \"$security_group_name\")"
+}
+
+aws_show_security_groups()
+{
+  aws ec2 describe-security-groups | jq '.SecurityGroups[]|"\(.GroupId) \(.GroupName) \(.Description)"'
+}
+
+aws_show_vpcs()
+{
+  aws ec2 describe-vpcs
 }
