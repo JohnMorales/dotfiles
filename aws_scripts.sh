@@ -137,3 +137,8 @@ aws_show_vpcs()
 {
   aws ec2 describe-vpcs
 }
+
+aws_show_policies()
+{
+  aws iam list-policies | jq '.Policies[]|(.Arn|select(startswith("arn:aws:iam::")))'
+}
