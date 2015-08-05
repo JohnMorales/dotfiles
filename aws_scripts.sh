@@ -138,6 +138,11 @@ aws_show_vpcs()
   aws ec2 describe-vpcs
 }
 
+aws_terminate_instances()
+{
+   aws ec2 terminate-instances --instance-ids "$@"
+}
+
 aws_show_policies()
 {
   aws iam list-policies | jq '.Policies[]|(.Arn|select(startswith("arn:aws:iam::")))'
