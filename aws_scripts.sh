@@ -147,3 +147,8 @@ aws_show_policies()
 {
   aws iam list-policies | jq '.Policies[]|(.Arn|select(startswith("arn:aws:iam::")))'
 }
+
+aws_set_profile()
+{
+  export AWS_DEFAULT_PROFILE=$1
+}
