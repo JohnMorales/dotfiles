@@ -429,7 +429,12 @@ fi;
 #Customizing git prompt
 # removing the newline.
 #GIT_PROMPT_END_USER=" ${White}${Time12a}${ResetColor}$ "
-GIT_PROMPT_END=" \n\u@${White}\H${ResetColor}:\$ "
+if [[ "$HOSTNAME" =~ home\.moralesva\.com$ ]]; then
+  GIT_PROMPT_END=" \n\u@${White}\h${ResetColor}:\$ "
+else
+  GIT_PROMPT_END=" \n\u@${White}\H${ResetColor}:\$ "
+fi
+
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
 # airline prompt

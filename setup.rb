@@ -40,13 +40,15 @@ generic_packages = %w{
   jq
   cmake
 }
-platform_specific = {
-        'mac' => %w{
+mac_tools = %w{
           grep
           pstree
           the_silver_searcher
           reattach-to-user-namespace
-          coreutils },
+          coreutils }
+platform_specific = {
+        'mac' => mac_tools,
+	'darwin' => mac_tools,
         'linux' => %w{
           python
           python-dev
