@@ -399,7 +399,7 @@ fi
 ##############################################
 
 if which brew &>/dev/null &&[ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-  echo "bashcompletions2 installed"
+  #echo "bashcompletions2 installed"
   . $(brew --prefix)/share/bash-completion/bash_completion
 elif which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
   echo "Using slow bash-completion v1, switch to bash-completion 2"
