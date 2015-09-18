@@ -28,6 +28,12 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 ##############################################
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+##############################################
+# Android SDK
+#
+##############################################
+export PATH="$PATH:/Users/johnmorales/Development/android-sdk-macosx/tools:/home/johnmorales/Development/android-sdk-macosx/platform-tools"
+
 
 ##############################################
 # GO
@@ -35,8 +41,6 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 ##############################################
 
 #Note that this must not be the same path as your Go installation.
-#export GOPATH=$HOME/go
-#export PATH=$PATH:$GOPATH/bin
 export GOPATH=~/Development/go
 export PATH=$PATH:$GOPATH/bin
 ##############################################
@@ -56,6 +60,7 @@ alias lls='ls -lph --color'
 alias ls='ls --color'
 alias t2='tree -Fth -L 2 --du |less' #see tree with size up to 2 levels deep
 alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
+alias cgrep="grep --color=always"
 alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
 alias ssh='cat ~/.ssh/config.d/* >~/.ssh/config; ssh' # this 'trick' cobbles my ssh_config together, prior to being ssh being called.
@@ -72,9 +77,9 @@ fi
 ###
 # Python
 ##
-# if [ -f ~/.force_phython_virtual_envs ]; then
-#   # . ~/.force_phython_virtual_envs
-# fi;
+if [ -f ~/.force_phython_virtual_envs ]; then
+   . ~/.force_phython_virtual_envs
+fi
 
 
 ##############################################
@@ -393,8 +398,12 @@ fi
 #
 ##############################################
 
-if which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+if which brew &>/dev/null &&[ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+  echo "bashcompletions2 installed"
+  . $(brew --prefix)/share/bash-completion/bash_completion
+elif which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
+  echo "Using slow bash-completion v1, switch to bash-completion 2"
+  . $(brew --prefix)/etc/bash_completion
 elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 elif [ -z "$BASH_COMPLETION" ]; then
@@ -438,7 +447,7 @@ fi
 [ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
 
 # airline prompt
-#[ -f ~/.shell_prompt.sh ] && . ~/.shell_prompt.sh
+[ -f ~/.shell_prompt.sh ] && . ~/.shell_prompt.sh
 
 ##############################################
 # AWS settings

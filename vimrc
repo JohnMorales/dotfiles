@@ -83,7 +83,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 "Adds a newline after a certain amount of characters, could be useful for writing text but not all the time.
-"set textwidth=79 
+"set textwidth=79
 set shiftround
 set expandtab
 set ruler
@@ -255,7 +255,7 @@ nmap <leader>v var
 nmap :Q :q
 
 " Delete trailing whitespaces.
-nmap <leader>tr :%s/\s\+$//g<CR>:w<CR>:e<CR>
+nmap <leader>tr :%s/\s*$//g<CR>:w<CR>:e<CR>
 
 " TODO: figure out what PMenu and SpecialKey do.
 " highlight Pmenu ctermbg=238 gui=bold
@@ -367,7 +367,7 @@ set relativenumber
 scriptencoding utf-8
 set encoding=utf-8
 set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set listchars=tab:▷⋅,trail:•,nbsp:⋅
 "let g:html_indent_tags = 'html\|div\|table\|p'
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
