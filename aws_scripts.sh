@@ -150,5 +150,16 @@ aws_show_policies()
 
 aws_set_profile()
 {
-  export AWS_DEFAULT_PROFILE=$1
+  local profile_id=$1
+  if [ -z $profile_id ]; then
+    echo "Must provide an profile id"
+    return
+  fi
+  local profile=$(grep -E "\[$profile_id.*\]" ~/.aws/credentials | sed -e 's/\[//' -e 's/\]//' -e '/^$/d')
+  if [ $(echo -n "$profile" | wc -l) -ne 1 ]; then
+    echo "Could not validate profile id"
+    return
+  fi
+  echo export AWS_DEFAULT_PROFILE=$profile
+  export AWS_DEFAULT_PROFILE=$profile
 }
