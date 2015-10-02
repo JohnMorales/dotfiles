@@ -44,6 +44,7 @@ mac_tools = %w{
           grep
           pstree
           the_silver_searcher
+          bash-completion2
           reattach-to-user-namespace
           coreutils }
 platform_specific = {
