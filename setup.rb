@@ -40,12 +40,31 @@ generic_packages = %w{
   jq
   cmake
 }
+execute "install homebrew versions" do
+  command "brew tap homebrew/versions"
+  not_if "[ -d /usr/local/Library/Taps/homebrew/homebrew-versions]"
+end
+
+execute "remove bash-completion" do
+  command "brew unlink bash-completion"
+  only_if "brew info bash-completion | grep -i poured >/dev/null"
+end
+
+legacy_packages = %w{
+          reattach-to-user-namespace
+}
+legacy_packages.each do |pkg|
+  execute "remove #{pkg}" do
+    command "brew uninstall #{pkg}"
+    not_if "brew info #{pkg}|grep 'Not installed'>/dev/null"
+  end
+end
+
 mac_tools = %w{
           grep
           pstree
           the_silver_searcher
           bash-completion2
-          reattach-to-user-namespace
           coreutils }
 platform_specific = {
         'mac' => mac_tools,
@@ -57,7 +76,7 @@ platform_specific = {
     }
 }
 
-(generic_packages + platform_specific[node[:os]]).each do |pkg|
+(generic_packages + platform_specific[node['os']]).each do |pkg|
   package pkg do
     action :install
   end
@@ -83,26 +102,19 @@ end
   end
 end
 vim_plugin_dir = File.expand_path "~/.vim/bundle"
-execute "clone vundle" do
+execute "clone vundle" do # ~FC040
   command "git clone https://github.com/gmarik/Vundle.vim.git #{vim_plugin_dir}/Vundle.vim && vim +PluginInstall +qall 2&> /dev/null"
   not_if "[ -d #{vim_plugin_dir}/Vundle.vim ]"
   user current_user
 end
 
-execute "update ycm" do
-  command "git pull"
-  cwd "#{vim_plugin_dir}/YouCompleteMe"
+git "YouCompleteMe" do
+  repository "https://github.com/Valloric/YouCompleteMe.git"
+  destination "#{vim_plugin_dir}/YouCompleteMe"
   user current_user
   group current_user
-  only_if "(git remote update && [ $(git rev-parse @) != $(git rev-parse @{u}) ]) || [ $(find . -name 'ycm_core*' -not -name '*.cpp' | wc -l) -eq 0 ]"
-end
-execute "update ycm submodules" do
-  command "git submodule update --init --recursive"
-  cwd "#{vim_plugin_dir}/YouCompleteMe"
-  user current_user
-  group current_user
-  action :nothing
-  subscribes :run, "execute[update ycm]"
+  enable_submodules true
+  notifies :run, "execute[compile ycm]", :immediately
 end
 execute "compile ycm" do
   command "./install.sh"
@@ -111,8 +123,6 @@ execute "compile ycm" do
   group current_user
   environment({ "YCM_CORES" => "1" })
   action :nothing
-  subscribes :run, "execute[update ycm]"
-  subscribes :run, "execute[update ycm submodules]"
 end
 
 ## Github projects.
@@ -120,43 +130,58 @@ end
  'magicmonty/bash-git-prompt' => "~/.bash-git-prompt",
  'JohnMorales/base16-shell' => "#{development_dir}/base-16/shell",
  'seebi/dircolors-solarized' => "#{development_dir}/dircolors-solarized",
- 'seebi/tmux-colors-solarized' => "#{development_dir}/tmux-colors-solarized"
+ 'seebi/tmux-colors-solarized' => "#{development_dir}/tmux-colors-solarized",
 }.each do |project, dest|
-  execute "clone #{project}" do
-    command "git clone https://github.com/#{project}.git #{dest}"
+  git dest do
+    repository "https://github.com/#{project}.git"
     user current_user
     group current_user
     not_if "[ -d #{dest} ]"
   end
 end
+execute "install_powerline" do
+  command "./install.sh"
+  cwd "#{development_dir}/powerline-fonts"
+  user current_user
+  group current_user
+  action :nothing
+end
+git "#{development_dir}/powerline-fonts" do
+  repository "https://github.com/powerline/fonts.git"
+  user current_user
+  group current_user
+  not_if "[ -d #{development_dir}/powerline-fonts ]"
+  notifies :run, "execute[install_powerline]", :immediately
+end
 
 ## NodeJS/IOJS
-execute "install nvm" do
-  command "curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.1/install.sh | bash"
-  user current_user
-  group current_user
-  not_if "[ -d ~/.nvm ]"
-end
-execute "install iojs" do
-  command ". ~/.nvm/nvm.sh;nvm install iojs;nvm alias default iojs"
-  user current_user
-  group current_user
-end
+# execute "install nvm" do
+#   command "curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.1/install.sh | bash"
+#   user current_user
+#   group current_user
+#   not_if "[ -d ~/.nvm ]"
+# end
+# execute "install iojs" do
+#   command ". ~/.nvm/nvm.sh;nvm install iojs;nvm alias default iojs"
+#   user current_user
+#   group current_user
+# end
+# #
+# ## NodeJS packages
+# %w{
+#    bower
+#    jscs
+#    jshint
+#    eslint
+#    js-yaml
+#    gulp
+# }.each do |pkg|
+#   execute "install #{pkg}" do
+#     command ". ~/.nvm/nvm.sh; npm install -g #{pkg}"
+#     user current_user
+#     group current_user
+#     not_if ". ~/.nvm/nvm.sh; npm list -g #{pkg}"
+#   end
+# end
 #
-## NodeJS packages
-%w{
-   bower
-   jscs
-   jshint
-   eslint
-   js-yaml
-   gulp
-}.each do |pkg|
-  execute "install #{pkg}" do
-    command ". ~/.nvm/nvm.sh; npm install -g #{pkg}"
-    user current_user
-    group current_user
-    not_if ". ~/.nvm/nvm.sh; npm list -g #{pkg}"
-  end
-end
-
+#  vim: set ts=2 sw=2 tw=0 et ft=chef.ruby :
