@@ -1932,7 +1932,6 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/johnmorales</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -2664,7 +2663,6 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/johnmorales</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -3461,7 +3459,6 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/johnmorales</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -4193,7 +4190,6 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/johnmorales</string>
 		</dict>
 	</array>
 	<key>NoSyncLastTipTime</key>
@@ -4253,8 +4249,6 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
-	<key>PrefsCustomFolder</key>
-	<string>/Users/jmorales/Development/home/iterm2</string>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
