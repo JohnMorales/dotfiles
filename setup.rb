@@ -28,9 +28,14 @@ development_dir = File.expand_path("~/Development")
     group current_user
   end
 end
+# update homebrew
+execute "update homebrew" do
+  command "brew update"
+end
 #
 # install generic system packages
 generic_packages = %w{
+  chromedriver
   tree
   tig
   tmux
