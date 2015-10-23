@@ -748,8 +748,8 @@ autocmd FileType yaml :call s:fold_yaml_sections()
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:agprg="ag --ignore tags --column --smart-case"
-let g:aghighlight=1
+let g:ag_prg="ag --ignore tags --column --smart-case"
+let g:ag_highlight=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End Ag
 "
