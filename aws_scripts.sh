@@ -152,14 +152,19 @@ aws_set_profile()
 {
   local profile_id=$1
   if [ -z $profile_id ]; then
-    echo "Must provide an profile id"
+    echo "Must provide on of the following profile ids: "
+    cat ~/.aws/credentials | awk '/^\[/ { gsub(/\[|\]/, "", $1); print $1 }'
     return
   fi
-  local profile=$(grep -E "\[$profile_id.*\]" ~/.aws/credentials | sed -e 's/\[//' -e 's/\]//' -e '/^$/d')
-  if [ $(echo -n "$profile" | wc -l) -ne 1 ]; then
-    echo "Could not validate profile id"
+  local profile=$(grep -E "\[.*$profile_id.*\]" ~/.aws/credentials | sed -e 's/\[//' -e 's/\]//' -e '/^$/d')
+  if [ -n "$profile" ] && [ $(echo -n "$profile" | wc -l) -ne 0 ]; then
+    echo "Could not validate profile id, found '$profile'"
     return
   fi
   echo export AWS_DEFAULT_PROFILE=$profile
   export AWS_DEFAULT_PROFILE=$profile
+  export AWS_EB_PROFILE=$profile
+  keys=$(grep -A2 $profile ~/.aws/credentials | tail -n2 | awk '{ printf("export %s=%s\n", toupper($1), $3) }')
+  echo "$keys"
+  eval "$keys"
 }
