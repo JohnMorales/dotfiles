@@ -455,13 +455,19 @@ fi
 ##############################################
 export EC2_AMITOOL_HOME="/usr/local/Cellar/ec2-ami-tools/1.5.2/libexec"
 export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
-if [ -f /usr/libexec/java_home ]; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
-fi;
+complete -C aws_completer aws
 
 if [ -f ~/.aws_scripts ]; then
   . ~/.aws_scripts
 fi
+
+##############################################
+# JAVA settings
+#
+##############################################
+if [ -f /usr/libexec/java_home ]; then
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi;
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
