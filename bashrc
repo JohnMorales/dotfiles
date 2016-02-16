@@ -390,7 +390,11 @@ if [ -d ~/.dircolors ]; then
   eval $(dircolors ~/.dircolors/dircolors.ansi-dark)
 fi
 if [ -n "$PS1" ]; then
-  eval "$(~/Development/base-16/shell/profile_helper.sh)"
+  if ! [ -f ~/Development/base-16/shell/profile_helper.sh ]; then
+    echo "Missing profile_helper.sh"
+  else
+    eval "$(~/Development/base-16/shell/profile_helper.sh)"
+  fi
 fi
 
 ##############################################
