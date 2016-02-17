@@ -66,7 +66,7 @@ legacy_packages.each do |pkg|
 end
 
 mac_tools = %w{
-          grep
+          homebrew/dupes/grep
           pstree
           the_silver_searcher
           bash-completion2
@@ -91,6 +91,7 @@ directory File.expand_path("~/.ssh/config.d") do
   action :create
   owner current_user
   group current_user
+  recursive true
 end
 
 # configure vim.
