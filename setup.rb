@@ -66,7 +66,7 @@ legacy_packages.each do |pkg|
 end
 
 mac_tools = %w{
-          grep
+          homebrew/dupes/grep
           pstree
           the_silver_searcher
           bash-completion2
@@ -91,6 +91,7 @@ directory File.expand_path("~/.ssh/config.d") do
   action :create
   owner current_user
   group current_user
+  recursive true
 end
 
 # configure vim.
@@ -132,11 +133,17 @@ end
 
 ## Github projects.
 {
- 'magicmonty/bash-git-prompt' => "~/.bash-git-prompt",
+ 'magicmonty/bash-git-prompt' => File.expand_path("~/.bash-git-prompt"),
  'JohnMorales/base16-shell' => "#{development_dir}/base-16/shell",
  'seebi/dircolors-solarized' => "#{development_dir}/dircolors-solarized",
  'seebi/tmux-colors-solarized' => "#{development_dir}/tmux-colors-solarized",
 }.each do |project, dest|
+  parent_directory = File.dirname(dest)
+  directory parent_directory do
+    action :create
+    recursive true
+    not_if "[ -d #{parent_directory} ]"
+  end
   git dest do
     repository "https://github.com/#{project}.git"
     user current_user
