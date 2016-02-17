@@ -8,21 +8,17 @@ call vundle#begin()
 
 " A bit meta..
 Plugin 'gmarik/Vundle.vim'
-
+Plugin 'sheerun/vim-polyglot.git'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'rking/ag.vim.git' " use this version due to the dependency from nerdtree-ag
 Plugin 'taiansu/nerdtree-ag.git'
-Plugin 'altercation/vim-colors-solarized.git'
-Plugin 'bling/vim-airline.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'tpope/vim-repeat.git'
 " ctrl-n seems to cause multiple issues.
 "Plugin 'terryma/vim-multiple-cursors.git'
-Plugin 'kana/vim-textobj-user.git'
-Plugin 'nelstrom/vim-textobj-rubyblock.git'
-Plugin 'Raimondi/delimitMate.git'
-Plugin 'maxbrunsfeld/vim-emacs-bindings.git'
+"Plugin 'maxbrunsfeld/vim-emacs-bindings.git'
+"
 " Switching back to ycm+ultisnips
 " Neosnippet doesn't fully support vim-snippets. (select mode snippets are not
 " supported.
@@ -35,34 +31,55 @@ Plugin 'JohnMorales/bootstrap-snippets'
 "Plugin 'git@github.com:honza/vim-snippets.git'
 "Plugin 'git@github.com:JohnMorales/vim-bootstrap3-snippets.git'
 "Plugin 'bonsaiben/bootstrap-snippets'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'majutsushi/tagbar'
+
+" ruby specific plugins
+Plugin 'kana/vim-textobj-user.git'
+Plugin 'nelstrom/vim-textobj-rubyblock.git'
 Plugin 'vim-ruby/vim-ruby'
-"Plugin 'tpope/vim-endwise'
-"Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'tpope/vim-rake' " Project specific plugins.
 Plugin 'tpope/vim-rails'
+Plugin 'yaymukund/vim-rabl'
+"Plugin 'ecomba/vim-ruby-refactoring'
+"Plugin 'tpope/vim-bundler'
+" end rb specfic
+
+Plugin 'Raimondi/delimitMate.git'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'dbakker/vim-projectroot'
 Plugin 'ivalkeen/vim-ctrlp-tjump'
-"Plugin 'ecomba/vim-ruby-refactoring'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'marijnh/tern_for_vim.git'
-Plugin 'elzr/vim-json.git'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/BufOnly.vim'
-"Plugin 'freeo/vim-kalisi'
-Plugin 'chriskempson/base16-vim'
 Plugin 'chrisbra/NrrwRgn'
-"Plugin 'gilligan/vim-lldb'
-Plugin 'fatih/vim-go.git'
+Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'majutsushi/tagbar' 
+Plugin 'bling/vim-airline.git'
+
+" Javascript
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'marijnh/tern_for_vim.git'
+Plugin 'elzr/vim-json.git'
 Plugin 'mxw/vim-jsx'
-"Plugin 'editorconfig/editorconfig-vim.git'
+" end js
+
+" css specific plugins
 Plugin 'hail2u/vim-css3-syntax.git'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'ap/vim-css-color'
-Plugin 'yaymukund/vim-rabl'
+
+
+" vim color themes 
+Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'chriskempson/base16-vim'
+"Plugin 'freeo/vim-kalisi'
+" end themes
+"Plugin 'gilligan/vim-lldb'
+" Go specific 
+Plugin 'fatih/vim-go.git'
+" end go specific 
+"Plugin 'editorconfig/editorconfig-vim.git'
 " Plugin 'edkolev/promptline.vim'
 " Plugin 'edkolev/tmuxline.vim'
 
@@ -164,7 +181,6 @@ endfunction
 "let g:solarized_bold = 0
 "let bg_profile = Trim(substitute(system("tmux showenv ITERM_PROFILE"), ".*=", "", ""))
 let bg_profile = $ITERM_PROFILE
-"echom bg_profile
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background

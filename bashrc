@@ -144,6 +144,9 @@ git_dirty() {
 create_local_gemset() {
   echo './.gems' > .rbenv-gemsets
 }
+recompile_ycm() {
+  (cd ~/.vim/bundle/YouCompleteMe; ./install.sh)
+}
 tmux_light() {
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-light.conf
 }
