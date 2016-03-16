@@ -1,0 +1,5 @@
+#!/bin/bash
+git clone https://github.com/rajasegar/jadebootstrap-seed.git
+mv jadebootstrap-seed/* .
+rm -rf jadebootstrap-seed
+npm install

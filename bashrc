@@ -271,6 +271,15 @@ service() {
   fi;
 }
 
+show_cookbook_git_status() {
+  for i in ~/Development/chef/cookbooks/*; do
+  [ -d $i ] && (cd $i; if [ -d .git ] && [ "$(git status -s 2>/dev/null| wc -l )" -ne 0 ]; then
+    echo i;
+    git status -s ;
+    fi
+    ) 
+  done;
+}
 # Get the version of the cookbook on the chef server
 chef_compare_server_version() {
   local cookbook=$(basename $(pwd))
