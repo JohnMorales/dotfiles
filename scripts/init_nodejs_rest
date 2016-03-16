@@ -1,0 +1,5 @@
+#!/bin/bash
+git clone git@github.com:JohnMorales/Node-Backend-Seed.git
+mv Node-Backend-Seed/* .
+rm -rf Node-Backend-Seed
+npm update --save
