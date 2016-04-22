@@ -28,7 +28,7 @@
 [difftool "diffmerge"]
   com = "diffmerge \"$LOCAL\" \"$REMOTE\" "
 [merge]
-  tool = diffmerge
+  tool = vimdiff
 [mergetool "diffmerge"]
   trustExitCode = true
   cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" "

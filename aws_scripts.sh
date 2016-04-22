@@ -151,6 +151,9 @@ aws_show_policies()
 aws_set_profile()
 {
   local profile_id=$1
+  if [ -z $profile_id ] && [ -f ~/.aws_current_profile ]; then
+    profile_id=$(cat ~/.aws_current_profile)
+  fi
   if [ -z $profile_id ]; then
     echo "Must provide on of the following profile ids: "
     cat ~/.aws/credentials | awk '/^\[/ { gsub(/\[|\]/, "", $1); print $1 }'
@@ -160,6 +163,8 @@ aws_set_profile()
   if [ -n "$profile" ] && [ $(echo -n "$profile" | wc -l) -ne 0 ]; then
     echo "Could not validate profile id, found '$profile'"
     return
+  else
+    echo $profile > ~/.aws_current_profile
   fi
   echo export AWS_DEFAULT_PROFILE=$profile
   export AWS_DEFAULT_PROFILE=$profile

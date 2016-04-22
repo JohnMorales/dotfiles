@@ -69,6 +69,8 @@ mac_tools = %w{
           homebrew/dupes/grep
           pstree
           the_silver_searcher
+          awsebcli
+          awscli
           bash-completion2
           coreutils }
 platform_specific = {

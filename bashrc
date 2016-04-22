@@ -26,7 +26,7 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 # Path
 #
 ##############################################
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:~/bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 ##############################################
 # Android SDK
@@ -433,6 +433,9 @@ if ! type __git_heads 2>/dev/null | head -n1 | grep function >/dev/null && ! [[ 
 fi
 
 
+# git + hub == github (https://github.com/github/hub)
+eval "$(hub alias -s)"
+
 
 update_docker_host_addr() {
  local docker_host=$(ping -c1 docker.local | awk '{ getline; sub(/:/,"", $4); print $4;exit }')
@@ -475,6 +478,7 @@ complete -C aws_completer aws
 
 if [ -f ~/.aws_scripts ]; then
   . ~/.aws_scripts
+  aws_set_profile
 fi
 
 ##############################################
@@ -491,3 +495,10 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### nvm
 NVM_DIR=${NVM_DIR:=~/.nvm}
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+## Add binstubs
+export PATH=./bin:$PATH
+
+# ARM (Vex) development
+export PATH=$PATH:~/vex/yagarto/yagarto-4.7.2/bin:~/vex/yagarto/yagarto-4.7.2/tools
