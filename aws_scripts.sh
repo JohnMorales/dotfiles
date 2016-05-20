@@ -2,6 +2,11 @@ aws_show_cloudfronts ()
 {
   aws cloudfront list-distributions | jq -r '.DistributionList|.Items[]| "\(.Id) \(.DomainName) \(.Origins.Items[0].DomainName) \(.Status)"'
 }
+aws_show_load_balanacers()
+{
+  aws elb describe-load-balancers | jq '.LoadBalancerDescriptions[]| "\(.DNSName) \(.Instances[]|join(","))"'
+}
+
 aws_show_pending_cloudfronts ()
 {
   aws cloudfront list-distributions | jq -r '.DistributionList|.Items[]|select(.Status=="InProgress")|{Status, Aliases: .Aliases.Items}'
@@ -166,10 +171,10 @@ aws_set_profile()
   else
     echo $profile > ~/.aws_current_profile
   fi
-  echo export AWS_DEFAULT_PROFILE=$profile
+  #echo export AWS_DEFAULT_PROFILE=$profile
   export AWS_DEFAULT_PROFILE=$profile
   export AWS_EB_PROFILE=$profile
   keys=$(grep -A2 $profile ~/.aws/credentials | tail -n2 | awk '{ printf("export %s=%s\n", toupper($1), $3) }')
-  echo "$keys"
+  #echo "$keys"
   eval "$keys"
 }
