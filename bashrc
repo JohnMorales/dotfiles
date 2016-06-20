@@ -68,6 +68,9 @@ alias be="bundle exec" # When running a command and forcing bundled gems
 alias whatismyip="curl -s https://domains.google.com/checkip;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
 alias tigb="tig HEAD ^master --first-parent --no-merges" # show only the commits until master, without merges
+if [ -f ~/.aliases ]; then
+  . ~/.aliases
+fi
 
 
 if [ -f ~/.smb_creds ]; then
@@ -86,6 +89,10 @@ fi
 # Functions
 #
 ##############################################
+grep_history() {
+  local term="$@"
+  grep $term -r ~/.history/ | tail
+}
 power_down_vms() {
   VMS=$(VBoxManage list runningvms |grep -v boot2docker | awk '{ x=$1;gsub("\"", "", x);print x }')
   for i in $VMS
