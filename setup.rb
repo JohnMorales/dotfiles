@@ -111,7 +111,7 @@ end
 end
 vim_plugin_dir = File.expand_path "~/.vim/bundle"
 execute "clone vundle" do # ~FC040
-  command "git clone https://github.com/gmarik/Vundle.vim.git #{vim_plugin_dir}/Vundle.vim && vim +PluginInstall +qall 2&> /dev/null"
+  command "git clone https://github.com/VundleVim/Vundle.vim #{vim_plugin_dir}/Vundle.vim && vim +PluginInstall +qall 2&> /dev/null </dev/null"
   not_if "[ -d #{vim_plugin_dir}/Vundle.vim ]"
   user current_user
 end

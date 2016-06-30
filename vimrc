@@ -9,7 +9,7 @@ call vundle#begin()
 " A bit meta..
 Plugin 'gmarik/Vundle.vim'
 Plugin 'sheerun/vim-polyglot.git'
-Plugin 'kien/ctrlp.vim.git'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'rking/ag.vim.git' " use this version due to the dependency from nerdtree-ag
 Plugin 'taiansu/nerdtree-ag.git'
