@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 "execute pathogen#infect()
 
+let g:alternateExtensions_cc = "inc,h,H,HPP,hpp"
 " Vundle configuration
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -9,12 +10,13 @@ call vundle#begin()
 " A bit meta..
 Plugin 'gmarik/Vundle.vim'
 Plugin 'sheerun/vim-polyglot.git'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'rking/ag.vim.git' " use this version due to the dependency from nerdtree-ag
 Plugin 'taiansu/nerdtree-ag.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'tpope/vim-repeat.git'
+"Plugin 'vim-scripts/a.vim.git'
 " ctrl-n seems to cause multiple issues.
 "Plugin 'terryma/vim-multiple-cursors.git'
 "Plugin 'maxbrunsfeld/vim-emacs-bindings.git'
@@ -24,6 +26,9 @@ Plugin 'tpope/vim-repeat.git'
 " supported.
 "Plugin 'Shougo/neocomplete.git'
 "Plugin 'Shougo/neosnippet.vim.git'
+Plugin 'Shougo/vimproc.vim.git'
+Plugin 'Shougo/neomru.vim.git'
+Plugin 'Shougo/unite.vim.git'
 "Plugin 'JohnMorales/neosnippet-snippets.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips.git'
@@ -47,7 +52,7 @@ Plugin 'Raimondi/delimitMate.git'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-projectionist' " Project specific plugins.
 Plugin 'dbakker/vim-projectroot'
-Plugin 'ivalkeen/vim-ctrlp-tjump'
+"Plugin 'ivalkeen/vim-ctrlp-tjump'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/BufOnly.vim'
@@ -208,6 +213,7 @@ syntax on
 " show tagbar
 noremap <F8> :TagbarToggle <CR>
 
+map <F5> :A<CR>
 "quickly get out of insert mode so that you can navigate (and practice quick keys)
 inoremap jj <esc>
 
@@ -298,6 +304,27 @@ else
 endif
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" unite
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file_rec/async','sorters','sorter_rank', )
+" replacing unite with ctrl-p
+let g:unite_data_directory='~/.vim/.cache/unite'
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable=1
+let g:unite_prompt='» '
+let g:unite_split_rule = 'botright'
+if executable('ag')
+let g:unite_source_grep_command='ag'
+let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
+let g:unite_source_grep_recursive_opt=''
+endif
+nnoremap <silent> <c-p> :Unite -auto-resize file file_mru file_rec/async bookmark file_list<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrlp
@@ -305,30 +332,30 @@ endif
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Project level tags (alt-p)
-nnoremap π :CtrlPTag<cr>
-" File level tags (alt-f)
-nnoremap ƒ :CtrlPBufTag<cr>
-" Jump to tags (alt-])
-nnoremap ‘ :CtrlPtjump<cr>
-vnoremap ‘ :CtrlPtjumpVisual<cr>
-" Show buffer (Alt-t)
-nmap † :CtrlPBuffer<CR>
-" Show recent files (Alt-r)
-nmap ® :CtrlPMRU<CR>
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = {
-  \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files -oc --exclude-standard'],
-    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ },
-  \ 'fallback': 'find %s -maxdepth 10 \( -type d -name ".*" -prune \) -o -type f -print'
-  \ }
-let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\bower_components\|node_modules\|\v[\/]\.(git)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-let g:ctrlp_show_hidden = 1
+" nnoremap π :CtrlPTag<cr>
+" " File level tags (alt-f)
+" nnoremap ƒ :CtrlPBufTag<cr>
+" " Jump to tags (alt-])
+" nnoremap ‘ :CtrlPtjump<cr>
+" vnoremap ‘ :CtrlPtjumpVisual<cr>
+" " Show buffer (Alt-t)
+" nmap † :CtrlPBuffer<CR>
+" " Show recent files (Alt-r)
+" nmap ® :CtrlPMRU<CR>
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_user_command = {
+"   \ 'types': {
+"     \ 1: ['.git', 'cd %s && git ls-files -oc --exclude-standard'],
+"     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+"     \ },
+"   \ 'fallback': 'find %s -maxdepth 10 \( -type d -name ".*" -prune \) -o -type f -print'
+"   \ }
+" let g:ctrlp_tjump_shortener= ['/Users/jmorales/.rbenv/.*/gems/', 'gems/' ]
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir': '\bower_components\|node_modules\|\v[\/]\.(git)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ }
+" let g:ctrlp_show_hidden = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " end ctrlp
@@ -696,6 +723,10 @@ let g:projectionist_heuristics = {
       \   "spec/*.rb": {"type": "rails.rspec"},
       \   "spec/features/*_spec.rb": {"type": "capy.rspec.rails.ruby"},
       \   "spec/*/*_spec.rb": {"type": "rspec.rails.ruby"}
+      \ },
+      \ "CMakeLists.txt" : {
+      \   "*.cc": {"alternate": "{}.h" },
+      \   "*.h": {"alternate": "{}.cc" }
       \ }
       \ }
 autocmd User ProjectionistActivate call s:activate()
