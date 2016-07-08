@@ -154,6 +154,21 @@ create_local_gemset() {
 recompile_ycm() {
   (cd ~/.vim/bundle/YouCompleteMe; ./install.sh)
 }
+ycm_init() {
+  if [ -f .ycm_extra_conf.py ]; then
+    echo ".ycm_extra_conf.py already exists, remove to install default"
+    return
+  fi
+  [ -d ~/.cache ] || mkdir ~/.cache
+  curl -sL https://raw.githubusercontent.com/Valloric/ycmd/master/cpp/ycm/.ycm_extra_conf.py -o /tmp/.ycm_extra_conf.py
+  if [ $? -ne 0 ]; then
+    cp ~/.cache /tmp/.ycm_extra_conf.py
+  else
+    cp /tmp/.ycm_extra_conf.py ~/.cache
+  fi
+  cp /tmp/.ycm_extra_conf.py .
+  echo "Installed default .ycm_extra_conf.py"
+}
 tmux_light() {
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-light.conf
 }

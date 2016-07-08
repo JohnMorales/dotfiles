@@ -16,6 +16,7 @@ Plugin 'rking/ag.vim.git' " use this version due to the dependency from nerdtree
 Plugin 'taiansu/nerdtree-ag.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'tpope/vim-repeat.git'
+Plugin 'chazy/cscope_maps.git'
 "Plugin 'vim-scripts/a.vim.git'
 " ctrl-n seems to cause multiple issues.
 "Plugin 'terryma/vim-multiple-cursors.git'
@@ -228,6 +229,7 @@ inoremap jj <esc>
 "
 " Build tags for current directory using exuberant c-tags
 set tags=./tags;
+set cscopetag
 nnoremap <silent> <Leader>ta :ProjectRootExe !ripper-tags -R . $(bundle show --paths) <cr>
 nnoremap <silent> <Leader>u :ProjectRootExe Ag<cr>
 
@@ -412,7 +414,7 @@ set relativenumber
 scriptencoding utf-8
 set encoding=utf-8
 set list
-set listchars=tab:▷⋅,trail:•,nbsp:⋅
+set listchars=tab:\ \ ,trail:•,nbsp:⋅
 "let g:html_indent_tags = 'html\|div\|table\|p'
 "let g:html_indent_tags .= '\|p\|nav\|head'
 "Still figuring this one out.
@@ -743,6 +745,7 @@ endfunction
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType cpp set keywordprg=cppman
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 "
