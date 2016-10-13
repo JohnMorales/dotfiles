@@ -423,13 +423,8 @@ export CLICOLOR=1 #Enable colors on a mac
 if [ -d ~/.dircolors ]; then
   eval $(dircolors ~/.dircolors/dircolors.ansi-dark)
 fi
-if [ -n "$PS1" ]; then
-  if ! [ -f ~/Development/base-16/shell/profile_helper.sh ]; then
-    echo "Missing profile_helper.sh"
-  else
-    eval "$(~/Development/base-16/shell/profile_helper.sh)"
-  fi
-fi
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 ##############################################
 # Externals

@@ -34,8 +34,10 @@ USAGE
   fi
   if ! mount | grep " $smb_mount_point " >/dev/null; then
     mkdir -p $smb_mount_point
+    echo mount -t smbfs //${smb_host_uri}/$smb_share $smb_mount_point
     result=$(mount -t smbfs //${smb_host_uri}/$smb_share $smb_mount_point 2>&1)
-    if [ $? -ne 0 ]; then
+    exit_code=$?
+    if [ $exit_code -ne 0 ]; then
       re='server connection failed: Socket is not connected'
       if [[ $result =~ $re ]]; then
         echo "'mount -t smbfs' failed, falling back to mount_smbfs"
@@ -47,6 +49,7 @@ USAGE
         fi
       fi
     fi
+  else
+    echo "$smb_mount_point already mounted."
   fi
-  #echo "$smb_mount_point already mounted."
 }
