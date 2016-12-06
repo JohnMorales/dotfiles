@@ -169,6 +169,7 @@ ycm_init() {
   cp /tmp/.ycm_extra_conf.py .
   echo "Installed default .ycm_extra_conf.py"
 }
+alias init_ycm=ycm_init
 tmux_light() {
   tmux source-file ~/Development/tmux-colors-solarized/tmuxcolors-light.conf
 }
