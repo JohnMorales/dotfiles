@@ -1,3 +1,4 @@
+current_user = ENV["SUDO_USER"]
 directory File.expand_path("~/.vim") do
   action :create
   owner current_user

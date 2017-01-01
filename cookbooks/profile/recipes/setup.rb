@@ -1,5 +1,4 @@
 # chef recipe to configure profile
-#
 current_user = ENV["SUDO_USER"]
 dotfiles_dir = File.expand_path("..", __FILE__)
 development_dir = File.expand_path("~/Development")
@@ -46,7 +45,7 @@ generic_packages = %w{
 }
 execute "install homebrew versions" do
   command "brew tap homebrew/versions"
-  not_if "[ -d /usr/local/Library/Taps/homebrew/homebrew-versions]"
+  not_if "[ -d /usr/local/Library/Taps/homebrew/homebrew-versions ]"
 end
 
 execute "remove bash-completion" do
@@ -98,9 +97,9 @@ end
 # configure vim.
 using_vim = false
 if using_vim 
-  require "./vim_setup.rb"
+  include_recipe "profile::vim_setup"
 else
-  require "./nvim_setup.rb"
+  include_recipe "profile::nvim_setup"
 end
 ## Github projects.
 {

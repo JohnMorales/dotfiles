@@ -5,4 +5,4 @@ cd ~/home
 [ -f /etc/redhat-release ] && grep CentOS /etc/redhat-release && ./install_dependencies_redhat.sh
 git pull
 which chef >/dev/null || ./profile_init.sh
-chef-apply setup.rb
+chef-client -z --config-option cookbook_path=$PWD/cookbooks -r profile::setup -l info

@@ -1,3 +1,5 @@
+current_user = ENV["SUDO_USER"]
+dotfiles_dir = File.expand_path("..", __FILE__)
 directory File.expand_path("~/.config/nvim") do
   action :create
   owner current_user
