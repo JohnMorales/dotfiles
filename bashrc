@@ -152,7 +152,7 @@ create_local_gemset() {
   echo './.gems' > .rbenv-gemsets
 }
 recompile_ycm() {
-  (cd ~/.vim/bundle/YouCompleteMe; ./install.sh)
+  (cd ~/.vim/bundle/YouCompleteMe; ./install.py --clang-completer)
 }
 ycm_init() {
   if [ -f .ycm_extra_conf.py ]; then
