@@ -2,3 +2,4 @@
 *.orig
 sshconfig
 local-mode-cache/
+nodes

@@ -1,6 +1,6 @@
 # chef recipe to configure profile
 current_user = ENV["SUDO_USER"]
-dotfiles_dir = File.expand_path("..", __FILE__)
+dotfiles_dir = ENV["PWD"]
 development_dir = File.expand_path("~/Development")
 # link in all profile files
 %w{
