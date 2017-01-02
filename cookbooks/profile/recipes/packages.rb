@@ -20,7 +20,6 @@ execute "remove bash-completion" do
 end
 
 legacy_packages = %w{
-          reattach-to-user-namespace
 }
 legacy_packages.each do |pkg|
   execute "remove #{pkg}" do
@@ -36,6 +35,7 @@ mac_tools = %w{
           awsebcli
           awscli
           bash-completion2
+          reattach-to-user-namespace
           coreutils }
 platform_specific = {
         'mac' => mac_tools,
