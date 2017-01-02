@@ -9,6 +9,7 @@ export TERM=xterm-256color
 ##############################################
 set -o vi
 export EDITOR=vim
+alias vim=nvim
 
 ####
 # tmux history

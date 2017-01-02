@@ -1,5 +1,14 @@
 current_user = ENV["SUDO_USER"]
 dotfiles_dir = File.expand_path("..", __FILE__)
+package "vim" do
+  action :remove
+end
+execute "tap neovim" do
+  command "brew tap neovim/neovim"
+end
+package "neovim" do
+  action :install
+end
 directory File.expand_path("~/.config/nvim") do
   action :create
   owner current_user
