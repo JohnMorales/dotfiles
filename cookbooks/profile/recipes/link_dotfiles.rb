@@ -1,4 +1,6 @@
 # link in all profile files
+current_user = ENV["SUDO_USER"]
+dotfiles_dir = ENV["PWD"]
 %w{
   vimrc
   bashrc

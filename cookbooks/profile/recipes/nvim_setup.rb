@@ -26,7 +26,7 @@ end
 
 execute "clone vim-plug" do # ~FC040
   command "curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && nvim +PluginInstall +qall 2&> /dev/null </dev/null"
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && nvim +PluginInstall +qall </dev/null"
   not_if "[ -f #{vim_plugin_dir}/plug.vim ]"
   timeout 60
   user current_user
