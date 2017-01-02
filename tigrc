@@ -3,6 +3,6 @@
 set refresh-mode = auto
 set show-changes = true
 set line-graphics = utf-8
-set main-view = date:short author id commit-title:graph=true,refs=true
+set main-view = date:default author id commit-title:graph=true,refs=true
 bind log J :/^commit
 bind log K :?^commit
