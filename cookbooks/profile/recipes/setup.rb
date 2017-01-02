@@ -6,6 +6,7 @@ include_recipe "profile::link_dotfiles"
 execute "update homebrew" do
   command "brew update"
 end
+include_recipe "profile::packages"
 #
 # install generic system packages
 directory File.expand_path("~/.ssh/config.d") do

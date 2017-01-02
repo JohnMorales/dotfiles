@@ -8,6 +8,8 @@ generic_packages = %w{
   bash-completion
   jq
   cmake
+  hub
+  diffmerge
 }
 execute "install homebrew versions" do
   command "brew tap homebrew/versions"

@@ -1,0 +1,3 @@
+#!/bin/bash
+exec chef-client -z --config-option cookbook_path=$PWD/cookbooks -r profile::setup -l info
+
