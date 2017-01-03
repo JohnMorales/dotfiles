@@ -1,4 +1,4 @@
-call plug#begin('$HOME/.config/nvim/plugged')
+call plug#begin('~/.local/share/nvim/site/plugged')
 
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
@@ -48,3 +48,6 @@ call denite#custom#var('file_rec/git', 'command',
 
 nnoremap <silent> <c-p> :Denite file_mru source buffer file_rec line<cr>
 imap jj <Esc>
+
+"guicolors
+set termguicolors
