@@ -9,7 +9,6 @@ generic_packages = %w{
   jq
   cmake
   hub
-  diffmerge
 }
 execute "install homebrew versions" do
   command "brew tap homebrew/versions"
@@ -48,6 +47,11 @@ platform_specific = {
           powerline
     }
 }
+if %w{ mac darwin }.include? node['os']
+  execute "install diffmerge" do
+    command "brew cask install diffmerge"
+  end
+end
 
 (generic_packages + platform_specific[node['os']]).each do |pkg|
   package pkg do
