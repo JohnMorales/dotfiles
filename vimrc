@@ -524,6 +524,7 @@ inoremap jk <Esc>
 
 nmap ,t :TagbarToggle<CR>
 
+set shell=/bin/sh
 
 let g:rootmarkers = ['.projectroot','.git','.hg','.svn','.bzr','_darcs','build.xml', 'Gemfile' ]
 
