@@ -6,6 +6,8 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 if filereadable(expand("~/.vimrc_background"))
@@ -34,20 +36,28 @@ set autochdir
 set tags=./tags;$HOME,./ctags;$HOME,./.vimtags;$HOME
 " Do not wrap lines longer than the window's width
 set nowrap
+set relativenumber
+set ts=2
+set sw=2
+set expandtab
+let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=2
 let mapleader = ','
-
 
 " By default denite uses find
 call denite#custom#var('file_rec', 'command',
 	\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 call denite#custom#source(
 	\ 'file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
+call denite#custom#source('file_mru', 'converters',
+	      \ ['converter_relative_word'])
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
 nnoremap <silent> <c-p> :Denite file_mru source buffer file_rec line<cr>
 imap jj <Esc>
+nnoremap <leader>sw :StripWhitespace<cr>
 
 "guicolors
 set termguicolors
