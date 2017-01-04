@@ -37,6 +37,7 @@ set tags=./tags;$HOME,./ctags;$HOME,./.vimtags;$HOME
 " Do not wrap lines longer than the window's width
 set nowrap
 set relativenumber
+set number
 set ts=2
 set sw=2
 set expandtab
@@ -58,6 +59,7 @@ call denite#custom#var('file_rec/git', 'command',
 nnoremap <silent> <c-p> :Denite file_mru source buffer file_rec line<cr>
 imap jj <Esc>
 nnoremap <leader>sw :StripWhitespace<cr>
+map <leader>m :NERDTreeToggle<CR>
 
 "guicolors
 set termguicolors
