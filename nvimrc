@@ -31,7 +31,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = {}
 
-set autochdir
+"set autochdir
 " Filenames for the tag command
 set tags=./tags;$HOME,./ctags;$HOME,./.vimtags;$HOME
 " Do not wrap lines longer than the window's width
@@ -60,6 +60,7 @@ nnoremap <silent> <c-p> :Denite file_mru source buffer file_rec line<cr>
 imap jj <Esc>
 nnoremap <leader>sw :StripWhitespace<cr>
 map <leader>m :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeFind<CR>
 
 "guicolors
 set termguicolors
