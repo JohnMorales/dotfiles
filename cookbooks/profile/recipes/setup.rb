@@ -3,8 +3,10 @@ current_user = ENV["SUDO_USER"]
 include_recipe "profile::link_dotfiles"
 
 # update homebrew
-execute "update homebrew" do
-  command "brew update"
+if node["os"] == "darwin"
+  execute "update homebrew" do
+    command "brew update"
+  end
 end
 include_recipe "profile::packages"
 #

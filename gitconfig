@@ -34,3 +34,6 @@
   cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" "
 [credential]
 	helper = osxkeychain
+[user]
+	email = jmorales@gmail.com
+	name = John Morales
