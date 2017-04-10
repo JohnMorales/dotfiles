@@ -171,7 +171,7 @@ aws_set_profile()
   else
     echo $profile > ~/.aws_current_profile
   fi
-  #echo export AWS_DEFAULT_PROFILE=$profile
+  [[ -n $PS1 ]] && echo export AWS_DEFAULT_PROFILE=$profile
   export AWS_DEFAULT_PROFILE=$profile
   export AWS_EB_PROFILE=$profile
   keys=$(grep -A2 $profile ~/.aws/credentials | tail -n2 | awk '{ printf("export %s=%s\n", toupper($1), $3) }')

@@ -29,6 +29,13 @@ servers = (
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
+  },
+  {
+    address = "irc.us.hackint.org";
+    chatnet = "DN42";
+    port = "6667";
+    use_tls = "no";
+    tls_verify = "no";
   }
 );
 
@@ -95,7 +102,19 @@ chatnets = {
     max_whois = "30";
   };
   SILC = { type = "SILC"; };
-  freenode = { type = "IRC"; };
+  freenode = {
+    type = "IRC";
+    sasl_mechanism = "PLAIN";
+    sasl_username = "jmo";
+    sasl_password = "ZXDmP4dWBrY6gH";
+  };
+  help = { type = "IRC"; };
+  DN42 = {
+    type = "IRC";
+    sasl_mechanism = "plain";
+    sasl_username = "jmo";
+    sasl_password = "noodle-impute-forehead";
+  };
 };
 
 channels = (
