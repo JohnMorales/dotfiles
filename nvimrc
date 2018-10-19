@@ -79,7 +79,7 @@ call denite#custom#var('grep', 'final_opts', [])
 
 nnoremap <silent> <leader>r :Denite file_old<cr>
 nnoremap <silent> <c-r> :Denite buffer<cr>
-nnoremap <silent> <c-p> :Denite file_mru source buffer file_rec line<cr>
+nnoremap <silent> <c-p> :Denite file_mru file_rec/git buffer file_rec line<cr>
 nnoremap <silent> <leader>f :Denite grep<cr>
 imap jj <Esc>
 nnoremap <leader>sw :StripWhitespace<cr>

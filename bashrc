@@ -2,7 +2,8 @@
 # TERMINAL
 #
 ##############################################
-export TERM=screen-256color
+# Using screen doesn't allow base16-shell to work
+#export TERM=screen-256color
 ##############################################
 # Vim
 #
@@ -521,3 +522,9 @@ export PATH=./bin:$PATH
 
 # ARM (Vex) development
 export PATH=$PATH:~/vex/yagarto/yagarto-4.7.2/bin:~/vex/yagarto/yagarto-4.7.2/tools
+
+PATH="/Users/jmorales/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/jmorales/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/jmorales/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/jmorales/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/jmorales/perl5"; export PERL_MM_OPT;
