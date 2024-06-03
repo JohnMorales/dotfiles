@@ -86,7 +86,6 @@ if [ -f ~/.force_phython_virtual_envs ]; then
    . ~/.force_phython_virtual_envs
 fi
 
-
 ##############################################
 # Functions
 #
@@ -426,8 +425,11 @@ export CLICOLOR=1 #Enable colors on a mac
 if [ -d ~/.dircolors ]; then
   eval $(dircolors ~/.dircolors/dircolors.ansi-dark)
 fi
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+base16_default-dark
 
 ##############################################
 # Externals
@@ -513,8 +515,8 @@ fi;
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### nvm
-NVM_DIR=${NVM_DIR:=~/.nvm}
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# NVM_DIR=${NVM_DIR:=~/.nvm}
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
 ## Add binstubs
@@ -522,9 +524,11 @@ export PATH=./bin:$PATH
 
 # ARM (Vex) development
 export PATH=$PATH:~/vex/yagarto/yagarto-4.7.2/bin:~/vex/yagarto/yagarto-4.7.2/tools
+<<<<<<< HEAD
 
 PATH="/Users/jmorales/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/jmorales/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/Users/jmorales/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/jmorales/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/jmorales/perl5"; export PERL_MM_OPT;
+. "$HOME/.cargo/env"

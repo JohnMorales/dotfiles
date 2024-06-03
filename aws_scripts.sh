@@ -14,7 +14,7 @@ aws_show_pending_cloudfronts ()
 
 aws_update_ssh_hosts()
 {
-  aws ec2 describe-instances | jq -r '.Reservations[].Instances[]|"\(.PublicDnsName) \(.KeyName) \((((.Tags//[])[]|select(.Key == "Name"))//{}).Value) \(.InstanceId)"' | while read hostname keyfile name instanceid; do
+  aws ec2 describe-instances | jq -r '.Reservations[].Instances[]|select(.State.Name == "running")|"\(.PublicDnsName) \(.KeyName) \((((.Tags//[])[]|select(.Key == "Name"))//{}).Value) \(.InstanceId)"' | while read hostname keyfile name instanceid; do
     if [ "$name" == "null" ]; then
      >&2 echo "$instanceid does not have a tag!!"
      continue
