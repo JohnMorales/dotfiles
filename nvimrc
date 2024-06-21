@@ -1,16 +1,14 @@
 call plug#begin('~/.local/share/nvim/site/plugged')
 
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/neomru.vim'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'duff/vim-bufonly'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 call plug#end()
+
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -32,10 +30,6 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = {}
 
-"set autochdir
-" Filenames for the tag command
-set tags=./tags;$HOME,./ctags;$HOME,./.vimtags;$HOME
-" Do not wrap lines longer than the window's width
 set nowrap
 set relativenumber
 set number
@@ -45,46 +39,3 @@ set expandtab
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 let mapleader = ','
-
-" By default denite uses find
-call denite#custom#var('file_rec', 'command',
-	\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-call denite#custom#source(
-	\ 'file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-call denite#custom#source('file_mru', 'converters',
-	      \ ['converter_relative_word'])
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-      \ ['git', 'ls-files', '-co', '--exclude-standard'])
-call denite#custom#map(
-			\ 'insert',
-			\ '<C-j>',
-			\ '<denite:move_to_next_line>',
-			\ 'noremap'
-			\)
-call denite#custom#map(
-			\ 'insert',
-			\ '<C-k>',
-			\ '<denite:move_to_previous_line>',
-			\ 'noremap'
-			\)
-
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts',
-    \ ['-i', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-
-nnoremap <silent> <leader>r :Denite file_old<cr>
-nnoremap <silent> <c-r> :Denite buffer<cr>
-nnoremap <silent> <c-p> :Denite file_mru file_rec/git buffer file_rec line<cr>
-nnoremap <silent> <leader>f :Denite grep<cr>
-imap jj <Esc>
-nnoremap <leader>sw :StripWhitespace<cr>
-map <leader>m :NERDTreeToggle<CR>
-nmap <leader>n :NERDTreeFind<CR>
-nmap <silent> <leader>O :BufOnly<cr>
-"guicolors
-set termguicolors

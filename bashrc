@@ -79,13 +79,6 @@ if [ -f ~/.smb_creds ]; then
   alias smbclient="smbclient -A ~/.smb_creds"
 fi
 
-###
-# Python
-##
-if [ -f ~/.force_phython_virtual_envs ]; then
-   . ~/.force_phython_virtual_envs
-fi
-
 ##############################################
 # Functions
 #
@@ -448,15 +441,6 @@ elif [ -z "$BASH_COMPLETION" ]; then
   echo "Missing bash completion, brew install bash-completion or /etc/bash_completion"
 fi
 
-#http://git-scm.com/book/en/Git-Basics-Tips-and-Tricks
-[ -f ~/.git-completion.bash ] || curl -L -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash  > ~/.git-completion.bash
-if ! type __git_heads 2>/dev/null | head -n1 | grep function >/dev/null && ! [[ -f ~/.git-completion.bash && $(. ~/.git-completion.bash) -eq 0 ]]; then
-  echo "Missing git completion."
-fi
-
-
-# git + hub == github (https://github.com/github/hub)
-eval "$(hub alias -s)"
 
 
 update_docker_host_addr() {
@@ -524,7 +508,6 @@ export PATH=./bin:$PATH
 
 # ARM (Vex) development
 export PATH=$PATH:~/vex/yagarto/yagarto-4.7.2/bin:~/vex/yagarto/yagarto-4.7.2/tools
-<<<<<<< HEAD
 
 PATH="/Users/jmorales/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/jmorales/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
