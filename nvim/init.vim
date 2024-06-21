@@ -15,6 +15,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'uarun/vim-protobuf'
 Plug 'rust-lang/rust.vim'
 Plug 'simrat39/rust-tools.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
 
 call plug#end()
 
@@ -22,6 +26,8 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+set background=dark
+colorscheme base16-default-dark
 
 "let g:airline#extensions#branch#enabled = 1
 "let g:airline#extensions#syntastic#enabled = 1
