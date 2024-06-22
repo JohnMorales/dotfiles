@@ -519,3 +519,6 @@ PERL_LOCAL_LIB_ROOT="/Users/jmorales/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_L
 PERL_MB_OPT="--install_base \"/Users/jmorales/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/jmorales/perl5"; export PERL_MM_OPT;
 . "$HOME/.cargo/env"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
