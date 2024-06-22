@@ -55,3 +55,9 @@ set expandtab
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 let mapleader = ','
+
+" Neotree
+nmap <silent> ,n :Neotree reveal<CR>
+nmap <silent> ,m :Neotree toggle<CR>
+nmap <silent> ,b :Neotree buffers<CR>
+nmap <silent> ,g :Neotree git_status<CR>

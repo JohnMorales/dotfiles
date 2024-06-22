@@ -224,7 +224,7 @@ set background=dark
 colorscheme base16-solarized-dark
 
 
-" Nerdtree
+" Neotree
 nmap <silent> ,n :NERDTreeFind<CR>
 nmap <silent> ,m :NERDTreeToggle<CR>
 "
