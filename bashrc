@@ -30,6 +30,8 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 ##############################################
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:~/bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+export PATH=$(pyenv root)/shims:$PATH"
 ##############################################
 # Android SDK
 #

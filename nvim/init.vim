@@ -26,8 +26,8 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-set background=dark
-colorscheme base16-default-dark
+set background=light
+colorscheme base16-default-light
 
 "let g:airline#extensions#branch#enabled = 1
 "let g:airline#extensions#syntastic#enabled = 1
@@ -55,6 +55,9 @@ set expandtab
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 let mapleader = ','
+
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
 
 " Neotree
 nmap <silent> ,n :Neotree reveal<CR>
