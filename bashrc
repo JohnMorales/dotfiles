@@ -439,7 +439,7 @@ elif which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
 elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 elif [ -z "$BASH_COMPLETION" ]; then
-  echo "Missing bash completion, brew install bash-completion or /etc/bash_completion"
+  echo "Missing bash completion, brew install bash-completion@2 or /etc/bash_completion"
 fi
 eval "$(brew shellenv)"
 
@@ -471,7 +471,11 @@ else
   GIT_PROMPT_END=" \n\u@${White}\H${ResetColor}:\$ "
 fi
 
-[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run makesetup"
+#[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run 'brew install bash-git-prompt'"
+if [ -f "/home/linuxbrew/.linuxbrew/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    __GIT_PROMPT_DIR="/home/linuxbrew/.linuxbrew/opt/bash-git-prompt/share"
+    source "/home/linuxbrew/.linuxbrew/opt/bash-git-prompt/share/gitprompt.sh"
+fi
 
 # airline prompt
 [ -f ~/.shell_prompt.sh ] && . ~/.shell_prompt.sh
@@ -518,3 +522,5 @@ PERL_MM_OPT="INSTALL_BASE=/Users/jmorales/perl5"; export PERL_MM_OPT;
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+

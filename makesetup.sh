@@ -121,7 +121,6 @@ fi
 }
 PACKAGES=(
   tree
-  the_silver_searcher
   tig
   pstree
   tmux
