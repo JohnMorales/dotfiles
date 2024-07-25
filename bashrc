@@ -32,7 +32,6 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/s
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 ##############################################
 # Android SDK
