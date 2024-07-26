@@ -31,7 +31,6 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:~/bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-=======
 export PATH=$HOME/.toolbox/bin:$PATH
 ##############################################
 # Android SDK
@@ -442,7 +441,6 @@ elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
 elif [ -z "$BASH_COMPLETION" ]; then
   echo "Missing bash completion, brew install bash-completion@2 or /etc/bash_completion"
 fi
-eval "$(brew shellenv)"
 
 
 

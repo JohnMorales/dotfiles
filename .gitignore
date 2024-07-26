@@ -3,3 +3,4 @@
 sshconfig
 local-mode-cache/
 nodes
+nvim/lazy-lock.json
