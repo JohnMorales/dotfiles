@@ -31,8 +31,6 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:~/bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 ##############################################
 # Android SDK
 #
@@ -443,6 +441,7 @@ elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
 elif [ -z "$BASH_COMPLETION" ]; then
   echo "Missing bash completion, brew install bash-completion or /etc/bash_completion"
 fi
+eval "$(brew shellenv)"
 
 
 
@@ -502,15 +501,13 @@ fi;
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### nvm
-# NVM_DIR=${NVM_DIR:=~/.nvm}
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 ## Add binstubs
 export PATH=./bin:$PATH
-
-# ARM (Vex) development
-export PATH=$PATH:~/vex/yagarto/yagarto-4.7.2/bin:~/vex/yagarto/yagarto-4.7.2/tools
 
 PATH="/Users/jmorales/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/jmorales/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
