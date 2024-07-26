@@ -31,6 +31,8 @@ export HISTFILE=~/.history/$(date +'%Y-%m-%d').log
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:./bin:~/bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
+=======
+export PATH=$HOME/.toolbox/bin:$PATH
 ##############################################
 # Android SDK
 #
@@ -66,7 +68,6 @@ alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes 
 alias cgrep="grep --color=always"
 alias clear_dns="sudo killall -HUP mDNSResponder"
 alias vi=vim
-alias ssh='cat ~/.ssh/config.d/* >~/.ssh/config; ssh' # this 'trick' cobbles my ssh_config together, prior to being ssh being called.
 alias be="bundle exec" # When running a command and forcing bundled gems
 alias whatismyip="curl -s https://domains.google.com/checkip;echo"
 alias tigbm="tig HEAD ^master --first-parent" # show only the commits until master, without commits in merges
@@ -523,4 +524,3 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
