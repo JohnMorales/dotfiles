@@ -15,3 +15,5 @@ vim.opt.number = true
 vim.opt.ts = 2
 vim.opt.sw = 2
 vim.opt.expandtab = true
+
+vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.format()<cr>")

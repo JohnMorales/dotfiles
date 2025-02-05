@@ -430,17 +430,17 @@ base16_default-dark
 #
 ##############################################
 
-if which brew &>/dev/null &&[ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-  #echo "bashcompletions2 installed"
-  . $(brew --prefix)/share/bash-completion/bash_completion
-elif which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
-  echo "Using slow bash-completion v1, switch to bash-completion 2"
-  . $(brew --prefix)/etc/bash_completion
-elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
-elif [ -z "$BASH_COMPLETION" ]; then
-  echo "Missing bash completion, brew install bash-completion@2 or /etc/bash_completion"
-fi
+# if which brew &>/dev/null &&[ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+#   #echo "bashcompletions2 installed"
+#   . $(brew --prefix)/share/bash-completion/bash_completion
+# elif which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
+#   echo "Using slow bash-completion v1, switch to bash-completion 2"
+#   . $(brew --prefix)/etc/bash_completion
+# elif [ -z "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ]; then
+#   . /etc/bash_completion
+# elif [ -z "$BASH_COMPLETION" ]; then
+#   echo "Missing bash completion, brew install bash-completion@2 or /etc/bash_completion"
+# fi
 
 
 
@@ -471,9 +471,9 @@ else
 fi
 
 #[ -f ~/.bash-git-prompt/gitprompt.sh ] && . ~/.bash-git-prompt/gitprompt.sh || echo "Missing git prompt, please run 'brew install bash-git-prompt'"
-if [ -f "/home/linuxbrew/.linuxbrew/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-    __GIT_PROMPT_DIR="/home/linuxbrew/.linuxbrew/opt/bash-git-prompt/share"
-    source "/home/linuxbrew/.linuxbrew/opt/bash-git-prompt/share/gitprompt.sh"
+if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)/share"
+    source "$__GIT_PROMPT_DIR/gitprompt.sh"
 fi
 
 # airline prompt
@@ -520,5 +520,8 @@ PERL_MM_OPT="INSTALL_BASE=/Users/jmorales/perl5"; export PERL_MM_OPT;
 . "$HOME/.cargo/env"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ -f ~/.paths ]; then
+  . ~/.paths
+fi

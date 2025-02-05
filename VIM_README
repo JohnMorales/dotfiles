@@ -1,0 +1,12 @@
+# Current customized shortcuts
+leader is space ' '
+show recent files <leader>fr
+show buffers files <leader>fb
+show live grep <leader>
+<leader>,t Neotree toggle
+<leader>,r Neotree reveal
+<leader>,b Neotree buffers
+<leader>,g Neotree git_status
+<leader>,s Neotree document_symbols
+
+
