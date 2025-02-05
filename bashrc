@@ -32,6 +32,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/s
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 export PATH=$HOME/.toolbox/bin:$PATH
+export PATH=/opt/homebrew/bin:$PATH
 ##############################################
 # Android SDK
 #
@@ -507,6 +508,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 
 ## Add binstubs
@@ -521,7 +523,7 @@ PERL_MM_OPT="INSTALL_BASE=/Users/jmorales/perl5"; export PERL_MM_OPT;
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 if [ -f ~/.paths ]; then
   . ~/.paths
 fi

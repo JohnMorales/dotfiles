@@ -3,21 +3,7 @@ set -e
 [[ "$OSTYPE" == "darwin"* ]] && IS_MAC=true
 
 SCRIPT_DIR=`pwd -P`
-VIMPLUGINDIR=~/.vim/bundle
 DEVELOPMENT=~/Development
-#mkdir -p ~/.vim/autoload $VIMPLUGINDIR;\
-#curl -Sso ~/.vim/autoload/pathogen.vim \
-#    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-mkdir -p $VIMPLUGINDIR
-for d in swap backup undo; do                # make vim dirs
-  test -d ~/.vim/$d || mkdir ~/.vim/$d
-done
-test -d $VIMPLUGINDIR/Vundle.vim || git clone https://github.com/gmarik/Vundle.vim.git $VIMPLUGINDIR/Vundle.vim
-
-if [ -d $VIMPLUGINDIR/ultisnips/ftdetect ] && ! [ -d ~/.vim/ftdetect ]; then
-  mkdir ~/.vim/ftdetect
-  ln -s ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect/
-fi;
 
 has_brew() {
   which brew >/dev/null
@@ -60,9 +46,9 @@ for i in ${FILES[@]}
   done
 
 # installing irssi customizations
-test -d ~/.irssi || mkdir ~/.irssi
-link_config_file "irssirc" "irssi/config"
-link_config_file "sshconfig" "ssh/config"
+# test -d ~/.irssi || mkdir ~/.irssi
+# link_config_file "irssirc" "irssi/config"
+# link_config_file "sshconfig" "ssh/config"
 # test -d ~/.irssi/irssi-colors-solarized || git clone git://github.com/huyz/irssi-colors-solarized.git ~/.irssi/irssi-colors-solarized
 # mkdir -p ~/.irssi/scripts
 # if [ ! -L ~/.irssi/scripts/autorun ]; then
