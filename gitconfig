@@ -35,5 +35,6 @@
 [credential]
 	helper = osxkeychain
 [user]
-	email = 360409+JohnMorales@users.noreply.github.com
 	name = John Morales
+[include]
+ path = ~/.git_email

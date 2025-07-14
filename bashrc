@@ -497,9 +497,7 @@ fi
 # JAVA settings
 #
 ##############################################
-if [ -f /usr/libexec/java_home ]; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
-fi;
+[ -f ~/.java_home ] && . ~/.java_home
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
